@@ -3,66 +3,105 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid'; // Para generar IDs únicos
-import { PostGradeService } from "../../services/PostGradeService"
-import { PostStudentDataService } from "../../services/PostStudentDataService"
+import { PostGradeService } from "../../services/PostGradeService";
+import { PostStudentDataService } from "../../services/PostStudentDataService";
 
 export const FirstQuizz = () => {
     const { register, handleSubmit, formState: { errors }, reset, clearErrors } = useForm();
     const navigate = useNavigate();
-    const [hints, setHints] = useState({});
-    const [timeLeft, setTimeLeft] = useState(1800); // 30 minutes
+    const quizDuration = 15 * 60; // 15 minutes in seconds
+    const [timeLeft, setTimeLeft] = useState(quizDuration); // Default 15 minutes
     const [score, setScore] = useState(null);
     const [isRetakeAllowed, setIsRetakeAllowed] = useState(false);
     const [studentId, setStudentId] = useState(null); // Para almacenar el ID del estudiante
+    const [droppedItems, setDroppedItems] = useState({
+        blank1: '',
+        blank2: '',
+        blank3: '',
+        blank4: '',
+        blank5: '',
+        blank6: '',
+    });
+    const [draggedItem, setDraggedItem] = useState(null);
 
-    const scrollToTop = () => {
+    // Ejecutar scrollToTop cuando el componente se monta
+    useEffect(() => {
         window.scrollTo({
             top: 0,
             behavior: "smooth",
         });
-    };
-
-    // Ejecutar scrollToTop cuando el componente se monta
-    useEffect(() => {
-        scrollToTop();
     }, []);
 
     useEffect(() => {
-        if (!isRetakeAllowed && timeLeft > 0) {
+        const quizStartTime = localStorage.getItem('quizStartTime');
+        if (quizStartTime) {
+            const elapsedTime = Math.floor((Date.now() - parseInt(quizStartTime, 10)) / 1000);
+            setTimeLeft(Math.max(quizDuration - elapsedTime, 0));
+        } else {
+            localStorage.setItem('quizStartTime', Date.now());
+        }
+    }, []);
+
+    useEffect(() => {
+        if (timeLeft > 0 && !isRetakeAllowed) {
             const timerId = setTimeout(() => {
                 setTimeLeft(timeLeft - 1);
             }, 1000);
             return () => clearTimeout(timerId);
         } else if (timeLeft === 0 && !isRetakeAllowed) {
-            alert('El tiempo ha terminado. El quiz se enviará automáticamente.');
             handleSubmit(onSubmit)();
         }
     }, [timeLeft, isRetakeAllowed]);
 
+    const onDrop = (event, target) => {
+        event.preventDefault();
+        const newDroppedItems = { ...droppedItems };
+        newDroppedItems[target] = draggedItem;
+        setDroppedItems(newDroppedItems);
+        setDraggedItem(null);
+    };
+
+    const onDragOver = (event) => {
+        event.preventDefault();
+    };
+
+    const onDragStart = (event, item) => {
+        setDraggedItem(item);
+    };
+
     const onSubmit = async (data) => {
         let calculatedScore = 0;
 
-        // Lógica para calificar las respuestas...
-        if (data.question1_a === "Micosis superficial") calculatedScore++;
-        if (data.question1_b === "Levadura lipófila") calculatedScore++;
-        if (data.question1_c === "Micosis cutáneas") calculatedScore++;
-        if (data.question1_d === "Onicomicosis") calculatedScore++;
-        if (data.question1_e === "Micosis subcutáneas") calculatedScore++;
-        if (data.question1_f === "Micosis oportunista") calculatedScore++;
-        if (data.question1_g === "Meningoencefalitis") calculatedScore++;
-        if (data.question1_h === "Reacciones alérgicas") calculatedScore++;
+        // Pregunta 1: Relacionar (2 puntos de 7)
+        const relationPoints = 2 / 8; // Cada respuesta correcta en esta sección vale 0.25 puntos
+        if (data.question1_1 === "Contiene información hormonal") calculatedScore += relationPoints;
+        if (data.question1_2 === "Contiene información renal") calculatedScore += relationPoints;
+        if (data.question1_3 === "Muestra ideal para prueba de ADN") calculatedScore += relationPoints;
+        if (data.question1_4 === "Se obtiene por hisopado bucal") calculatedScore += relationPoints;
+        if (data.question1_5 === "Se obtiene por biopsia") calculatedScore += relationPoints;
+        if (data.question1_6 === "Se obtiene mediante punción lumbar") calculatedScore += relationPoints;
+        if (data.question1_7 === "Permite el estudio de la Genética") calculatedScore += relationPoints;
+        if (data.question1_8 === "Se obtiene por puncion articular") calculatedScore += relationPoints;
 
-        if (data.question2_1 === "Verdadero") calculatedScore++;
-        if (data.question2_2 === "Falso") calculatedScore++;
-        if (data.question2_3 === "Falso") calculatedScore++;
-        if (data.question2_4 === "Verdadero") calculatedScore++;
+        // Pregunta 2: Marcar V o F (2 puntos de 7)
+        const trueFalsePoints = 2 / 8; // Cada respuesta correcta en esta sección vale 0.25 puntos
+        if (data.question2_1 === "V") calculatedScore += trueFalsePoints;
+        if (data.question2_2 === "V") calculatedScore += trueFalsePoints;
+        if (data.question2_3 === "V") calculatedScore += trueFalsePoints;
+        if (data.question2_4 === "F") calculatedScore += trueFalsePoints;
+        if (data.question2_5 === "V") calculatedScore += trueFalsePoints;
+        if (data.question2_6 === "V") calculatedScore += trueFalsePoints;
+        if (data.question2_7 === "V") calculatedScore += trueFalsePoints;
+        if (data.question2_8 === "V") calculatedScore += trueFalsePoints;
 
-        if (data.question3 === "3.3") calculatedScore++;
-
-        if (data.question4_1 === "bipartición") calculatedScore++;
-        if (data.question4_2 === "hifas") calculatedScore++;
-        if (data.question4_3 === "Ascomycota") calculatedScore++;
-        if (data.question4_4 === "agar sabouraud") calculatedScore++;
+        // Pregunta 3: Arrastrar al espacio en blanco (3 puntos de 7)
+        const dragDropPoints = 3 / 6; // Cada respuesta correcta en esta sección vale 0.5 puntos
+        if (droppedItems.blank1 === "biológico") calculatedScore += dragDropPoints;
+        if (droppedItems.blank2 === "genética") calculatedScore += dragDropPoints;
+        if (droppedItems.blank3 === "enfermedades") calculatedScore += dragDropPoints;
+        if (droppedItems.blank4 === "biopsia") calculatedScore += dragDropPoints;
+        if (droppedItems.blank5 === "protocolos") calculatedScore += dragDropPoints;
+        if (droppedItems.blank6 === "confiables") calculatedScore += dragDropPoints;
 
         setScore(calculatedScore);
 
@@ -87,9 +126,6 @@ export const FirstQuizz = () => {
 
         setIsRetakeAllowed(true);
     };
-    const toggleHint = (question) => {
-        setHints(prevHints => ({ ...prevHints, [question]: !prevHints[question] }));
-    };
 
     const formatTime = (seconds) => {
         const minutes = Math.floor(seconds / 60);
@@ -100,9 +136,10 @@ export const FirstQuizz = () => {
     const handleRetakeQuiz = () => {
         clearErrors();
         reset();
-        setTimeLeft(1800);
+        setTimeLeft(quizDuration);
         setScore(null);
         setIsRetakeAllowed(false);
+        localStorage.setItem('quizStartTime', Date.now());
     };
     
     const closeModal = () => {
@@ -112,11 +149,14 @@ export const FirstQuizz = () => {
     return (
         <QuizContainer>
             <BackButton onClick={() => navigate(-1)}>Regresar</BackButton>
-            <QuizTitle>Quiz: Micosis y Hongos</QuizTitle>
+            <QuizTitle>Quiz: Laboratorio de Biología</QuizTitle>
             <StudentName>
                 <label>Nombre del estudiante:</label>
-                <input type="text" {...register("studentName", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
-                {errors.studentName && <ErrorMessage>Este campo es obligatorio.</ErrorMessage>}
+                <input type="text" {...register("studentName", {
+                    required: !isRetakeAllowed,
+                    validate: value => value.trim().split(/\s+/).length >= 3
+                })} disabled={isRetakeAllowed} />
+                {errors.studentName && <ErrorMessage>Debe ingresar al menos tres palabras (nombre y dos apellidos).</ErrorMessage>}
             </StudentName>
             {!isRetakeAllowed && <Timer>Tiempo restante: {formatTime(timeLeft)}</Timer>}
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -125,131 +165,131 @@ export const FirstQuizz = () => {
                     <p>1. Relacionar: (2 puntos)</p>
                     <QuestionContent>
                         <SelectContainer>
-                            <label>Pitiriasis versicolor</label>
-                            <select {...register("question1_a", { required: !isRetakeAllowed })} disabled={isRetakeAllowed}>
+                            <label>Sangre</label>
+                            <select {...register("question1_1", { required: !isRetakeAllowed })} disabled={isRetakeAllowed}>
                                 <option value="">Seleccione...</option>
-                                <option value="Micosis superficial">Micosis superficial</option>
-                                <option value="Levadura lipófila">Levadura lipófila</option>
-                                <option value="Micosis cutáneas">Micosis cutáneas</option>
-                                <option value="Onicomicosis">Onicomicosis</option>
-                                <option value="Micosis subcutáneas">Micosis subcutáneas</option>
-                                <option value="Micosis oportunista">Micosis oportunista</option>
-                                <option value="Meningoencefalitis">Meningoencefalitis</option>
-                                <option value="Reacciones alérgicas">Reacciones alérgicas</option>
+                                <option value="Contiene información hormonal">Contiene información hormonal</option>
+                                <option value="Contiene información renal">Contiene información renal</option>
+                                <option value="Muestra ideal para prueba de ADN">Muestra ideal para prueba de ADN</option>
+                                <option value="Se obtiene por hisopado bucal">Se obtiene por hisopado bucal</option>
+                                <option value="Se obtiene mediante punción lumbar">Se obtiene mediante punción lumbar</option>
+                                <option value="Permite el estudio de la Genética">Permite el estudio de la Genética</option>
+                                <option value="Se obtiene por puncion articular">Se obtiene por puncion articular</option>
+                                <option value="Se obtiene por biopsia">Se obtiene por biopsia</option>
                             </select>
-                            {errors.question1_a && <ErrorMessage>Esta pregunta es obligatoria.</ErrorMessage>}
+                            {errors.question1_1 && <ErrorMessage>Esta pregunta es obligatoria.</ErrorMessage>}
                         </SelectContainer>
 
                         <SelectContainer>
-                            <label>Malassezia</label>
-                            <select {...register("question1_b", { required: !isRetakeAllowed })} disabled={isRetakeAllowed}>
+                            <label>Orina</label>
+                            <select {...register("question1_2", { required: !isRetakeAllowed })} disabled={isRetakeAllowed}>
                                 <option value="">Seleccione...</option>
-                                <option value="Micosis superficial">Micosis superficial</option>
-                                <option value="Levadura lipófila">Levadura lipófila</option>
-                                <option value="Micosis cutáneas">Micosis cutáneas</option>
-                                <option value="Onicomicosis">Onicomicosis</option>
-                                <option value="Micosis subcutáneas">Micosis subcutáneas</option>
-                                <option value="Micosis oportunista">Micosis oportunista</option>
-                                <option value="Meningoencefalitis">Meningoencefalitis</option>
-                                <option value="Reacciones alérgicas">Reacciones alérgicas</option>
+                                <option value="Contiene información hormonal">Contiene información hormonal</option>
+                                <option value="Contiene información renal">Contiene información renal</option>
+                                <option value="Muestra ideal para prueba de ADN">Muestra ideal para prueba de ADN</option>
+                                <option value="Se obtiene por hisopado bucal">Se obtiene por hisopado bucal</option>
+                                <option value="Se obtiene mediante punción lumbar">Se obtiene mediante punción lumbar</option>
+                                <option value="Permite el estudio de la Genética">Permite el estudio de la Genética</option>
+                                <option value="Se obtiene por puncion articular">Se obtiene por puncion articular</option>
+                                <option value="Se obtiene por biopsia">Se obtiene por biopsia</option>
                             </select>
-                            {errors.question1_b && <ErrorMessage>Esta pregunta es obligatoria.</ErrorMessage>}
+                            {errors.question1_2 && <ErrorMessage>Esta pregunta es obligatoria.</ErrorMessage>}
                         </SelectContainer>
 
                         <SelectContainer>
-                            <label>Dermatofitosis</label>
-                            <select {...register("question1_c", { required: !isRetakeAllowed })} disabled={isRetakeAllowed}>
+                            <label>Saliva</label>
+                            <select {...register("question1_3", { required: !isRetakeAllowed })} disabled={isRetakeAllowed}>
                                 <option value="">Seleccione...</option>
-                                <option value="Micosis superficial">Micosis superficial</option>
-                                <option value="Levadura lipófila">Levadura lipófila</option>
-                                <option value="Micosis cutáneas">Micosis cutáneas</option>
-                                <option value="Onicomicosis">Onicomicosis</option>
-                                <option value="Micosis subcutáneas">Micosis subcutáneas</option>
-                                <option value="Micosis oportunista">Micosis oportunista</option>
-                                <option value="Meningoencefalitis">Meningoencefalitis</option>
-                                <option value="Reacciones alérgicas">Reacciones alérgicas</option>
+                                <option value="Contiene información hormonal">Contiene información hormonal</option>
+                                <option value="Contiene información renal">Contiene información renal</option>
+                                <option value="Muestra ideal para prueba de ADN">Muestra ideal para prueba de ADN</option>
+                                <option value="Se obtiene por hisopado bucal">Se obtiene por hisopado bucal</option>
+                                <option value="Se obtiene mediante punción lumbar">Se obtiene mediante punción lumbar</option>
+                                <option value="Permite el estudio de la Genética">Permite el estudio de la Genética</option>
+                                <option value="Se obtiene por puncion articular">Se obtiene por puncion articular</option>
+                                <option value="Se obtiene por biopsia">Se obtiene por biopsia</option>
                             </select>
-                            {errors.question1_c && <ErrorMessage>Esta pregunta es obligatoria.</ErrorMessage>}
+                            {errors.question1_3 && <ErrorMessage>Esta pregunta es obligatoria.</ErrorMessage>}
                         </SelectContainer>
 
                         <SelectContainer>
-                            <label>Tiña de las uñas</label>
-                            <select {...register("question1_d", { required: !isRetakeAllowed })} disabled={isRetakeAllowed}>
+                            <label>Células</label>
+                            <select {...register("question1_4", { required: !isRetakeAllowed })} disabled={isRetakeAllowed}>
                                 <option value="">Seleccione...</option>
-                                <option value="Micosis superficial">Micosis superficial</option>
-                                <option value="Levadura lipófila">Levadura lipófila</option>
-                                <option value="Micosis cutáneas">Micosis cutáneas</option>
-                                <option value="Onicomicosis">Onicomicosis</option>
-                                <option value="Micosis subcutáneas">Micosis subcutáneas</option>
-                                <option value="Micosis oportunista">Micosis oportunista</option>
-                                <option value="Meningoencefalitis">Meningoencefalitis</option>
-                                <option value="Reacciones alérgicas">Reacciones alérgicas</option>
+                                <option value="Contiene información hormonal">Contiene información hormonal</option>
+                                <option value="Contiene información renal">Contiene información renal</option>
+                                <option value="Muestra ideal para prueba de ADN">Muestra ideal para prueba de ADN</option>
+                                <option value="Se obtiene por hisopado bucal">Se obtiene por hisopado bucal</option>
+                                <option value="Se obtiene mediante punción lumbar">Se obtiene mediante punción lumbar</option>
+                                <option value="Permite el estudio de la Genética">Permite el estudio de la Genética</option>
+                                <option value="Se obtiene por puncion articular">Se obtiene por puncion articular</option>
+                                <option value="Se obtiene por biopsia">Se obtiene por biopsia</option>
                             </select>
-                            {errors.question1_d && <ErrorMessage>Esta pregunta es obligatoria.</ErrorMessage>}
+                            {errors.question1_4 && <ErrorMessage>Esta pregunta es obligatoria.</ErrorMessage>}
                         </SelectContainer>
 
                         <SelectContainer>
-                            <label>Esporotricosis</label>
-                            <select {...register("question1_e", { required: !isRetakeAllowed })} disabled={isRetakeAllowed}>
+                            <label>Tejido</label>
+                            <select {...register("question1_5", { required: !isRetakeAllowed })} disabled={isRetakeAllowed}>
                                 <option value="">Seleccione...</option>
-                                <option value="Micosis superficial">Micosis superficial</option>
-                                <option value="Levadura lipófila">Levadura lipófila</option>
-                                <option value="Micosis cutáneas">Micosis cutáneas</option>
-                                <option value="Onicomicosis">Onicomicosis</option>
-                                <option value="Micosis subcutáneas">Micosis subcutáneas</option>
-                                <option value="Micosis oportunista">Micosis oportunista</option>
-                                <option value="Meningoencefalitis">Meningoencefalitis</option>
-                                <option value="Reacciones alérgicas">Reacciones alérgicas</option>
+                                <option value="Contiene información hormonal">Contiene información hormonal</option>
+                                <option value="Contiene información renal">Contiene información renal</option>
+                                <option value="Muestra ideal para prueba de ADN">Muestra ideal para prueba de ADN</option>
+                                <option value="Se obtiene por hisopado bucal">Se obtiene por hisopado bucal</option>
+                                <option value="Se obtiene mediante punción lumbar">Se obtiene mediante punción lumbar</option>
+                                <option value="Permite el estudio de la Genética">Permite el estudio de la Genética</option>
+                                <option value="Se obtiene por puncion articular">Se obtiene por puncion articular</option>
+                                <option value="Se obtiene por biopsia">Se obtiene por biopsia</option>
                             </select>
-                            {errors.question1_e && <ErrorMessage>Esta pregunta es obligatoria.</ErrorMessage>}
+                            {errors.question1_5 && <ErrorMessage>Esta pregunta es obligatoria.</ErrorMessage>}
                         </SelectContainer>
 
                         <SelectContainer>
-                            <label>Candidosis</label>
-                            <select {...register("question1_f", { required: !isRetakeAllowed })} disabled={isRetakeAllowed}>
+                            <label>LCR (Líquido cefalorraquídeo)</label>
+                            <select {...register("question1_6", { required: !isRetakeAllowed })} disabled={isRetakeAllowed}>
                                 <option value="">Seleccione...</option>
-                                <option value="Micosis superficial">Micosis superficial</option>
-                                <option value="Levadura lipófila">Levadura lipófila</option>
-                                <option value="Micosis cutáneas">Micosis cutáneas</option>
-                                <option value="Onicomicosis">Onicomicosis</option>
-                                <option value="Micosis subcutáneas">Micosis subcutáneas</option>
-                                <option value="Micosis oportunista">Micosis oportunista</option>
-                                <option value="Meningoencefalitis">Meningoencefalitis</option>
-                                <option value="Reacciones alérgicas">Reacciones alérgicas</option>
+                                <option value="Contiene información hormonal">Contiene información hormonal</option>
+                                <option value="Contiene información renal">Contiene información renal</option>
+                                <option value="Muestra ideal para prueba de ADN">Muestra ideal para prueba de ADN</option>
+                                <option value="Se obtiene por hisopado bucal">Se obtiene por hisopado bucal</option>
+                                <option value="Se obtiene mediante punción lumbar">Se obtiene mediante punción lumbar</option>
+                                <option value="Permite el estudio de la Genética">Permite el estudio de la Genética</option>
+                                <option value="Se obtiene por puncion articular">Se obtiene por puncion articular</option>
+                                <option value="Se obtiene por biopsia">Se obtiene por biopsia</option>
                             </select>
-                            {errors.question1_f && <ErrorMessage>Esta pregunta es obligatoria.</ErrorMessage>}
+                            {errors.question1_6 && <ErrorMessage>Esta pregunta es obligatoria.</ErrorMessage>}
                         </SelectContainer>
 
                         <SelectContainer>
-                            <label>Criptococosis</label>
-                            <select {...register("question1_g", { required: !isRetakeAllowed })} disabled={isRetakeAllowed}>
+                            <label>ADN</label>
+                            <select {...register("question1_7", { required: !isRetakeAllowed })} disabled={isRetakeAllowed}>
                                 <option value="">Seleccione...</option>
-                                <option value="Micosis superficial">Micosis superficial</option>
-                                <option value="Levadura lipófila">Levadura lipófila</option>
-                                <option value="Micosis cutáneas">Micosis cutáneas</option>
-                                <option value="Onicomicosis">Onicomicosis</option>
-                                <option value="Micosis subcutáneas">Micosis subcutáneas</option>
-                                <option value="Micosis oportunista">Micosis oportunista</option>
-                                <option value="Meningoencefalitis">Meningoencefalitis</option>
-                                <option value="Reacciones alérgicas">Reacciones alérgicas</option>
+                                <option value="Contiene información hormonal">Contiene información hormonal</option>
+                                <option value="Contiene información renal">Contiene información renal</option>
+                                <option value="Muestra ideal para prueba de ADN">Muestra ideal para prueba de ADN</option>
+                                <option value="Se obtiene por hisopado bucal">Se obtiene por hisopado bucal</option>
+                                <option value="Se obtiene mediante punción lumbar">Se obtiene mediante punción lumbar</option>
+                                <option value="Permite el estudio de la Genética">Permite el estudio de la Genética</option>
+                                <option value="Se obtiene por puncion articular">Se obtiene por puncion articular</option>
+                                <option value="Se obtiene por biopsia">Se obtiene por biopsia</option>
                             </select>
-                            {errors.question1_g && <ErrorMessage>Esta pregunta es obligatoria.</ErrorMessage>}
+                            {errors.question1_7 && <ErrorMessage>Esta pregunta es obligatoria.</ErrorMessage>}
                         </SelectContainer>
 
                         <SelectContainer>
-                            <label>Aspergilosis</label>
-                            <select {...register("question1_h", { required: !isRetakeAllowed })} disabled={isRetakeAllowed}>
+                            <label>Líquido sinovial</label>
+                            <select {...register("question1_8", { required: !isRetakeAllowed })} disabled={isRetakeAllowed}>
                                 <option value="">Seleccione...</option>
-                                <option value="Micosis superficial">Micosis superficial</option>
-                                <option value="Levadura lipófila">Levadura lipófila</option>
-                                <option value="Micosis cutáneas">Micosis cutáneas</option>
-                                <option value="Onicomicosis">Onicomicosis</option>
-                                <option value="Micosis subcutáneas">Micosis subcutáneas</option>
-                                <option value="Micosis oportunista">Micosis oportunista</option>
-                                <option value="Meningoencefalitis">Meningoencefalitis</option>
-                                <option value="Reacciones alérgicas">Reacciones alérgicas</option>
+                                <option value="Contiene información hormonal">Contiene información hormonal</option>
+                                <option value="Contiene información renal">Contiene información renal</option>
+                                <option value="Muestra ideal para prueba de ADN">Muestra ideal para prueba de ADN</option>
+                                <option value="Se obtiene por hisopado bucal">Se obtiene por hisopado bucal</option>
+                                <option value="Se obtiene mediante punción lumbar">Se obtiene mediante punción lumbar</option>
+                                <option value="Permite el estudio de la Genética">Permite el estudio de la Genética</option>
+                                <option value="Se obtiene por puncion articular">Se obtiene por puncion articular</option>
+                                <option value="Se obtiene por biopsia">Se obtiene por biopsia</option>
                             </select>
-                            {errors.question1_h && <ErrorMessage>Esta pregunta es obligatoria.</ErrorMessage>}
+                            {errors.question1_8 && <ErrorMessage>Esta pregunta es obligatoria.</ErrorMessage>}
                         </SelectContainer>
                     </QuestionContent>
                 </Question>
@@ -258,49 +298,97 @@ export const FirstQuizz = () => {
                     <p>2. Marque verdadero ( V ) o falso ( F ): (2 puntos)</p>
                     <QuestionContent>
                         <SelectContainer>
-                            <label>2.1. Los hongos son microorganismos eucarióticos.</label>
+                            <label>a) El sudor es una muestra biológica humana.</label>
                             <label>
-                                <input type="radio" value="Verdadero" {...register("question2_1", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
+                                <input type="radio" value="V" {...register("question2_1", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
                                 Verdadero
                             </label>
                             <label>
-                                <input type="radio" value="Falso" {...register("question2_1", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
+                                <input type="radio" value="F" {...register("question2_1", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
                                 Falso
                             </label>
                         </SelectContainer>
 
                         <SelectContainer>
-                            <label>2.2. La mayoría de los hongos poseen una pared no rígida.</label>
+                            <label>b) Una muestra biológica se usa para diagnosticar enfermedades.</label>
                             <label>
-                                <input type="radio" value="Verdadero" {...register("question2_2", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
+                                <input type="radio" value="V" {...register("question2_2", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
                                 Verdadero
                             </label>
                             <label>
-                                <input type="radio" value="Falso" {...register("question2_2", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
+                                <input type="radio" value="F" {...register("question2_2", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
                                 Falso
                             </label>
                         </SelectContainer>
 
                         <SelectContainer>
-                            <label>2.3. Los hongos son fotosintéticos.</label>
+                            <label>c) El líquido pleural es una muestra obtenida por un método invasivo.</label>
                             <label>
-                                <input type="radio" value="Verdadero" {...register("question2_3", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
+                                <input type="radio" value="V" {...register("question2_3", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
                                 Verdadero
                             </label>
                             <label>
-                                <input type="radio" value="Falso" {...register("question2_3", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
+                                <input type="radio" value="F" {...register("question2_3", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
                                 Falso
                             </label>
                         </SelectContainer>
 
                         <SelectContainer>
-                            <label>2.4. La mayoría de los hongos causan micosis.</label>
+                            <label>d) El líquido pericárdico es una muestra obtenida por un método no invasivo.</label>
                             <label>
-                                <input type="radio" value="Verdadero" {...register("question2_4", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
+                                <input type="radio" value="V" {...register("question2_4", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
                                 Verdadero
                             </label>
                             <label>
-                                <input type="radio" value="Falso" {...register("question2_4", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
+                                <input type="radio" value="F" {...register("question2_4", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
+                                Falso
+                            </label>
+                        </SelectContainer>
+
+                        <SelectContainer>
+                            <label>e) La orina se puede usar para el diagnóstico de la TBC.</label>
+                            <label>
+                                <input type="radio" value="V" {...register("question2_5", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
+                                Verdadero
+                            </label>
+                            <label>
+                                <input type="radio" value="F" {...register("question2_5", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
+                                Falso
+                            </label>
+                        </SelectContainer>
+
+                        <SelectContainer>
+                            <label>f) Algunas muestras biológicas son tomadas por los médicos.</label>
+                            <label>
+                                <input type="radio" value="V" {...register("question2_6", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
+                                Verdadero
+                            </label>
+                            <label>
+                                <input type="radio" value="F" {...register("question2_6", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
+                                Falso
+                            </label>
+                        </SelectContainer>
+
+                        <SelectContainer>
+                            <label>g) El suero y el plasma son muestras diferentes.</label>
+                            <label>
+                                <input type="radio" value="V" {...register("question2_7", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
+                                Verdadero
+                            </label>
+                            <label>
+                                <input type="radio" value="F" {...register("question2_7", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
+                                Falso
+                            </label>
+                        </SelectContainer>
+
+                        <SelectContainer>
+                            <label>h) La orina se usa para medir la evolución de la diabetes.</label>
+                            <label>
+                                <input type="radio" value="V" {...register("question2_8", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
+                                Verdadero
+                            </label>
+                            <label>
+                                <input type="radio" value="F" {...register("question2_8", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
                                 Falso
                             </label>
                         </SelectContainer>
@@ -308,57 +396,69 @@ export const FirstQuizz = () => {
                 </Question>
 
                 <Question>
-                    <p>3. Subraye la alternativa incorrecta: (2 puntos)</p>
+                    <p>3. Arrastrar al espacio en blanco: (3 puntos)</p>
                     <QuestionContent>
-                        <SelectContainer>
-                            <label>
-                                <input type="radio" value="3.1" {...register("question3", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
-                                3.1. Casi todos los hongos son aerobios estrictos o facultativos.
-                            </label>
-                            <label>
-                                <input type="radio" value="3.2" {...register("question3", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
-                                3.2. Los hongos son quimiotróficos y secretan enzimas degradativas.
-                            </label>
-                            <label>
-                                <input type="radio" value="3.3" {...register("question3", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
-                                3.3. Casi todos los hongos patógenos son endógenos.
-                            </label>
-                            <label>
-                                <input type="radio" value="3.4" {...register("question3", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
-                                3.4. La mayor parte de micosis son de tratamiento difícil.
-                            </label>
-                        </SelectContainer>
+                        <TextBlock>
+                            Las muestras biológicas son materiales de origen 
+                            <BlankSpace 
+                                onDrop={(event) => onDrop(event, 'blank1')} 
+                                onDragOver={onDragOver}
+                            >
+                                {droppedItems.blank1 || '____________'}
+                            </BlankSpace> 
+                            que se recolectan y utilizan para realizar análisis, investigaciones y diagnósticos en diversos campos científicos y médicos. Estas muestras contienen información 
+                            <BlankSpace 
+                                onDrop={(event) => onDrop(event, 'blank2')} 
+                                onDragOver={onDragOver}
+                            >
+                                {droppedItems.blank2 || '____________'}
+                            </BlankSpace>, 
+                            biomoléculas o células que permiten obtener datos valiosos sobre la salud, 
+                            <BlankSpace 
+                                onDrop={(event) => onDrop(event, 'blank3')} 
+                                onDragOver={onDragOver}
+                            >
+                                {droppedItems.blank3 || '____________'}
+                            </BlankSpace>, procesos biológicos y diversos aspectos de la vida.
+                            La recolección de muestras biológicas se realiza mediante técnicas específicas, como la extracción de sangre, la 
+                            <BlankSpace 
+                                onDrop={(event) => onDrop(event, 'blank4')} 
+                                onDragOver={onDragOver}
+                            >
+                                {droppedItems.blank4 || '____________'}
+                            </BlankSpace>, el frotis, el hisopado o la punción lumbar, entre otras. Estas técnicas se llevan a cabo siguiendo unos 
+                            <BlankSpace 
+                                onDrop={(event) => onDrop(event, 'blank5')} 
+                                onDragOver={onDragOver}
+                            >
+                                {droppedItems.blank5 || '____________'}
+                            </BlankSpace> 
+                            adecuados para garantizar la integridad de la muestra y obtener resultados precisos y 
+                            <BlankSpace 
+                                onDrop={(event) => onDrop(event, 'blank6')} 
+                                onDragOver={onDragOver}
+                            >
+                                {droppedItems.blank6 || '____________'}
+                            </BlankSpace>.
+                        </TextBlock>
                     </QuestionContent>
+                    
+                    <DraggableItems>
+                        {['biológico', 'genética', 'enfermedades', 'biopsia', 'protocolos', 'confiables'].map(item => (
+                            !Object.values(droppedItems).includes(item) && (
+                                <DraggableItem
+                                    key={item}
+                                    draggable
+                                    onDragStart={(event) => onDragStart(event, item)}
+                                >
+                                    {item}
+                                </DraggableItem>
+                            )
+                        ))}
+                    </DraggableItems>
+                    
                 </Question>
 
-                <Question>
-                    <p>4. Completar: (2 puntos)</p>
-                    <QuestionContent>
-                        <SelectContainer>
-                            <label>4.1. La mayor parte de las levaduras se reproducen por:</label>
-                            <input type="text" {...register("question4_1", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
-                            {errors.question4_1 && <ErrorMessage>Este campo es obligatorio.</ErrorMessage>}
-                        </SelectContainer>
-
-                        <SelectContainer>
-                            <label>4.2. Filamentos tubulares ramificados de los hongos:</label>
-                            <input type="text" {...register("question4_2", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
-                            {errors.question4_2 && <ErrorMessage>Este campo es obligatorio.</ErrorMessage>}
-                        </SelectContainer>
-
-                        <SelectContainer>
-                            <label>4.3. La mayor parte de los hongos patógenos son miembros del filo:</label>
-                            <input type="text" {...register("question4_3", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
-                            {errors.question4_3 && <ErrorMessage>Este campo es obligatorio.</ErrorMessage>}
-                        </SelectContainer>
-
-                        <SelectContainer>
-                            <label>4.4. El medio micológico tradicional es:</label>
-                            <input type="text" {...register("question4_4", { required: !isRetakeAllowed })} disabled={isRetakeAllowed} />
-                            {errors.question4_4 && <ErrorMessage>Este campo es obligatorio.</ErrorMessage>}
-                        </SelectContainer>
-                    </QuestionContent>
-                </Question>
 
                 <SubmitButton type="submit" disabled={isRetakeAllowed}>Enviar Respuestas</SubmitButton>
             </form>
@@ -366,7 +466,7 @@ export const FirstQuizz = () => {
                 <ScoreModal>
                     <ScoreContent>
                         <h2>¡Quiz completado!</h2>
-                        <p>Has respondido correctamente {score} de 16 preguntas.</p>
+                        <p>Has respondido correctamente {score.toFixed(2)} de 7 puntos.</p>
                         <ModalButton onClick={closeModal}>Cerrar</ModalButton>
                     </ScoreContent>
                 </ScoreModal>
@@ -375,8 +475,8 @@ export const FirstQuizz = () => {
     );
 };
 
-
 // Estilos
+
 const QuizContainer = styled.div`
     padding: 20px;
     max-width: clamp(500px, 75%, 900px);
@@ -389,6 +489,30 @@ const QuizTitle = styled.h1`
     color: #005a6d;
     margin-bottom: 20px;
     text-align: center;
+`;
+
+const SelectContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 15px;
+
+    label {
+        font-size: clamp(0.9rem, 1.2vw, 1rem);
+        color: #555;
+        margin-bottom: 5px;
+    }
+
+    select, input[type="text"] {
+        padding: 8px;
+        font-size: clamp(0.9rem, 1vw, 1rem);
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    input[type="radio"] {
+        margin-right: 10px;
+    }
 `;
 
 const StudentName = styled.div`
@@ -432,33 +556,41 @@ const QuestionContent = styled.div`
     gap: 10px;
 `;
 
-const SelectContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-bottom: 15px;
-
-    label {
-        font-size: clamp(0.9rem, 1.2vw, 1rem);
-        color: #555;
-        margin-bottom: 5px;
-    }
-
-    select, input[type="text"] {
-        padding: 8px;
-        font-size: clamp(0.9rem, 1vw, 1rem);
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    input[type="radio"] {
-        margin-right: 10px;
-    }
+const TextBlock = styled.div`
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
 `;
 
-const ErrorMessage = styled.span`
-    color: red;
-    font-size: clamp(0.8rem, 1vw, 0.9rem);
+const BlankSpace = styled.span`
+    display: inline-block;
+    min-width: 100px;
+    border-bottom: 1px dashed #000;
+    margin: 0 5px;
+    padding: 2px;
+    cursor: pointer;
+    background-color: #f0f8ff;
+    text-align: center;
+`;
+
+const DraggableItems = styled.div`
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+`;
+
+const DraggableItem = styled.div`
+    padding: 10px 20px;
+    background-color: #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    user-select: none;
+
+    &:hover {
+        background-color: #bbb;
+    }
 `;
 
 const SubmitButton = styled.button`
@@ -511,19 +643,6 @@ const ScoreContent = styled.div`
     text-align: center;
     max-width: 400px;
     width: 100%;
-
-    ul {
-        list-style-type: none;
-        padding: 0;
-        margin-top: 20px;
-        text-align: left;
-    }
-
-    li {
-        font-size: clamp(1rem, 1.2vw, 1.2rem);
-        color: ${props => props.correct ? 'green' : 'red'};
-        margin-bottom: 10px;
-    }
 `;
 
 const ModalButton = styled.button`
@@ -540,9 +659,7 @@ const ModalButton = styled.button`
     }
 `;
 
-
-
-
-
-
-
+const ErrorMessage = styled.span`
+color: red;
+font-size: clamp(0.8rem, 1vw, 0.9rem);
+`;

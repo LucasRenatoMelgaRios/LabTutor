@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom"; // Importa useNavigate
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa"; // Importa la flecha hacia atrás
+import { CierreUno } from "../components/CierreUno";
 
 
 export const FirstClassPage = () => {
@@ -204,24 +205,24 @@ export const FirstClassPage = () => {
                 </VideoWrapper>
                 <FlexSection>
 
-<DialogamosContainer>
-    <DialogamosTitle>Dialogamos</DialogamosTitle>
-    <QuestionList>
-        <QuestionItem>
-            <Question>* ¿Qué son las muestras biológicas?</Question>
-        </QuestionItem>
-        <QuestionItem>
-            <Question>* ¿Cuáles son los tipos de muestras biológicas?</Question>
-        </QuestionItem>
-        <QuestionItem>
-            <Question>* ¿Por qué se necesitan las muestras biológicas?</Question>
-        </QuestionItem>
-        <QuestionItem>
-            <Question>* ¿Qué nos indican los colores de los tubos?</Question>
-        </QuestionItem>
-    </QuestionList>
-</DialogamosContainer>
-</FlexSection>
+                    <DialogamosContainer>
+                        <DialogamosTitle>Dialogamos</DialogamosTitle>
+                        <QuestionList>
+                            <QuestionItem>
+                                <Question>* ¿Qué son las muestras biológicas?</Question>
+                            </QuestionItem>
+                            <QuestionItem>
+                                <Question>* ¿Cuáles son los tipos de muestras biológicas?</Question>
+                            </QuestionItem>
+                            <QuestionItem>
+                                <Question>* ¿Por qué se necesitan las muestras biológicas?</Question>
+                            </QuestionItem>
+                            <QuestionItem>
+                                <Question>* ¿Qué nos indican los colores de los tubos?</Question>
+                            </QuestionItem>
+                        </QuestionList>
+                    </DialogamosContainer>
+                </FlexSection>
                 <ContentWrapper>
                     <ClassDescription>
                         La recolección de muestras biológicas se realiza mediante técnicas específicas, como la <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[2])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[2])} className="hover-word">venopunción</HoverWord>, la <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[3])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[3])} className="hover-word">biopsia</HoverWord>, el <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[4])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[4])} className="hover-word">frotis</HoverWord>, el <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[9])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[9])} className="hover-word">hisopado</HoverWord> o la <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[5])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[5])} className="hover-word">punción lumbar</HoverWord>, entre otras. Estas técnicas se llevan a cabo siguiendo unos protocolos adecuados para garantizar la integridad de la muestra y obtener resultados precisos y confiables.
@@ -285,13 +286,7 @@ export const FirstClassPage = () => {
             <Section>
                 <SectionTitle>Práctica #01: Extracción de Muestra Sanguínea</SectionTitle>
                 <VideoWrapper>
-                    <iframe
-                        src="https://www.youtube.com/watch?v=UqjE0UtMLf0"
-                        title="Extracción de Muestra Sanguínea"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                    ></iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/kkGeAMKSDnk?si=CsYdlFJR6-o6h9o7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </VideoWrapper>
                 <ContentWrapper>
                     <InstructionList>
@@ -331,6 +326,10 @@ export const FirstClassPage = () => {
                         </Instruction>
                     </InstructionList>
                 </ContentWrapper>
+            </Section>
+
+            <Section>
+                <CierreUno/>
             </Section>
 
             {/* Sección del cuestionario */}
