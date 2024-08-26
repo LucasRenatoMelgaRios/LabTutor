@@ -112,13 +112,13 @@ export const ClassesSection = () => {
         </MainContainer>
     )
 }
-
 const MainContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 20px 5%;
     justify-content: center;
+    box-sizing: border-box;
 `;
 
 const TitleContainer = styled.div`
@@ -126,27 +126,36 @@ const TitleContainer = styled.div`
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 
     img {
-        width: clamp(200px, 5vw, 650px);
+        width: clamp(150px, 50%, 400px);
+        margin-bottom: 20px;
     }
 `;
 
 const Title = styled.h2`
-    font-size: clamp(22px, 1.5vw, 36px);
+    font-size: clamp(18px, 4vw, 36px);
     font-weight: 500;
+    margin-bottom: 20px;
 `;
 
 const ClassesContainer = styled.div`
-    padding-left: 300px;
-    padding-right: 300px;
+    padding: 0;
+    width: 100%;
+    margin: 0 auto;
 `;
 
 const ClassesGridContainer = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajuste para pantallas pequeñas */
+    gap: 20px;
     margin-top: 20px;
+    width: 100%;
+
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
 `;
 
 const ClassCard = styled.div`
@@ -157,11 +166,17 @@ const ClassCard = styled.div`
     display: flex;
     flex-direction: column;
     border: 1px solid rgb(229, 231, 235);
-    overflow: hidden; /* Asegura que no haya desbordamiento de contenido */
-    height: 100%; /* Hace que la card ocupe todo el espacio disponible */
+    overflow: hidden;
+    height: 100%;
+    transition: transform 0.3s ease;
 
-    h3, p{
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    h3, p {
         text-align: left;
+        margin: 5px 0;
     }
 `;
 
@@ -170,7 +185,7 @@ const ImageContainer = styled.div`
 
     img {
         width: 100%;
-        height: 200px; /* Ajusta la altura según lo necesario */
+        height: 180px;
         object-fit: cover;
         border-top-right-radius: 10px;
         border-top-left-radius: 10px;
@@ -181,8 +196,8 @@ const ContentContainer = styled.div`
     display: flex;
     flex-direction: column;
     padding: 10px;
-    flex-grow: 1; /* Hace que el contenido ocupe el espacio restante */
-    justify-content: space-between; /* Distribuye el contenido verticalmente */
+    flex-grow: 1;
+    justify-content: space-between;
 `;
 
 const FechaContainer = styled.div`
@@ -190,12 +205,12 @@ const FechaContainer = styled.div`
     justify-content: space-between;
     color: #07bdbd;
 
-    p{
+    p {
         color: #07bdbd;
         font-size: clamp(12px, 0.7vw, 19px);
     }
 
-    svg{
+    svg {
         font-size: 20px;
         font-weight: bold;
     }
@@ -208,7 +223,7 @@ const ProfesorContainer = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-    text-decoration: none; /* Elimina el subrayado */
-    color: inherit; /* Hereda el color del elemento padre */
-    display: block; /* Asegura que el enlace ocupe todo el espacio del bloque */
+    text-decoration: none;
+    color: inherit;
+    display: block;
 `;

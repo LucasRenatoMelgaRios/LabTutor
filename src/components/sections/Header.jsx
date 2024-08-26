@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { FaClipboardList } from "react-icons/fa"; // Importa el ícono de React Icons
+import { FaClipboardList } from "react-icons/fa";
 
 export const Header = () => {
     const navigate = useNavigate();
@@ -26,25 +26,26 @@ export const Header = () => {
 const MainContainer = styled.header`
     width: 100%;
     display: flex;
-    justify-content: space-between; /* Ajusta para separar el título del botón */
-    padding: 20px;
+    justify-content: space-between;
+    padding: clamp(10px, 2vw, 20px); /* Responsive padding */
     background-color: #d1eeea;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    box-sizing: border-box; /* Ensure padding is included in width */
 `;
 
 const TitleContainer = styled.div`
     display: flex;
-    justify-content: center;
     align-items: center;
     gap: 10px;
 
     img{
-        width: 50px; /* Ajusta el tamaño del logo */
+        width: clamp(30px, 5vw, 50px); /* Responsive width for logo */
         border-radius: 10px;
     }
 
     p{
-        font-size: 1.5rem;
+        font-size: clamp(1rem, 2.5vw, 1.5rem); /* Responsive font size */
         font-weight: bold;
         color: #333;
     }
@@ -61,11 +62,11 @@ const NotesButton = styled.button`
     gap: 8px;
     background-color: #005a6d;
     color: white;
-    padding: 10px 20px;
+    padding: clamp(5px, 1vw, 10px) clamp(10px, 2vw, 20px); /* Responsive padding */
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: clamp(0.8rem, 2vw, 1rem); /* Responsive font size */
     transition: background-color 0.3s;
 
     &:hover {
@@ -73,6 +74,6 @@ const NotesButton = styled.button`
     }
 
     svg {
-        margin-right: 5px;
+        font-size: clamp(16px, 2.5vw, 20px); /* Responsive icon size */
     }
 `;

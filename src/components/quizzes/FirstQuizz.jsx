@@ -15,6 +15,18 @@ export const FirstQuizz = () => {
     const [isRetakeAllowed, setIsRetakeAllowed] = useState(false);
     const [studentId, setStudentId] = useState(null); // Para almacenar el ID del estudiante
 
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    };
+
+    // Ejecutar scrollToTop cuando el componente se monta
+    useEffect(() => {
+        scrollToTop();
+    }, []);
+
     useEffect(() => {
         if (!isRetakeAllowed && timeLeft > 0) {
             const timerId = setTimeout(() => {
