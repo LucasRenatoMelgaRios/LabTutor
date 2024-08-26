@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid'; // Para generar IDs únicos
 import { PostGradeService } from "../../services/PostGradeService";
 import { PostStudentDataService } from "../../services/PostStudentDataService";
 
+
 export const FirstQuizz = () => {
     const { register, handleSubmit, formState: { errors }, reset, clearErrors } = useForm();
     const navigate = useNavigate();
@@ -22,7 +23,7 @@ export const FirstQuizz = () => {
         blank5: '',
         blank6: '',
     });
-    const [draggedItem, setDraggedItem] = useState(null);
+    const [selectedItem, setSelectedItem] = useState(null);
 
     // Ejecutar scrollToTop cuando el componente se monta
     useEffect(() => {
@@ -53,20 +54,17 @@ export const FirstQuizz = () => {
         }
     }, [timeLeft, isRetakeAllowed]);
 
-    const onDrop = (event, target) => {
-        event.preventDefault();
-        const newDroppedItems = { ...droppedItems };
-        newDroppedItems[target] = draggedItem;
-        setDroppedItems(newDroppedItems);
-        setDraggedItem(null);
+    const onSelectItem = (item) => {
+        setSelectedItem(item);
     };
 
-    const onDragOver = (event) => {
-        event.preventDefault();
-    };
-
-    const onDragStart = (event, item) => {
-        setDraggedItem(item);
+    const onBlankSpaceClick = (target) => {
+        if (selectedItem) {
+            const newDroppedItems = { ...droppedItems };
+            newDroppedItems[target] = selectedItem;
+            setDroppedItems(newDroppedItems);
+            setSelectedItem(null); // Clear selection after "dropping"
+        }
     };
 
     const onSubmit = async (data) => {
@@ -396,47 +394,41 @@ export const FirstQuizz = () => {
                 </Question>
 
                 <Question>
-                    <p>3. Arrastrar al espacio en blanco: (3 puntos)</p>
+                    <p>3. Completar al espacio en blanco: (3 puntos) <span style={{fontSize:"14px"}}>*selecciona tu respuesta y luego el espacio en blanco*</span> </p>
                     <QuestionContent>
                         <TextBlock>
                             Las muestras biológicas son materiales de origen 
                             <BlankSpace 
-                                onDrop={(event) => onDrop(event, 'blank1')} 
-                                onDragOver={onDragOver}
+                                onClick={() => onBlankSpaceClick('blank1')}
                             >
                                 {droppedItems.blank1 || '____________'}
                             </BlankSpace> 
                             que se recolectan y utilizan para realizar análisis, investigaciones y diagnósticos en diversos campos científicos y médicos. Estas muestras contienen información 
                             <BlankSpace 
-                                onDrop={(event) => onDrop(event, 'blank2')} 
-                                onDragOver={onDragOver}
+                                onClick={() => onBlankSpaceClick('blank2')}
                             >
                                 {droppedItems.blank2 || '____________'}
                             </BlankSpace>, 
                             biomoléculas o células que permiten obtener datos valiosos sobre la salud, 
                             <BlankSpace 
-                                onDrop={(event) => onDrop(event, 'blank3')} 
-                                onDragOver={onDragOver}
+                                onClick={() => onBlankSpaceClick('blank3')}
                             >
                                 {droppedItems.blank3 || '____________'}
                             </BlankSpace>, procesos biológicos y diversos aspectos de la vida.
                             La recolección de muestras biológicas se realiza mediante técnicas específicas, como la extracción de sangre, la 
                             <BlankSpace 
-                                onDrop={(event) => onDrop(event, 'blank4')} 
-                                onDragOver={onDragOver}
+                                onClick={() => onBlankSpaceClick('blank4')}
                             >
                                 {droppedItems.blank4 || '____________'}
                             </BlankSpace>, el frotis, el hisopado o la punción lumbar, entre otras. Estas técnicas se llevan a cabo siguiendo unos 
                             <BlankSpace 
-                                onDrop={(event) => onDrop(event, 'blank5')} 
-                                onDragOver={onDragOver}
+                                onClick={() => onBlankSpaceClick('blank5')}
                             >
                                 {droppedItems.blank5 || '____________'}
                             </BlankSpace> 
                             adecuados para garantizar la integridad de la muestra y obtener resultados precisos y 
                             <BlankSpace 
-                                onDrop={(event) => onDrop(event, 'blank6')} 
-                                onDragOver={onDragOver}
+                                onClick={() => onBlankSpaceClick('blank6')}
                             >
                                 {droppedItems.blank6 || '____________'}
                             </BlankSpace>.
@@ -448,8 +440,8 @@ export const FirstQuizz = () => {
                             !Object.values(droppedItems).includes(item) && (
                                 <DraggableItem
                                     key={item}
-                                    draggable
-                                    onDragStart={(event) => onDragStart(event, item)}
+                                    onClick={() => onSelectItem(item)}
+                                    isSelected={selectedItem === item}
                                 >
                                     {item}
                                 </DraggableItem>
@@ -474,7 +466,6 @@ export const FirstQuizz = () => {
         </QuizContainer>
     );
 };
-
 // Estilos
 
 const QuizContainer = styled.div`
