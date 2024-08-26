@@ -81,7 +81,7 @@ export const ClassesSection = () => {
     return (
         <MainContainer>
             <TitleContainer>
-                <h1>Extracción y recolección de muestras biológicas humanas</h1>
+                <h1>MUESTRAS BIOLÓGICAS HUMANAS</h1>
                 <img src="https://img.freepik.com/fotos-premium/representacion-3d-nino-pequeno-bata-laboratorio-gafas-sosteniendo-matraz_1057-16674.jpg" alt="" />
             </TitleContainer>
             <ClassesContainer>
@@ -127,6 +127,10 @@ const TitleContainer = styled.div`
     flex-direction: column;
     align-items: center;
     text-align: center;
+
+    h1{
+        font-size: clamp(20px, 3.2vw, 200px);
+    }
 
     img {
         width: clamp(150px, 50%, 400px);

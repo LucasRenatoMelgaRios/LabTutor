@@ -19,56 +19,72 @@ export const FirstClassPage = () => {
     }, []);
     const definitions = [
         {
-            word: "Genética",
-            description: "La genética es el campo de la biología que busca comprender cómo se transmiten las características hereditarias.",
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBaGHYJzOUFlw6ZKXNrhqJeGd3h2YF-TGlfg&s"
+            word: "muestras biológicas",
+            description: "Una muestra biológica es una cantidad limitada de sustancia o material proveniente de un organismo.",
+            image: "https://example.com/biological-sample-image.jpg"
+        },
+        {
+            word: "órganos completos",
+            description: "Los órganos completos son partes del cuerpo con funciones específicas, como el corazón, los pulmones, el hígado, etc.",
+            image: "https://example.com/organ-image.jpg"
+        },
+        {
+            word: "tejidos",
+            description: "Los tejidos son grupos de células similares que trabajan juntas para realizar una función específica en el cuerpo.",
+            image: "https://example.com/tissue-image.jpg"
+        },
+        {
+            word: "células",
+            description: "Las células son las unidades estructurales y funcionales más pequeñas de los organismos vivos.",
+            image: "https://example.com/cell-image.jpg"
         },
         {
             word: "ADN",
             description: "El ADN es la molécula que contiene la información genética.",
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBaGHYJzOUFlw6ZKXNrhqJeGd3h2YF-TGlfg&s"
+            image: "https://example.com/dna-image.jpg"
         },
         {
-            word: "Venopunción",
-            description: "La venopunción es el proceso de acceder a una vena con una aguja, generalmente para extraer sangre o administrar un tratamiento intravenoso.",
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBaGHYJzOUFlw6ZKXNrhqJeGd3h2YF-TGlfg&s"
+            word: "ARN",
+            description: "El ARN es una molécula similar al ADN que juega un papel crucial en la síntesis de proteínas.",
+            image: "https://example.com/rna-image.jpg"
         },
         {
-            word: "Biopsia",
-            description: "Una biopsia es un procedimiento médico en el que se extrae una pequeña muestra de tejido para ser examinada en un laboratorio.",
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBaGHYJzOUFlw6ZKXNrhqJeGd3h2YF-TGlfg&s"
+            word: "proteínas",
+            description: "Las proteínas son moléculas esenciales para la estructura, función y regulación de las células del cuerpo.",
+            image: "https://example.com/protein-image.jpg"
         },
         {
-            word: "Frotis",
-            description: "El frotis es una técnica de recolección de células de una superficie, como la piel o el cuello uterino, para su examen microscópico.",
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBaGHYJzOUFlw6ZKXNrhqJeGd3h2YF-TGlfg&s"
+            word: "fluidos corporales",
+            description: "Los fluidos corporales incluyen sangre, orina, saliva, etc., y transportan sustancias dentro del cuerpo.",
+            image: "https://example.com/body-fluid-image.jpg"
         },
         {
-            word: "Punción lumbar",
-            description: "La punción lumbar es un procedimiento en el que se inserta una aguja en la columna vertebral para obtener líquido cefalorraquídeo.",
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBaGHYJzOUFlw6ZKXNrhqJeGd3h2YF-TGlfg&s"
+            word: "humor vítreo",
+            description: "El humor vítreo es el líquido gelatinoso que se encuentra en el ojo, entre el cristalino y la retina.",
+            image: "https://example.com/vitreous-humor-image.jpg"
         },
         {
-            word: "Líquido cefalorraquídeo",
+            word: "líquido cefalorraquídeo",
             description: "El líquido cefalorraquídeo es un fluido que circula alrededor del cerebro y la médula espinal, protegiendo y nutriendo el sistema nervioso central.",
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBaGHYJzOUFlw6ZKXNrhqJeGd3h2YF-TGlfg&s"
+            image: "https://example.com/cerebrospinal-fluid-image.jpg"
         },
         {
-            word: "Anticoagulante",
-            description: "Un anticoagulante es una sustancia que previene la coagulación de la sangre, utilizada comúnmente en tubos de ensayo durante la recolección de muestras de sangre.",
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBaGHYJzOUFlw6ZKXNrhqJeGd3h2YF-TGlfg&s"
+            word: "enfermedades",
+            description: "Las enfermedades son alteraciones de la salud que afectan el normal funcionamiento del organismo.",
+            image: "https://example.com/disease-image.jpg"
         },
         {
-            word: "Homogeneizar",
-            description: "Homogeneizar significa mezclar o agitar una sustancia para que sus componentes se distribuyan de manera uniforme.",
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBaGHYJzOUFlw6ZKXNrhqJeGd3h2YF-TGlfg&s"
+            word: "genotipos particulares",
+            description: "El genotipo es la constitución genética de un organismo, representando su combinación específica de alelos.",
+            image: "https://example.com/genotype-image.jpg"
         },
         {
-            word: "Hisopado",
-            description: "El hisopado es un método de recolección de muestras utilizando un hisopo, comúnmente utilizado para recolectar células de la garganta o la nariz.",
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBaGHYJzOUFlw6ZKXNrhqJeGd3h2YF-TGlfg&s"
-        },
+            word: "ancestría",
+            description: "La ancestría se refiere a los orígenes familiares o genealógicos de un individuo.",
+            image: "https://example.com/ancestry-image.jpg"
+        }
     ];
+
 
     const [hoveredWord, setHoveredWord] = useState(null);
     const [position, setPosition] = useState({ top: 0, left: 0 });
@@ -149,25 +165,17 @@ export const FirstClassPage = () => {
             <Section>
                 <FlexContainer>
                     <BackButton onClick={() => navigate(-1)}>
-                        <FaArrowLeft /> {/* Flecha hacia atrás */}
+                        <FaArrowLeft />
                     </BackButton>
                     <ClassTitle>Muestras Biológicas Humanas</ClassTitle>
                     <BackButton>
-                        <FaArrowRight /> {/* Flecha hacia atrás */}
+                        <FaArrowRight />
                     </BackButton>
                 </FlexContainer>
-                <VideoWrapper>
-                    <iframe
-                        src="https://www.youtube.com/embed/mtfe2vvetSo"
-                        title="Extracción de Muestra Sanguínea"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                    ></iframe>
-                </VideoWrapper>
+
                 <ContentWrapper>
                     <ClassDescription>
-                        El <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[0])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[0])} className="hover-word">Genética</HoverWord> es el campo de la biología que busca comprender cómo se transmiten las características hereditarias. El <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[1])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[1])} className="hover-word">ADN</HoverWord> es la molécula que contiene la información genética.
+                        Las <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[0])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[0])} className="hover-word">muestras biológicas</HoverWord> son una cantidad limitada de cualquier sustancia o material proveniente de un organismo; pueden ser <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[1])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[1])} className="hover-word">órganos completos</HoverWord>, <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[2])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[2])} className="hover-word">tejidos</HoverWord>, <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[3])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[3])} className="hover-word">células</HoverWord>, <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[4])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[4])} className="hover-word">ADN</HoverWord>, <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[5])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[5])} className="hover-word">ARN</HoverWord>, <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[6])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[6])} className="hover-word">proteínas</HoverWord> o <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[7])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[7])} className="hover-word">fluidos corporales</HoverWord> como orina, saliva, sangre, sudor, <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[8])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[8])} className="hover-word">humor vítreo</HoverWord>, <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[9])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[9])} className="hover-word">líquido cefalorraquídeo</HoverWord>, etc. Este material es utilizado para representar y estudiar <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[10])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[10])} className="hover-word">enfermedades</HoverWord>, <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[11])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[11])} className="hover-word">genotipos particulares</HoverWord>, pruebas de paternidad o <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[12])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[12])} className="hover-word">ancestría</HoverWord>. La palabra ‘muestra’ implica una menor cantidad tomada de una mayor.
                     </ClassDescription>
                     {hoveredWord && (
                         <HoverContainer style={{ top: position.top, left: position.left }} className="hover-container">
@@ -178,6 +186,9 @@ export const FirstClassPage = () => {
                     <ClassImage src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOhbN3uugJXdXaPBcO0OAAcDPr0qew-b-kIw&s" alt="Muestras Biológicas Humanas" />
                 </ContentWrapper>
             </Section>
+
+            {/* Sección de video y dialogamos */}
+
 
             {/* Sección de tipos de muestras biológicas */}
             <Section>
@@ -191,6 +202,26 @@ export const FirstClassPage = () => {
                         allowFullScreen
                     ></iframe>
                 </VideoWrapper>
+                <FlexSection>
+
+<DialogamosContainer>
+    <DialogamosTitle>Dialogamos</DialogamosTitle>
+    <QuestionList>
+        <QuestionItem>
+            <Question>* ¿Qué son las muestras biológicas?</Question>
+        </QuestionItem>
+        <QuestionItem>
+            <Question>* ¿Cuáles son los tipos de muestras biológicas?</Question>
+        </QuestionItem>
+        <QuestionItem>
+            <Question>* ¿Por qué se necesitan las muestras biológicas?</Question>
+        </QuestionItem>
+        <QuestionItem>
+            <Question>* ¿Qué nos indican los colores de los tubos?</Question>
+        </QuestionItem>
+    </QuestionList>
+</DialogamosContainer>
+</FlexSection>
                 <ContentWrapper>
                     <ClassDescription>
                         La recolección de muestras biológicas se realiza mediante técnicas específicas, como la <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[2])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[2])} className="hover-word">venopunción</HoverWord>, la <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[3])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[3])} className="hover-word">biopsia</HoverWord>, el <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[4])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[4])} className="hover-word">frotis</HoverWord>, el <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[9])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[9])} className="hover-word">hisopado</HoverWord> o la <HoverWord onMouseEnter={(e) => handleMouseEvent(e, definitions[5])} onMouseLeave={handleMouseLeave} onClick={(e) => handleMouseEvent(e, definitions[5])} className="hover-word">punción lumbar</HoverWord>, entre otras. Estas técnicas se llevan a cabo siguiendo unos protocolos adecuados para garantizar la integridad de la muestra y obtener resultados precisos y confiables.
@@ -255,7 +286,7 @@ export const FirstClassPage = () => {
                 <SectionTitle>Práctica #01: Extracción de Muestra Sanguínea</SectionTitle>
                 <VideoWrapper>
                     <iframe
-                        src="https://www.youtube.com/embed/mtfe2vvetSo"
+                        src="https://www.youtube.com/watch?v=UqjE0UtMLf0"
                         title="Extracción de Muestra Sanguínea"
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -299,7 +330,6 @@ export const FirstClassPage = () => {
                             10. Presionar en la zona de punción con algodón durante varios segundos y sujetar con esparadrapo, indicarle al paciente que presione la zona durante unos 3 a 5 minutos manteniendo el brazo extendido.
                         </Instruction>
                     </InstructionList>
-                    <PracticeImage src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBaGHYJzOUFlw6ZKXNrhqJeGd3h2YF-TGlfg&s" alt="Extracción de sangre" />
                 </ContentWrapper>
             </Section>
 
@@ -382,6 +412,7 @@ const ClassDescription = styled.p`
 
 const ClassImage = styled.img`
     width: 100%;
+    background-color: #8a0a8a;
     height: auto;
     border-radius: 10px;
 `;
@@ -595,3 +626,39 @@ const FlexContainer = styled.div`
     justify-content: center;
     align-items: center;
 `;
+
+
+const FlexSection = styled.div`
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Permite que los elementos se ajusten si no hay suficiente espacio */
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+        justify-content: center;
+    }
+`;
+
+const DialogamosContainer = styled.div`
+    background-color: #f0f8ff;
+    padding: clamp(20px, 3vw, 30px);
+    border-radius: 10px;
+    width: 100%; /* Para que ocupe el 100% del ancho disponible */
+    max-width: 500px; /* Ajusta según sea necesario */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Centra el contenedor dentro de su sección */
+`;
+
+
+const DialogamosTitle = styled.h2`
+    font-size: clamp(1.5rem, 2vw, 2.2rem);
+    color: #005a6d;
+    margin-bottom: 20px;
+    text-align: center;
+`;
+
+
