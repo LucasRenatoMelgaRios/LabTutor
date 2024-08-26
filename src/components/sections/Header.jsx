@@ -8,8 +8,8 @@ export const Header = () => {
     return (
         <>
             <MainContainer>
-                <TitleContainer>
-                    <img src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/625d6f41-519c-4d72-adf9-382db270fbf5/thumb_man_coding_app_square.png" alt="LabTutor Logo" />
+                <TitleContainer onClick={() => navigate('/')}>
+                    <img  src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/625d6f41-519c-4d72-adf9-382db270fbf5/thumb_man_coding_app_square.png" alt="LabTutor Logo" />
                     <p>LabTutor</p>
                 </TitleContainer>
                 <ButtonContainer>
@@ -38,10 +38,12 @@ const TitleContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 10px;
+    cursor: pointer;
 
     img{
         width: clamp(30px, 5vw, 50px); /* Responsive width for logo */
         border-radius: 10px;
+        cursor: pointer;
     }
 
     p{
