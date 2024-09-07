@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+import { Routes, Route, HashRouter, Navigate } from 'react-router-dom'; // Cambia a HashRouter
 import { HomePage } from '../pages/HomePage';
 import { FirstClassPage } from '../pages/FirstClassPage';
 import { SecondClassPage } from '../pages/SecondClassPage';
@@ -70,10 +70,10 @@ const RoutesWrapper = () => {
 
 export const MyRouters = () => {
   return (
-    <BrowserRouter basename="/LabTutor">
+    <HashRouter basename="/LabTutor"> {/* Cambiado a HashRouter */}
       <AuthProvider>
         <RoutesWrapper />
       </AuthProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
