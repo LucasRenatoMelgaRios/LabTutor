@@ -577,7 +577,6 @@ const DraggableItem = styled.div`
     border-radius: 5px;
     cursor: pointer;
     text-align: center;
-    user-select: none;
 
     &:hover {
         background-color: #bbb;
