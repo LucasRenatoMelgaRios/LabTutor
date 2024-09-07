@@ -19,7 +19,8 @@ const RoutesWrapper = () => {
   return (
     <Routes>
       {/* Si el usuario está logueado, redirigir a /home en vez de a "/" */}
-      <Route path="/" element={user ? <Navigate to="/home" /> : <LoginPage />} />
+      <Route path="/" element={user ? <Navigate to="/home" /> : <Navigate to="/login" />} />
+      <Route path="/login" element={<LoginPage />} />
 
       {/* Rutas privadas */}
       <Route path="/home" element={<PrivateRoute><HomePage /></PrivateRoute>} />
