@@ -1,7 +1,6 @@
 import styled from "styled-components"
 
 import { ClassesSection } from "../components/sections/ClassesSection"
-import { ChatGPTComponent } from "../components/ChatGPTComponent";
 
 export const HomePage = () => {
 
@@ -9,7 +8,6 @@ export const HomePage = () => {
         <>
             <MainContainer>
                 <ClassesSection />
-                <ChatGPTComponent/>
             </MainContainer>
         </>
     )
