@@ -12,18 +12,23 @@ export const AuthProvider = ({ children }) => {
   // Función para iniciar sesión
   const login = async (dni, codigo) => {
     try {
-      // Realizamos una petición al archivo JSON
-      const response = await axios.get(`${import.meta.env.BASE_URL}users.json`);
-      const students = response.data;
-
+      // Realizamos una petición a la API de Mock
+      const response = await axios.get('https://66ca61e159f4350f064f0e88.mockapi.io/api/labtutor/users');
+      const students = response.data; // Datos de los estudiantes
+      
+      console.log("Datos recibidos de la API:", students); // Verifica si students es un array
+      
       // Buscamos si hay algún estudiante que coincida con el DNI y código
       const student = students.find(student => 
         String(student.dni).trim() === String(dni).trim() && 
         student.codigo_estudiante.trim().toUpperCase() === codigo.trim().toUpperCase()
       );
-
+  
       if (student) {
-        // Si coincide, guardamos la información del estudiante en el estado y localStorage
+        // Si coincide, mostramos en consola quién es el usuario que ha ingresado
+        console.log("Usuario logueado:", student);
+        
+        // Guardamos la información del estudiante en el estado y localStorage
         setUser({ id: student.id, nombre: student.nombre });
         localStorage.setItem('user', JSON.stringify({ id: student.id, nombre: student.nombre }));
         navigate('/home'); // Navegar después de iniciar sesión

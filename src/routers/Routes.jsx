@@ -1,4 +1,3 @@
-// src/routes/MyRouters.js
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import { HomePage } from '../pages/HomePage';
 import { FirstClassPage } from '../pages/FirstClassPage';
@@ -23,12 +22,48 @@ const RoutesWrapper = () => {
       <Route path="/login" element={<LoginPage />} />
 
       {/* Rutas privadas */}
-      <Route path="/home" element={<PrivateRoute><HomePage /></PrivateRoute>} />
-      <Route path="/class/1" element={<PrivateRoute><FirstClassPage /></PrivateRoute>} />
-      <Route path="/class/2" element={<PrivateRoute><SecondClassPage /></PrivateRoute>} />
-      <Route path="/class/3" element={<PrivateRoute><ThirdClassPage /></PrivateRoute>} />
-      <Route path="/firstQuizz" element={<PrivateRoute><QuizzPage /></PrivateRoute>} />
-      <Route path="/notas" element={<PrivateRoute><NotasPage /></PrivateRoute>} />
+      <Route path="/home" element={
+        <PrivateRoute>
+          <Header /> {/* Header solo en rutas privadas */}
+          <HomePage />
+          <Footer /> {/* Footer solo en rutas privadas */}
+        </PrivateRoute>
+      } />
+      <Route path="/class/1" element={
+        <PrivateRoute>
+          <Header />
+          <FirstClassPage />
+          <Footer />
+        </PrivateRoute>
+      } />
+      <Route path="/class/2" element={
+        <PrivateRoute>
+          <Header />
+          <SecondClassPage />
+          <Footer />
+        </PrivateRoute>
+      } />
+      <Route path="/class/3" element={
+        <PrivateRoute>
+          <Header />
+          <ThirdClassPage />
+          <Footer />
+        </PrivateRoute>
+      } />
+      <Route path="/firstQuizz" element={
+        <PrivateRoute>
+          <Header />
+          <QuizzPage />
+          <Footer />
+        </PrivateRoute>
+      } />
+      <Route path="/notas" element={
+        <PrivateRoute>
+          <Header />
+          <NotasPage />
+          <Footer />
+        </PrivateRoute>
+      } />
     </Routes>
   );
 };
@@ -37,9 +72,7 @@ export const MyRouters = () => {
   return (
     <BrowserRouter basename="/LabTutor">
       <AuthProvider>
-        <Header />
         <RoutesWrapper />
-        <Footer />
       </AuthProvider>
     </BrowserRouter>
   );
