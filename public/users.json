@@ -1,0 +1,302 @@
+[
+    {
+        "id": 1,
+        "nombre": "Aguilar Castañeda, Miguel Yeison",
+        "dni": 76959289,
+        "codigo_estudiante": "9A260"
+    },
+    {
+        "id": 2,
+        "nombre": "Aguirre Callan, Angelina Jade",
+        "dni": 60223352,
+        "codigo_estudiante": "0TFHQ"
+    },
+    {
+        "id": 3,
+        "nombre": "Alhuay Sarmiento, Yulisa",
+        "dni": 76438561,
+        "codigo_estudiante": "78HC6"
+    },
+    {
+        "id": 4,
+        "nombre": "Alvarado Ferrer, Shandy Susan",
+        "dni": 71591719,
+        "codigo_estudiante": "4XUOR"
+    },
+    {
+        "id": 5,
+        "nombre": "Arevalo Tamani, Danna Graciela",
+        "dni": 77815783,
+        "codigo_estudiante": "4RXJW"
+    },
+    {
+        "id": 6,
+        "nombre": "Arévalo Tamani, Zeus Banny",
+        "dni": 76991976,
+        "codigo_estudiante": "PTP9B"
+    },
+    {
+        "id": 7,
+        "nombre": "Beteta Fernandez, Aracely",
+        "dni": 63254814,
+        "codigo_estudiante": "JUJJR"
+    },
+    {
+        "id": 8,
+        "nombre": "Bezares Omonte, Jaquelyn",
+        "dni": 77084483,
+        "codigo_estudiante": "EPUP9"
+    },
+    {
+        "id": 9,
+        "nombre": "Cardenas Ramos, Pia Andre",
+        "dni": 62384328,
+        "codigo_estudiante": "7NNSK"
+    },
+    {
+        "id": 10,
+        "nombre": "Carhuayano Soplin, Fernando José",
+        "dni": 75875154,
+        "codigo_estudiante": "CRFPH"
+    },
+    {
+        "id": 11,
+        "nombre": "Castillo Albornoz, Yomira Mayra",
+        "dni": 61103005,
+        "codigo_estudiante": "27SOQ"
+    },
+    {
+        "id": 12,
+        "nombre": "Cerna Carrillo, Briana Alexandra",
+        "dni": 61377597,
+        "codigo_estudiante": "XYMUA"
+    },
+    {
+        "id": 13,
+        "nombre": "Chamorro Pascual, Solange Mariana",
+        "dni": 71572735,
+        "codigo_estudiante": "D7BUM"
+    },
+    {
+        "id": 14,
+        "nombre": "Clemente Ramirez, Mirley",
+        "dni": 81173808,
+        "codigo_estudiante": "2OX85"
+    },
+    {
+        "id": 15,
+        "nombre": "Cornelio Cantaro, Jeraly Maily",
+        "dni": 76580040,
+        "codigo_estudiante": "MZHK4"
+    },
+    {
+        "id": 16,
+        "nombre": "De La Barra Paredes, Maria Rosa",
+        "dni": 45388073,
+        "codigo_estudiante": "8R765"
+    },
+    {
+        "id": 17,
+        "nombre": "De La Cruz Esteban, Triana Angelline",
+        "dni": 73675768,
+        "codigo_estudiante": "5LBTV"
+    },
+    {
+        "id": 18,
+        "nombre": "Diego Cardenas, Alexis",
+        "dni": 74069130,
+        "codigo_estudiante": "G4OUR"
+    },
+    {
+        "id": 19,
+        "nombre": "Doroteo Mauri, Luis Jampiere",
+        "dni": 76813679,
+        "codigo_estudiante": "0W6MU"
+    },
+    {
+        "id": 20,
+        "nombre": "Espinoza Tueros, Yoisy Guiliana",
+        "dni": 71959889,
+        "codigo_estudiante": "YPIOJ"
+    },
+    {
+        "id": 21,
+        "nombre": "Eugenio Rosas, Maryori",
+        "dni": 75891546,
+        "codigo_estudiante": "IS19U"
+    },
+    {
+        "id": 22,
+        "nombre": "Flores Pérez, Yomira Jazmin",
+        "dni": 76385760,
+        "codigo_estudiante": "SDK2X"
+    },
+    {
+        "id": 23,
+        "nombre": "García Garcia, May Taison",
+        "dni": 75855487,
+        "codigo_estudiante": "I02MG"
+    },
+    {
+        "id": 24,
+        "nombre": "Grados Melgarejo, Mery Mardeli",
+        "dni": 60889343,
+        "codigo_estudiante": "QMNQI"
+    },
+    {
+        "id": 25,
+        "nombre": "Hurtado Nieto, Sally",
+        "dni": 61544124,
+        "codigo_estudiante": "HMD9V"
+    },
+    {
+        "id": 26,
+        "nombre": "Isla Flores, Marco Antonio",
+        "dni": 60602716,
+        "codigo_estudiante": "2LSNV"
+    },
+    {
+        "id": 27,
+        "nombre": "Julca Huaman, Evelyn Rocio",
+        "dni": 71303503,
+        "codigo_estudiante": "F8X4K"
+    },
+    {
+        "id": 28,
+        "nombre": "Matos Porta, Anghelo Genaro",
+        "dni": 73307180,
+        "codigo_estudiante": "IRN8U"
+    },
+    {
+        "id": 29,
+        "nombre": "Meliton Florido, Leydibi Herlinda",
+        "dni": 60200568,
+        "codigo_estudiante": "6G25F"
+    },
+    {
+        "id": 30,
+        "nombre": "Mena Hilario, Ana Cristina",
+        "dni": 73963422,
+        "codigo_estudiante": "YBBXQ"
+    },
+    {
+        "id": 31,
+        "nombre": "Mercedes Martel, Yusselly Cristina",
+        "dni": 60733746,
+        "codigo_estudiante": "O2SQE"
+    },
+    {
+        "id": 32,
+        "nombre": "Montenegro Coz, Marializ Esther",
+        "dni": 77693430,
+        "codigo_estudiante": "M4KKG"
+    },
+    {
+        "id": 33,
+        "nombre": "Nieto Eugenio, Nun Alecxander",
+        "dni": 71568173,
+        "codigo_estudiante": "BKC07"
+    },
+    {
+        "id": 34,
+        "nombre": "Ortiz Cabanillas, Daniel",
+        "dni": 46681555,
+        "codigo_estudiante": "GWFLY"
+    },
+    {
+        "id": 35,
+        "nombre": "Paucar Pari, Banessa Feliciana",
+        "dni": 76140235,
+        "codigo_estudiante": "HO3Z1"
+    },
+    {
+        "id": 36,
+        "nombre": "Pinasco Juanan, Fabrisio Jose",
+        "dni": 60932447,
+        "codigo_estudiante": "H1STW"
+    },
+    {
+        "id": 37,
+        "nombre": "Ponce Figueroa, Katerin Tatiana",
+        "dni": 76655223,
+        "codigo_estudiante": "98YJH"
+    },
+    {
+        "id": 38,
+        "nombre": "Ramirez Ore, Greisy Andrea",
+        "dni": 60733750,
+        "codigo_estudiante": "DSZMO"
+    },
+    {
+        "id": 39,
+        "nombre": "Rengifo Silvestre, Leydy Sharith",
+        "dni": 60889087,
+        "codigo_estudiante": "RSCYI"
+    },
+    {
+        "id": 40,
+        "nombre": "Rodriguez Saire, Milagros",
+        "dni": 75161576,
+        "codigo_estudiante": "HDKVL"
+    },
+    {
+        "id": 41,
+        "nombre": "Rojas Diego, Maribella Kayra",
+        "dni": 74539825,
+        "codigo_estudiante": "THVO3"
+    },
+    {
+        "id": 42,
+        "nombre": "Sanchez Ponce, Mariana",
+        "dni": 75162314,
+        "codigo_estudiante": "G8DIY"
+    },
+    {
+        "id": 43,
+        "nombre": "Sandoval Guardia, Violeta Tamara",
+        "dni": 60580215,
+        "codigo_estudiante": "EIVE7"
+    },
+    {
+        "id": 44,
+        "nombre": "Silvestre Rueda, Darlin",
+        "dni": 63248043,
+        "codigo_estudiante": "5TUX5"
+    },
+    {
+        "id": 45,
+        "nombre": "Simon Calero, Naydi Antonia",
+        "dni": 71306433,
+        "codigo_estudiante": "CSGJJ"
+    },
+    {
+        "id": 46,
+        "nombre": "Solano Selaya, Francesca",
+        "dni": 72877572,
+        "codigo_estudiante": "8Z912"
+    },
+    {
+        "id": 47,
+        "nombre": "Tarazona Ávalos, Carmela Yanina",
+        "dni": 75335767,
+        "codigo_estudiante": "QHRIO"
+    },
+    {
+        "id": 48,
+        "nombre": "Valeriano Vazques, Yulissa Yasmira",
+        "dni": 71320949,
+        "codigo_estudiante": "6IDBJ"
+    },
+    {
+        "id": 49,
+        "nombre": "Velez De Villa Dominguez, Abraham",
+        "dni": 73181598,
+        "codigo_estudiante": "JQDJR"
+    },
+    {
+        "id": 50,
+        "nombre": "Zevallos Trinidad, Zureyla Mercedes",
+        "dni": 72949537,
+        "codigo_estudiante": "0DLXS"
+    }
+]
