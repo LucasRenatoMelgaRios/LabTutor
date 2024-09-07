@@ -69,10 +69,8 @@ const RoutesWrapper = () => {
 };
 
 export const MyRouters = () => {
-  const basename = process.env.NODE_ENV === 'production' ? '/LabTutor' : '/';
-
   return (
-    <HashRouter basename={basename}> {/* basename solo en producción */}
+    <HashRouter> {/* Sin basename, HashRouter se encargará de la navegación */}
       <AuthProvider>
         <RoutesWrapper />
       </AuthProvider>
