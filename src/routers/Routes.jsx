@@ -11,6 +11,7 @@ import { NotasPage } from '../pages/NotasPage';
 import { LoginPage } from '../pages/LoginPage';
 import { PrivateRoute } from '../components/PrivateRoute';
 import { AuthProvider, useAuth } from '../context/AuthContext'; // Importa el contexto de autenticación
+import { FirstClassForum } from '../components/forum/FirstClassForum';
 
 const RoutesWrapper = () => {
   const { user } = useAuth(); // Asegúrate de que el contexto provee un token o estado de autenticación
@@ -54,6 +55,13 @@ const RoutesWrapper = () => {
         <PrivateRoute>
           <Header />
           <QuizzPage />
+          <Footer />
+        </PrivateRoute>
+      } />
+      <Route path="/foro/1" element={
+        <PrivateRoute>
+          <Header />
+          <FirstClassForum />
           <Footer />
         </PrivateRoute>
       } />

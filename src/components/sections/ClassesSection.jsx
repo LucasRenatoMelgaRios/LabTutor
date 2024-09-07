@@ -2,8 +2,29 @@ import styled from "styled-components"
 import { CiCalendarDate } from "react-icons/ci";
 import { GiTeacher } from "react-icons/gi";
 import { Link } from "react-router-dom";  // Importa Link
+import { useAuth } from "../../context/AuthContext";
 
 export const ClassesSection = () => {
+
+    const { user } = useAuth(); // Obtén el nombre del usuario desde el contexto
+
+
+    const getSaludo = () => {
+        const hora = new Date().getHours();
+        if (hora < 12) {
+            return "Buenos días";
+        } else if (hora < 18) {
+            return "Buenas tardes";
+        } else {
+            return "Buenas noches";
+        }
+    };
+
+    const obtenerPrimerNombre = (nombreCompleto) => {
+        const [apellidos, nombres] = nombreCompleto.split(", ");
+        const primerNombre = nombres.split(" ")[0]; // Obtiene solo el primer nombre
+        return primerNombre;
+    };
 
     const classesData = [
         {
@@ -80,38 +101,53 @@ export const ClassesSection = () => {
 
     return (
         <MainContainer>
-            <TitleContainer>
-                <h1>MUESTRAS BIOLÓGICAS HUMANAS</h1>
-                <img src="https://img.freepik.com/fotos-premium/representacion-3d-nino-pequeno-bata-laboratorio-gafas-sosteniendo-matraz_1057-16674.jpg" alt="" />
-            </TitleContainer>
-            <ClassesContainer>
-                <Title>Clases</Title>
-                <ClassesGridContainer>
-                    {classesData.map((clase) => (
-                        <StyledLink to={`/class/${clase.id}`} key={clase.id}>
-                            <ClassCard>
-                                <ImageContainer>
-                                    <img src={clase.img} alt={clase.title} />
-                                </ImageContainer>
-                                <ContentContainer>
-                                    <FechaContainer>
-                                        <p>{clase.fecha}</p>
-                                        <CiCalendarDate />
-                                    </FechaContainer>
-                                    <h3>{clase.title}</h3>
-                                    <ProfesorContainer>
-                                        <p>{clase.profesor}</p>
-                                        <GiTeacher />
-                                    </ProfesorContainer>
-                                </ContentContainer>
-                            </ClassCard>
-                        </StyledLink>
-                    ))}
-                </ClassesGridContainer>
-            </ClassesContainer>
-        </MainContainer>
+        <SaludoContainer>
+            {/* Muestra el saludo seguido del primer nombre del usuario */}
+            <h2>{getSaludo()}, {user ? obtenerPrimerNombre(user.nombre) : "Usuario"}! Que vamos a aprender hoy?</h2>
+        </SaludoContainer>
+        <TitleContainer>
+            <h1>MUESTRAS BIOLÓGICAS HUMANAS</h1>
+            <img src="https://img.freepik.com/fotos-premium/representacion-3d-nino-pequeno-bata-laboratorio-gafas-sosteniendo-matraz_1057-16674.jpg" alt="" />
+        </TitleContainer>
+        <ClassesContainer>
+            <Title>Clases</Title>
+            <ClassesGridContainer>
+                {classesData.map((clase) => (
+                    <StyledLink to={`/class/${clase.id}`} key={clase.id}>
+                        <ClassCard>
+                            <ImageContainer>
+                                <img src={clase.img} alt={clase.title} />
+                            </ImageContainer>
+                            <ContentContainer>
+                                <FechaContainer>
+                                    <p>{clase.fecha}</p>
+                                    <CiCalendarDate />
+                                </FechaContainer>
+                                <h3>{clase.title}</h3>
+                                <ProfesorContainer>
+                                    <p>{clase.profesor}</p>
+                                    <GiTeacher />
+                                </ProfesorContainer>
+                            </ContentContainer>
+                        </ClassCard>
+                    </StyledLink>
+                ))}
+            </ClassesGridContainer>
+        </ClassesContainer>
+    </MainContainer>
     )
 }
+const SaludoContainer = styled.div`
+    margin-bottom: 20px;
+    text-align: center;
+
+    h2 {
+        font-size: clamp(18px, 4vw, 36px);
+        font-weight: 500;
+        color: #333;
+    }
+`;
+
 const MainContainer = styled.div`
     width: 100%;
     display: flex;

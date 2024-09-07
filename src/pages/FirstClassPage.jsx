@@ -198,7 +198,6 @@ export const FirstClassPage = () => {
                     <iframe
                         src="https://www.youtube.com/embed/mtfe2vvetSo"
                         title="Extracción de Muestra Sanguínea"
-                        frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
                     ></iframe>
@@ -377,10 +376,15 @@ export const FirstClassPage = () => {
             </Section>
 
             {/* Sección del botón para el quiz */}
-            <Section>
+            <Section style={{display: "flex"}}>
                 <QuizButtonWrapper>
                     <Link to="/firstQuizz">
-                        <QuizButton>Tomar el Quiz</QuizButton>
+                        <QuizButton disabled>Tomar el Quiz</QuizButton>
+                    </Link>
+                </QuizButtonWrapper>
+                <QuizButtonWrapper>
+                    <Link to="/foro/1">
+                        <QuizButton>Foro</QuizButton>
                     </Link>
                 </QuizButtonWrapper>
             </Section>

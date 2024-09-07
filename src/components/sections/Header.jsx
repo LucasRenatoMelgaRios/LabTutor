@@ -85,6 +85,7 @@ const MenuIcon = styled.div`
 `;
 
 // Menú lateral que cubre el 100% del alto de la pantalla
+// Menú lateral que cubre el 100% del alto de la pantalla
 const SideMenu = styled.div`
     position: fixed;
     top: 0;
@@ -100,9 +101,10 @@ const SideMenu = styled.div`
     padding: 20px;
     box-sizing: border-box;
     z-index: 1500;
-    transform: ${({ isOpen }) => (isOpen ? 'translateX(0)' : 'translateX(100%)')}; /* Se mueve desde fuera de la pantalla */
+    transform: ${(props) => (props.isOpen ? 'translateX(0)' : 'translateX(100%)')}; /* Se mueve desde fuera de la pantalla */
     transition: transform 0.3s ease; /* Animación suave */
 `;
+
 
 // Estilos para los ítems del menú
 const DropdownItem = styled.div`
