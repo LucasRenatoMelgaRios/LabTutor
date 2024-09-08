@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { useAuth } from '../context/AuthContext'; // Importar el contexto de autenticación
+import { useAuth } from '../context/AuthContext'; // Import the auth context
 import styled from 'styled-components';
 
 export const LoginPage = () => {
   const [dni, setDni] = useState('');
   const [codigo, setCodigo] = useState('');
-  const { login } = useAuth(); // Usar el hook useAuth para acceder a la función login
+  const { login } = useAuth(); // Use the useAuth hook to access the login function
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (login) {
-        login(dni, codigo); // Invoca login si está disponible
+      login(dni, codigo); // Call login if it's available
     } else {
-        console.error('login is not a function');
+      console.error('login is not a function');
     }
   };
 
@@ -42,7 +42,7 @@ export const LoginPage = () => {
   );
 };
 
-// Estilos con styled-components
+// Styled-components styles
 
 const LoginContainer = styled.div`
   display: flex;
@@ -59,13 +59,12 @@ const LoginCard = styled.div`
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
-  text-align: center;
 `;
 
-const Title = styled.h2`
-  font-size: 2rem;
+const Title = styled.h1`
   margin-bottom: 20px;
-  color: #333;
+  font-size: 24px;
+  text-align: center;
 `;
 
 const Form = styled.form`
@@ -74,38 +73,28 @@ const Form = styled.form`
 `;
 
 const Label = styled.label`
-  text-align: left;
-  font-size: 1rem;
-  color: #555;
   margin-bottom: 5px;
+  font-weight: bold;
 `;
 
 const Input = styled.input`
+  margin-bottom: 15px;
   padding: 10px;
-  font-size: 1rem;
   border: 1px solid #ddd;
   border-radius: 5px;
-  margin-bottom: 20px;
-  outline: none;
-  transition: border-color 0.3s ease;
-
-  &:focus {
-    border-color: #74ebd5;
-  }
+  font-size: 16px;
 `;
 
 const SubmitButton = styled.button`
-  padding: 12px;
-  font-size: 1.1rem;
+  padding: 10px;
   background-color: #74ebd5;
   color: white;
   border: none;
   border-radius: 5px;
+  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-
+  
   &:hover {
-    background-color: #66d1c1;
+    background-color: #65c4b8;
   }
 `;
-
