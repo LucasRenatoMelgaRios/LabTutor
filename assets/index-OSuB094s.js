@@ -1247,6 +1247,22 @@ border: 1px solid #d1eeea;
     grid-template-columns: repeat(2, 215px); /* Ancho fijo para las columnas */
     grid-template-rows: repeat(2, 215px); /* Alto fijo para las filas */
   }
+
+  @media (max-width: 510px) {
+    width: 365px; /* Ancho fijo */
+    height: 365px; /* Ajuste de alto */
+
+    grid-template-columns: repeat(2, 165px); /* Ancho fijo para las columnas */
+    grid-template-rows: repeat(2, 165px); /* Alto fijo para las filas */
+  }
+
+  @media (max-width: 400px) {
+    width: 265px; /* Ancho fijo */
+    height: 265px; /* Ajuste de alto */
+
+    grid-template-columns: repeat(2, 115px); /* Ancho fijo para las columnas */
+    grid-template-rows: repeat(2, 115px); /* Alto fijo para las filas */
+  }
 `,n3=E.div`
   max-width: 50%;
   display: flex;
