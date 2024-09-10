@@ -31,8 +31,7 @@ export const LandingPage = () => {
           <LogoText>LabTutor</LogoText>
         </LogoContainer>
         <NavButtons>
-          <Button secondary onClick={handleLogin}>Iniciar sesión</Button>
-          <Button primary>Free Trial</Button>
+          <ButtonNav secondary onClick={handleLogin}>Iniciar sesión</ButtonNav>
         </NavButtons>
       </Navbar>
 
@@ -217,6 +216,27 @@ const NavButtons = styled.div`
   }
 `;
 
+const ButtonNav = styled.button`
+  padding: 12px 25px;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  background-color: #6487fa;
+  &:hover {
+      background-color: #6576bb;
+  }
+
+  @media (max-width: 380px) {
+    padding: 12px 15px;
+
+  }
+
+`;
+
 const Button = styled.button`
   padding: 12px 25px;
   font-size: clamp(1rem, 1.5vw, 1.2rem);
@@ -294,7 +314,6 @@ const HeroSection = styled.section`
 
 
 const HeroContent = styled.div`
-  max-width: 45%;
 `;
 
 const Title = styled.h2`
@@ -381,35 +400,36 @@ const BenefitsSection = styled.section`
 
   @media (max-width: 1700px) {
     padding: 80px 200px;
-
   }
 
   @media (max-width: 1500px) {
     padding: 80px 100px;
-
   }
 
   @media (max-width: 1380px) {
     padding: 80px 50px;
+  }
 
+  @media (max-width: 1332px) {
+    flex-direction: column;
+    text-align: center;
+    padding: 50px;
+    gap: 20px;
   }
 
   @media (max-width: 1050px) {
     padding: 80px 50px;
     flex-direction: column;
-
   }
 
   @media (max-width: 852px) {
     align-items: center;
     padding: 80px 150px;
-
   }
 
   @media (max-width: 600px) {
     align-items: center;
     padding: 80px 20px;
-
   }
 `;
 const BenefitsImage = styled.img`
