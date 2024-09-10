@@ -92,9 +92,10 @@ export const LandingPage = () => {
       {/* Nueva sección de Beneficios */}
       <BenefitsSection>
         <BenefitsImageContainer>
-          <ImageGridElement style={{ borderTopLeftRadius: "60px", borderBottomRightRadius: "60px", backgroundColor: "#15d1c1" }} >
+          <ImageGridElement style={{ borderTopLeftRadius: "60px", borderBottomRightRadius: "60px", backgroundColor: "#15d1c1",  /* Rotar la imagen en el eje X */
+ }} >
             <BenefitsImage
-              src={hero1} alt="Beneficios" first />
+              src={hero1} alt="Beneficios" />
           </ImageGridElement>
           <ImageGridElement style={{ borderTopRightRadius: "60px", borderBottomLeftRadius: "60px", backgroundColor: "#6487fa" }}>
             <BenefitsImage src={hero2} alt="Beneficios" />
@@ -460,6 +461,7 @@ const BenefitsImageContainer = styled.div`
   width: 600px; /* Ancho fijo */
   height: 600px; /* Ajuste de alto */
   margin: 0 auto; /* Centrado horizontal */
+  
 
   @media (max-width: 1500px) {
     width: 500px; /* Ancho fijo */

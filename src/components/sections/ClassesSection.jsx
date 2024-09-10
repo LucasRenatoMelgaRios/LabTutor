@@ -98,7 +98,7 @@ export const ClassesSection = () => {
             img: "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/625d6f41-519c-4d72-adf9-382db270fbf5/thumb_man_coding_app_square.png"
         }
     ];
-
+    
     return (
         <MainContainer>
         <SaludoContainer>
@@ -107,7 +107,6 @@ export const ClassesSection = () => {
         </SaludoContainer>
         <TitleContainer>
             <h1>MUESTRAS BIOLÓGICAS HUMANAS</h1>
-            <img src="https://img.freepik.com/fotos-premium/representacion-3d-nino-pequeno-bata-laboratorio-gafas-sosteniendo-matraz_1057-16674.jpg" alt="" />
         </TitleContainer>
         <ClassesContainer>
             <Title>Clases</Title>

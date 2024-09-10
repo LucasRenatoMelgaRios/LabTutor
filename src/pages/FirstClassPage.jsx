@@ -3,21 +3,29 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom"; // Importa useNavigate
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa"; // Importa la flecha hacia atrás
 import { CierreUno } from "../components/CierreUno";
+import imagen1 from "../assets/classes/class1/imagen1.PNG"
+import imagen2 from "../assets/classes/class1/imagen2.PNG"
+import imagen3 from "../assets/classes/class1/imagen3.PNG"
+import imagen4 from "../assets/classes/class1/imagen4.PNG"
+import imagen5 from "../assets/classes/class1/imagen5.PNG"
+import imagen6 from "../assets/classes/class1/imagen6.PNG"
+import imagen7 from "../assets/classes/class1/imagen7.PNG"
+import imagen8 from "../assets/classes/class1/imagen8.PNG"
 
 
 export const FirstClassPage = () => {
     const navigate = useNavigate(); // Inicializa useNavigate
 
-    const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        });
-    };
-    // Ejecutar scrollToTop cuando el componente se monta
-    useEffect(() => {
-        scrollToTop();
-    }, []);
+    // const scrollToTop = () => {
+    //     window.scrollTo({
+    //         top: 0,
+    //         behavior: "smooth",
+    //     });
+    // };
+    // // Ejecutar scrollToTop cuando el componente se monta
+    // useEffect(() => {
+    //     scrollToTop();
+    // }, []);
     const definitions = [
         {
             word: "muestras biológicas",
@@ -159,6 +167,7 @@ export const FirstClassPage = () => {
 
     return (
         <ClassContainer>
+
             {/* Sección de introducción */}
             {/* Botón de regresar */}
 
@@ -289,18 +298,36 @@ export const FirstClassPage = () => {
                 </VideoWrapper>
                 <ContentWrapper>
                     <InstructionList>
-                        <Instruction>
-                            1. Colocar al paciente en posición adecuada/cómoda (sentado) con el brazo elegido para la punción en hiperextensión.
-                        </Instruction>
+                    <Instruction>1. Colocar al paciente en posición adecuada/cómoda (sentado) con el brazo elegido para la punción en hiperextensión.</Instruction>
+                        <IntructionTextContainer>
+                        <img src={imagen1} alt="" />
+                        <img src={imagen2} alt="" />
+                        </IntructionTextContainer>
+
                         <Instruction>
                             2. Seleccionar la zona de punción en la que se realizará la punción venosa teniendo en cuenta el calibre y movilidad de la vena.
                         </Instruction>
+                        <IntructionTextContainer>
+                        <img src={imagen3} alt="" />
+                        <img src={imagen4} alt="" />
+
+                        </IntructionTextContainer>
                         <Instruction>
                             3. Colocar la ligadura a 7 o 8 centímetros por encima de la zona de punción elegida durante un tiempo no superior a un minuto. Pedir al paciente que mantenga el puño cerrado a ser posible.
                         </Instruction>
+                        <IntructionTextContainer>
+                        <img src={imagen5} alt="" />
+                        <img src={imagen6} alt="" />
+
+                        </IntructionTextContainer>
                         <Instruction>
                             4. Aplicar solución antiséptica (alcohol 70 %) y dejar secar.
                         </Instruction>
+                        <IntructionTextContainer>
+                        <img src={imagen7} alt="" />
+                        <img src={imagen8} alt="" />
+
+                        </IntructionTextContainer>
                         <Instruction>
                             5. Puncionar la vena con ángulo de 20º el 30º.
                         </Instruction>
@@ -374,7 +401,6 @@ export const FirstClassPage = () => {
                     </QuestionItem>
                 </QuestionList>
             </Section>
-
             {/* Sección del botón para el quiz */}
             <Section style={{display: "flex"}}>
                 <QuizButtonWrapper>
@@ -437,6 +463,7 @@ const ContentWrapper = styled.div`
     justify-content: center;
     align-items: center;
     gap: clamp(8px, 1.5vw, 15px);
+    margin-top: 20px;
 
     img {
         margin-top: 15px;
@@ -488,11 +515,17 @@ const Instruction = styled.li`
     list-style: none;
 `;
 
-const PracticeImage = styled.img`
-    width: clamp(250px, 40%, 350px);
-    height: auto;
-    border-radius: 10px;
-    margin-top: 20px;
+const IntructionTextContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 20px;
+    max-width: 100%;
+
+    img{
+        width: 50%;
+    }
 `;
 
 const VideoWrapper = styled.div`
