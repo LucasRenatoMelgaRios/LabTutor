@@ -54,16 +54,20 @@ const LoginContainer = styled.div`
 
 const LoginCard = styled.div`
   background-color: white;
-  padding: 40px;
+  padding: clamp(20px, 5vw, 40px);
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
+
+  @media (max-width: 768px) {
+    max-width: 90%;
+  }
 `;
 
 const Title = styled.h1`
   margin-bottom: 20px;
-  font-size: 24px;
+  font-size: clamp(1.5rem, 2vw, 2rem);
   text-align: center;
 `;
 
@@ -75,6 +79,7 @@ const Form = styled.form`
 const Label = styled.label`
   margin-bottom: 5px;
   font-weight: bold;
+  font-size: clamp(0.875rem, 1vw, 1rem);
 `;
 
 const Input = styled.input`
@@ -82,7 +87,7 @@ const Input = styled.input`
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: clamp(0.875rem, 1vw, 1rem);
 `;
 
 const SubmitButton = styled.button`
@@ -91,7 +96,7 @@ const SubmitButton = styled.button`
   color: white;
   border: none;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: clamp(1rem, 2vw, 1.25rem);
   cursor: pointer;
   
   &:hover {
