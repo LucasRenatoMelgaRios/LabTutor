@@ -1,23 +1,34 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { FaClipboardList, FaBars, FaTimes } from "react-icons/fa";
+import { FaClipboardList, FaBars, FaTimes, FaAngleDown, FaAngleUp } from "react-icons/fa";
+import { MdForum } from "react-icons/md";
 import { useState } from "react";
-import { useAuth } from "../../context/AuthContext"; // Ensure you import the auth context
+import { useAuth } from "../../context/AuthContext";
 import { ImExit } from "react-icons/im";
-
 export const Header = () => {
     const navigate = useNavigate();
-    const { logout } = useAuth();
+    const { user, logout } = useAuth(); // Obtener el usuario del contexto de autenticación
     const [isOpen, setIsOpen] = useState(false);
+    const [isForumsOpen, setIsForumsOpen] = useState(false); // Estado para el submenú de foros
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
 
+    const toggleForums = () => {
+        setIsForumsOpen(!isForumsOpen);
+    };
+
+    const closeSubMenuForum = () => {
+        setIsForumsOpen(false);
+    };
+
     const handleNavigation = (path) => {
         navigate(path);
-        toggleMenu(); // Close the menu after navigation
+        toggleMenu(); // Cerrar el menú después de la navegación
     };
+
+    const forumLinks = Array.from({ length: 9 }, (_, i) => i + 1); // Crea un array con números del 1 al 9
 
     return (
         <>
@@ -30,19 +41,57 @@ export const Header = () => {
                     <FaBars size={24} />
                 </MenuIcon>
                 <SideMenu isOpen={isOpen}>
-                    <CloseButton onClick={toggleMenu}>
+                    <CloseButton onClick={() => {
+                        toggleMenu();
+                        closeSubMenuForum();
+                    }}>
                         <FaTimes size={24} />
                     </CloseButton>
-                    <DropdownItem onClick={() => handleNavigation('/notas')} >
-                        <FaClipboardList size={20} />
-                        Notas
+
+                    {/* Mostrar Notas o Notas Profesor dependiendo del ID del usuario */}
+                    {user?.id === "51" ? (
+                        <DropdownItem onClick={() => handleNavigation('/notasProfesor')}>
+                            <FlexContainer>
+                                <FaClipboardList size={20} />
+                                <span>Registro de Notas</span>
+                            </FlexContainer>
+                        </DropdownItem>
+                    ) : (
+                        <DropdownItem onClick={() => handleNavigation('/notas')}>
+                            <FlexContainer>
+                                <FaClipboardList size={20} />
+                                <span>Notas</span>
+                            </FlexContainer>
+                        </DropdownItem>
+                    )}
+
+                    {/* Foros */}
+                    <DropdownItem onClick={toggleForums}>
+                        <FlexContainer>
+                            <MdForum size={20} />
+                            <span>Foros</span>
+                            {isForumsOpen ? <FaAngleUp size={16} /> : <FaAngleDown size={16} />} {/* Icono para abrir/cerrar */}
+                        </FlexContainer>
                     </DropdownItem>
+                    <SubMenu isOpen={isForumsOpen}>
+                        {forumLinks.map((forum) => (
+                            <DropdownItem style={{ fontSize: "1.2em", marginLeft: "25px" }} key={forum} onClick={() => handleNavigation(`/foro/${forum}`)}>
+                                <FlexContainer>
+                                    <span>Foro {forum}</span>
+                                </FlexContainer>
+                            </DropdownItem>
+                        ))}
+                    </SubMenu>
+
+                    {/* Cerrar sesión */}
                     <DropdownItem onClick={() => {
                         logout();
-                        toggleMenu(); // Close the menu after logout
+                        toggleMenu();
                     }}>
-                        <ImExit />
-                        Cerrar sesión
+                        <FlexContainer>
+                            <ImExit size={30} />
+                            <span>Cerrar sesión</span>
+                        </FlexContainer>
                     </DropdownItem>
                 </SideMenu>
                 {isOpen && <Backdrop onClick={toggleMenu} />}
@@ -50,7 +99,6 @@ export const Header = () => {
         </>
     );
 };
-
 
 // Estilos para el contenedor principal
 const MainContainer = styled.header`
@@ -95,7 +143,6 @@ const MenuIcon = styled.div`
     }
 `;
 
-// Menú lateral que cubre el 100% del alto de la pantalla
 const SideMenu = styled.div`
     position: fixed;
     top: 0;
@@ -115,10 +162,9 @@ const SideMenu = styled.div`
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 `;
 
-// Botón para cerrar el menú
 const CloseButton = styled.div`
-    align-self: flex-end; /* Alinea el botón al final */
-    margin-bottom: 20px; /* Espacio debajo del botón */
+    align-self: flex-end;
+    margin-bottom: 20px;
     cursor: pointer;
 
     svg {
@@ -127,16 +173,16 @@ const CloseButton = styled.div`
         transition: color 0.3s ease;
 
         &:hover {
-            color: #ff5f5f; /* Cambio de color en hover */
+            color: #ff5f5f;
         }
     }
 `;
 
-// Estilos para los ítems del menú
 const DropdownItem = styled.div`
     padding: 15px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 10px;
     cursor: pointer;
     font-size: clamp(1rem, 2vw, 1.5rem);
@@ -156,7 +202,41 @@ const DropdownItem = styled.div`
     }
 `;
 
-// Fondo oscuro que aparece detrás del menú
+// Contenedor flex para alinear ícono y texto
+const FlexContainer = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre el icono y el texto */
+`;
+
+// Añadimos animación suave al submenú
+const SubMenu = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 20px;
+    max-height: ${(props) => (props.isOpen ? '300px' : '0')}; /* Limitar la altura para activar el scroll */
+    overflow-y: auto; /* Habilitar el scroll vertical */
+    overflow-x: hidden;
+    transition: max-height 0.4s ease-in-out; /* Añade una transición suave */
+    scrollbar-width: thin; /* Hace que el scroll sea más delgado */
+    scrollbar-color: #ccc #f1f1f1; /* Color del scroll */
+    
+    /* Estilos para el scrollbar en navegadores basados en WebKit (Chrome, Safari) */
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: #f1f1f1;
+    }
+`;
+
 const Backdrop = styled.div`
     position: fixed;
     top: 0;
@@ -167,4 +247,3 @@ const Backdrop = styled.div`
     z-index: 1400;
     cursor: pointer;
 `;
-

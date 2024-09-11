@@ -12,6 +12,8 @@ import { PrivateRoute } from '../components/PrivateRoute';
 import { AuthProvider, useAuth } from '../context/AuthContext'; // Importa el contexto de autenticación
 import { FirstClassForum } from '../components/forum/FirstClassForum';
 import { LandingPage } from '../pages/LandingPage';
+import { NotasProfesorPage } from '../pages/NotasProfesorPage';
+import { NotasProfesorRoute } from '../components/NotasProfesorRoute';
 
 const RoutesWrapper = () => {
   const { user } = useAuth(); // Asegúrate de que el contexto provee un token o estado de autenticación
@@ -25,6 +27,16 @@ const RoutesWrapper = () => {
 
       {/* Si el usuario está logueado, redirigir a /home */}
       <Route path="/login" element={user ? <Navigate to="/home" /> : <LoginPage />} />
+      <Route
+        path="/notasProfesor"
+        element={
+          <NotasProfesorRoute>
+            <Header /> {/* Header visible solo en rutas privadas */}
+
+            <NotasProfesorPage />
+          </NotasProfesorRoute>
+        }
+      />
 
       {/* Rutas privadas solo accesibles si el usuario está autenticado */}
       <Route path="/home" element={
@@ -76,6 +88,7 @@ const RoutesWrapper = () => {
           <Footer />
         </PrivateRoute>
       } />
+
     </Routes>
   );
 };

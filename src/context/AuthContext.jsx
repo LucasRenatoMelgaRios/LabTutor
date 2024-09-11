@@ -29,8 +29,9 @@ export const AuthProvider = ({ children }) => {
         console.log("Usuario logueado:", student);
         
         // Guardamos la información del estudiante en el estado y localStorage
-        setUser({ id: student.id, nombre: student.nombre });
-        localStorage.setItem('user', JSON.stringify({ id: student.id, nombre: student.nombre }));
+        // Aquí nos aseguramos de que el id siempre sea tratado como string
+        setUser({ id: String(student.id), nombre: student.nombre });
+        localStorage.setItem('user', JSON.stringify({ id: String(student.id), nombre: student.nombre }));
         navigate('/home'); // Navegar después de iniciar sesión
       } else {
         alert('Credenciales incorrectas');
@@ -52,7 +53,9 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
-      setUser(JSON.parse(storedUser)); // Restauramos el usuario si existe
+      // Nos aseguramos de que el id se mantenga como string cuando restauramos el estado
+      const parsedUser = JSON.parse(storedUser);
+      setUser({ ...parsedUser, id: String(parsedUser.id) });
     }
   }, []);
 
