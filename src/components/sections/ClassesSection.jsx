@@ -36,9 +36,9 @@ export const ClassesSection = () => {
         },
         {
             id: 2,
-            title: "Otra Clase",
-            fecha: "Julio 20, 2024",
-            profesor: "Otro Profesor",
+            title: "Factores Condicionantes de la Muestra",
+            fecha: "Septiembre 12, 2024",
+            profesor: "Rogelio Melgar Pérez",
             img: "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/625d6f41-519c-4d72-adf9-382db270fbf5/thumb_man_coding_app_square.png"
         },
         {
