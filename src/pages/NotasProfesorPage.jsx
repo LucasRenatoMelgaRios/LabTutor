@@ -79,11 +79,22 @@ export const NotasProfesorPage = () => {
 
     // Función para calcular el promedio de las notas válidas
     const calcularPromedio = (notas) => {
+        // Filtra las notas que no sean null o undefined
         const validNotas = notas.filter(nota => nota.nota !== null && nota.nota !== undefined);
-        if (validNotas.length === 0) return "-";
-        const suma = validNotas.reduce((a, b) => a + b.nota, 0);
-        return (suma / validNotas.length).toFixed(2);
+    
+        // Si no hay tres notas completas, no calculamos el promedio
+        if (validNotas.length !== 3) return "-";
+        
+        // Extraemos las notas asegurándonos de que siempre trabajamos con números
+        const [nota1, nota2, nota3] = validNotas.map(nota => nota.nota);
+    
+        // Calculamos el promedio ponderado
+        const promedio = (nota1 * 0.45 + nota2 * 0.35 + nota3 * 0.2);
+    
+        // Redondear hacia arriba si el decimal es .5 o mayor
+        return Math.ceil(promedio); // Redondea hacia arriba el resultado final
     };
+    
 
     if (loading) {
         return <LoadingMessage>Cargando...</LoadingMessage>;
@@ -107,17 +118,17 @@ export const NotasProfesorPage = () => {
                     </tr>
                     <tr>
                         <TableHeader></TableHeader>
-                        <TableHeader>P1</TableHeader>
-                        <TableHeader>P2</TableHeader>
-                        <TableHeader>P3</TableHeader>
+                        <TableHeader>P</TableHeader>
+                        <TableHeader>C</TableHeader>
+                        <TableHeader>A</TableHeader>
                         <TableHeader>Promedio</TableHeader>
-                        <TableHeader>P4</TableHeader>
-                        <TableHeader>P5</TableHeader>
-                        <TableHeader>P6</TableHeader>
+                        <TableHeader>P</TableHeader>
+                        <TableHeader>C</TableHeader>
+                        <TableHeader>A</TableHeader>
                         <TableHeader>Promedio</TableHeader>
-                        <TableHeader>P7</TableHeader>
-                        <TableHeader>P8</TableHeader>
-                        <TableHeader>P9</TableHeader>
+                        <TableHeader>P</TableHeader>
+                        <TableHeader>C</TableHeader>
+                        <TableHeader>A</TableHeader>
                         <TableHeader>Promedio</TableHeader>
                         <TableHeader></TableHeader>
                     </tr>

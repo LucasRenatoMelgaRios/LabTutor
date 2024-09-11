@@ -98,42 +98,43 @@ export const ClassesSection = () => {
             img: "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/625d6f41-519c-4d72-adf9-382db270fbf5/thumb_man_coding_app_square.png"
         }
     ];
-    
+
     return (
         <MainContainer>
-        <SaludoContainer>
-            {/* Muestra el saludo seguido del primer nombre del usuario */}
-            <h2>{getSaludo()}, {user ? obtenerPrimerNombre(user.nombre) : "Usuario"}! Que vamos a aprender hoy?</h2>
-        </SaludoContainer>
-        <TitleContainer>
-            <h1>MUESTRAS BIOLÓGICAS HUMANAS</h1>
-        </TitleContainer>
-        <ClassesContainer>
-            <Title>Clases</Title>
-            <ClassesGridContainer>
-                {classesData.map((clase) => (
-                    <StyledLink to={`/class/${clase.id}`} key={clase.id}>
-                        <ClassCard>
-                            <ImageContainer>
-                                <img src={clase.img} alt={clase.title} />
-                            </ImageContainer>
-                            <ContentContainer>
-                                <FechaContainer>
-                                    <p>{clase.fecha}</p>
-                                    <CiCalendarDate />
-                                </FechaContainer>
-                                <h3>{clase.title}</h3>
-                                <ProfesorContainer>
-                                    <p>{clase.profesor}</p>
-                                    <GiTeacher />
-                                </ProfesorContainer>
-                            </ContentContainer>
-                        </ClassCard>
-                    </StyledLink>
-                ))}
-            </ClassesGridContainer>
-        </ClassesContainer>
-    </MainContainer>
+            <SaludoContainer>
+                {/* Muestra el saludo seguido del primer nombre del usuario */}
+                <h2>{getSaludo()}, {user ? obtenerPrimerNombre(user.nombre) : "Usuario"}! Que vamos a aprender hoy?</h2>
+            </SaludoContainer>
+            <TitleContainer>
+                <h1>MUESTRAS BIOLÓGICAS HUMANAS</h1>
+            </TitleContainer>
+            <ClassesContainer>
+                <Title>Clases</Title>
+                <ClassesGridContainer>
+                    {classesData.map((clase, index) => (
+                        <StyledLink to={`/class/${clase.id}`} key={clase.id}>
+                            <ClassCard index={index}>
+                                <ImageContainer>
+                                    <img src={clase.img} alt={clase.title} />
+                                </ImageContainer>
+                                <ContentContainer>
+                                    <FechaContainer>
+                                        <p>{clase.fecha}</p>
+                                        <CiCalendarDate />
+                                    </FechaContainer>
+                                    <h3>{clase.title}</h3>
+                                    <ProfesorContainer>
+                                        <p>{clase.profesor}</p>
+                                        <GiTeacher />
+                                    </ProfesorContainer>
+                                </ContentContainer>
+                            </ClassCard>
+                        </StyledLink>
+                    ))}
+                </ClassesGridContainer>
+
+            </ClassesContainer>
+        </MainContainer>
     )
 }
 const SaludoContainer = styled.div`
@@ -154,6 +155,16 @@ const MainContainer = styled.div`
     padding: 20px 5%;
     justify-content: center;
     box-sizing: border-box;
+    animation: fadeIn 1s ease-in-out;
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
 `;
 
 const TitleContainer = styled.div`
@@ -208,9 +219,26 @@ const ClassCard = styled.div`
     overflow: hidden;
     height: 100%;
     transition: transform 0.3s ease;
+    opacity: 0;
+    transform: scale(0.95); /* Empieza ligeramente más pequeña */
+
+    /* Animación suave */
+    animation: fadeInCard 0.5s ease forwards;
+    animation-delay: ${({ index }) => index * 0.1}s; /* Retraso progresivo según el índice */
 
     &:hover {
         transform: scale(1.05);
+    }
+
+    @keyframes fadeInCard {
+        0% {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
     }
 
     h3, p {
@@ -218,6 +246,7 @@ const ClassCard = styled.div`
         margin: 5px 0;
     }
 `;
+
 
 const ImageContainer = styled.div`
     height: auto;
