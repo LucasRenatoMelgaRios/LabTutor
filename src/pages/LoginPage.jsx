@@ -21,7 +21,8 @@ export const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (login) {
-      login(dni, codigo); // Call login if it's available
+      // Call login passing DNI and codigo
+      login(dni, codigo); 
     } else {
       console.error('login is not a function');
     }

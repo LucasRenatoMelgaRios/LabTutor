@@ -75,8 +75,9 @@ export const NotasPage = () => {
 
     // Función para calcular el promedio ponderado
     const calcularPromedio = (notas) => {
-        if (notas.every(nota => nota !== null && nota !== undefined)) {
-            const [nota1, nota2, nota3] = notas;
+        const notasValidas = [notas["1"], notas["2"], notas["3"]].filter(nota => nota !== null && nota !== undefined);
+        if (notasValidas.length === 3) {
+            const [nota1, nota2, nota3] = [notas["1"], notas["2"], notas["3"]];
             const promedio = (nota1 * 0.45 + nota2 * 0.35 + nota3 * 0.2);
             return Math.ceil(promedio);
         } else {
@@ -103,45 +104,39 @@ export const NotasPage = () => {
 
     const { nombre, notas } = student;
 
-    // Dividimos las notas en 3 semestres (cada semestre tiene 3 exámenes)
-    const semestre1 = notas.slice(0, 3).map(n => n.nota);  // Primer semestre: exámenes 1, 2, 3
-    const semestre2 = notas.slice(3, 6).map(n => n.nota);  // Segundo semestre: exámenes 4, 5, 6
-    const semestre3 = notas.slice(6, 9).map(n => n.nota);  // Tercer semestre: exámenes 7, 8, 9
-
     return (
         <PageContainer>
             <Title ref={titleRef}>Notas de {nombre}</Title>
             <NotasContainer>
-                {/* Primer Semestre */}
+                {/* Primera Etapa */}
                 <NotasCard ref={(el) => (cardsRef.current[0] = el)}>
                     <SemesterTitle>Primera etapa</SemesterTitle>
-                    <NotaRow><span>P:</span> <Nota>{mostrarNota(semestre1[0])}</Nota></NotaRow>
-                    <NotaRow><span>C:</span> <Nota>{mostrarNota(semestre1[1])}</Nota></NotaRow>
-                    <NotaRow><span>A:</span> <Nota>{mostrarNota(semestre1[2])}</Nota></NotaRow>
-                    <PromedioRow><span>Promedio:</span> <Promedio>{calcularPromedio(semestre1)}</Promedio></PromedioRow>
+                    <NotaRow><span>P:</span> <Nota>{mostrarNota(notas["1"])}</Nota></NotaRow>
+                    <NotaRow><span>C:</span> <Nota>{mostrarNota(notas["2"])}</Nota></NotaRow>
+                    <NotaRow><span>A:</span> <Nota>{mostrarNota(notas["3"])}</Nota></NotaRow>
+                    <PromedioRow><span>Promedio:</span> <Promedio>{calcularPromedio(notas)}</Promedio></PromedioRow>
                 </NotasCard>
 
-                {/* Segundo Semestre */}
+                {/* Segunda Etapa */}
                 <NotasCard ref={(el) => (cardsRef.current[1] = el)}>
                     <SemesterTitle>Segunda etapa</SemesterTitle>
-                    <NotaRow><span>P:</span> <Nota>{mostrarNota(semestre2[0])}</Nota></NotaRow>
-                    <NotaRow><span>C:</span> <Nota>{mostrarNota(semestre2[1])}</Nota></NotaRow>
-                    <NotaRow><span>A:</span> <Nota>{mostrarNota(semestre2[2])}</Nota></NotaRow>
-                    <PromedioRow><span>Promedio:</span> <Promedio>{calcularPromedio(semestre2)}</Promedio></PromedioRow>
+                    <NotaRow><span>P:</span> <Nota>{mostrarNota(notas["4"])}</Nota></NotaRow>
+                    <NotaRow><span>C:</span> <Nota>{mostrarNota(notas["5"])}</Nota></NotaRow>
+                    <NotaRow><span>A:</span> <Nota>{mostrarNota(notas["6"])}</Nota></NotaRow>
                 </NotasCard>
 
-                {/* Tercer Semestre */}
+                {/* Tercera Etapa */}
                 <NotasCard ref={(el) => (cardsRef.current[2] = el)}>
                     <SemesterTitle>Tercera etapa</SemesterTitle>
-                    <NotaRow><span>P:</span> <Nota>{mostrarNota(semestre3[0])}</Nota></NotaRow>
-                    <NotaRow><span>C:</span> <Nota>{mostrarNota(semestre3[1])}</Nota></NotaRow>
-                    <NotaRow><span>A:</span> <Nota>{mostrarNota(semestre3[2])}</Nota></NotaRow>
-                    <PromedioRow><span>Promedio:</span> <Promedio>{calcularPromedio(semestre3)}</Promedio></PromedioRow>
+                    <NotaRow><span>P:</span> <Nota>{mostrarNota(notas["7"])}</Nota></NotaRow>
+                    <NotaRow><span>C:</span> <Nota>{mostrarNota(notas["8"])}</Nota></NotaRow>
+                    <NotaRow><span>A:</span> <Nota>{mostrarNota(notas["9"])}</Nota></NotaRow>
                 </NotasCard>
             </NotasContainer>
         </PageContainer>
     );
 };
+
 
 // Styled Components
 const PageContainer = styled.div`

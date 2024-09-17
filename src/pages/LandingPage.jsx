@@ -27,6 +27,9 @@ export const LandingPage = () => {
     navigate("/login");
   };
   const benefitsImageContainerRef = useRef(null); // Referencia para el contenedor de imágenes
+  const benefitItems = gsap.utils.toArray(".benefit-item");
+  const benefitsSectionRef = useRef(null);
+
 
 
   useEffect(() => {
@@ -62,49 +65,47 @@ export const LandingPage = () => {
   }, []);
 
   useEffect(() => {
-    // Esperar que el DOM esté listo
-    setTimeout(() => {
-      gsap.fromTo(
-        ".benefit-item",
-        { opacity: 0, y: 50 }, // Estado inicial
-        {
-          scrollTrigger: {
-            trigger: ".benefits-section",
-            start: "top 80%", // Inicia la animación cuando el 80% del elemento es visible
-            end: "bottom 20%",
-            toggleActions: "play none none none", // Reproducir la animación solo una vez
-          },
-          opacity: 1,
-          y: 0, // Se mueve a la posición original
-          duration: 1.2,
-          stagger: 0.3, // Retraso entre elementos
-          ease: "power2.out", // Efecto de suavizado
-        }
-      );
-    }, 500);  // Esperar 500ms para asegurar que el DOM está listo
-  }, []);
+    // Esperar a que el componente esté completamente montado
+    const benefitItems = gsap.utils.toArray(".benefit-item");
 
-  useEffect(() => {
-    // Animación para las imágenes dentro de BenefitsImageContainer
     gsap.fromTo(
-      benefitsImageContainerRef.current.children,
-      { opacity: 0, scale: 0.8, y: 50 }, // Estado inicial
+      benefitItems,
+      { opacity: 0, y: 50 }, // Estado inicial
+      {
+        scrollTrigger: {
+          trigger: benefitsSectionRef.current,
+          start: "top 80%", // Inicia la animación cuando el 80% del contenedor es visible
+          end: "bottom 20%",
+          toggleActions: "play none none none", // Reproducir la animación solo una vez
+        },
+        opacity: 1,
+        y: 0, // Se mueve a la posición original
+        duration: 1.2,
+        stagger: 0.3, // Retraso entre elementos
+        ease: "power2.out", // Efecto de suavizado
+      }
+    );
+  }, []);
+  useEffect(() => {
+    // Animación para el contenedor y sus elementos
+    gsap.fromTo(
+      benefitsImageContainerRef.current, 
+      { opacity: 0, scale: 0.8 }, // Estado inicial del contenedor
       {
         opacity: 1,
         scale: 1,
-        y: 0,
         duration: 1,
-        stagger: 0.2,
         ease: "power3.out",
         scrollTrigger: {
           trigger: benefitsImageContainerRef.current,
-          start: "top 80%", // Inicia la animación cuando el 80% del contenedor es visible
+          start: "top 80%", // Inicia cuando el 80% del contenedor es visible
           end: "bottom 20%",
-          toggleActions: "play none none none", // Reproduce la animación una vez
+          toggleActions: "play none none none",
         },
       }
     );
   }, []);
+  
 
   return (
     <PageContainer>
@@ -190,8 +191,8 @@ export const LandingPage = () => {
           </ImageGridElement>
         </BenefitsImageContainer>
 
-        <BenefitsContent>
-          <BenefitsTitle>
+        <BenefitsContent ref={benefitsSectionRef} className="benefits-section">
+          <BenefitsTitle className="benefit-item">
             <span style={{
               background: 'linear-gradient(90deg, #15d1c1 0%, #6487fa 100%)',
               WebkitBackgroundClip: 'text',
@@ -312,6 +313,8 @@ const ButtonNav = styled.button`
 
   @media (max-width: 380px) {
     padding: 12px 15px;
+    font-size: clamp(0.6rem, 1vw, 0.8rem);
+
 
   }
 
@@ -326,14 +329,25 @@ const Button = styled.button`
   cursor: pointer;
   font-weight: bold;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  width: 180px;
 
   ${(props) =>
     props.primary &&
     `
     background-color: #6487fa;
+    white-space: nowrap;
+    width: 280px;
+
+
     &:hover {
       background-color: #6576bb;
     }
+
+      @media (max-width: 305px) {
+    width: 200px;
+
+
+  }
   `}
 
   ${(props) =>
@@ -370,7 +384,6 @@ const HeroSection = styled.section`
   }
 
   @media (max-width: 1332px) {
-    flex-direction: column;
     text-align: center;
     padding: 50px;
     gap: 20px;
@@ -417,6 +430,11 @@ const ButtonContainer = styled.div`
     flex-direction: column;
     gap: 10px;
   }
+
+  @media (max-width: 1049px) {
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const HeroImage = styled.img`
@@ -436,6 +454,17 @@ const HeroImageContainer = styled.div`
   border: 5px dotted #38c1d3; /* Borde de 2px, punteado y de color negro */
   border-radius: 100%;
   padding: 20px;
+
+  
+  @media (max-width: 552px) {
+    width: clamp(250px, 40%, 500px);
+
+  }
+
+  @media (max-width: 375px) {
+    width: clamp(250px, 30%, 500px);
+
+  }
 
 
 `;
@@ -595,13 +624,17 @@ const BenefitsTitle = styled.h3`
   font-weight: bold;
   color: #333;
 `;
-
 const BenefitItem = styled.div`
   display: flex;
   align-items: center;
   gap: 15px;
   svg{
     font-size: 10px;
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column; /* Apila ícono y texto en pantallas pequeñas */
+    text-align: center; /* Centra el texto */
   }
 `;
 
@@ -617,9 +650,10 @@ const BenefitIcon = styled.span`
   svg {
     font-size: 1.8rem; /* Cambia el tamaño del icono */
   }
+
 `;
 
-const BenefitText = styled.p`
+const BenefitText = styled.div`
   font-size: 1.2rem;
   font-weight: 500;
   display: flex;
@@ -627,15 +661,12 @@ const BenefitText = styled.p`
   color: #7c7878;
   gap: 5px;
 
-  h4{
+  h4 {
     font-size: 1.4rem;
     color: #000000;
   }
+
+  @media (max-width: 600px) {
+    text-align: center; /* Centra el texto para pantallas pequeñas */
+  }
 `;
-
-
-
-
-
-
-

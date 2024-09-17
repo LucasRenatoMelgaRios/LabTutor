@@ -12,31 +12,31 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const ClassesSection = () => {
     const classesGridRef = useRef(null); // Referencia para el grid de clases
-
-  useEffect(() => {
-    // Animación para las tarjetas de clase
-    gsap.fromTo(
-      classesGridRef.current.children,
-      { opacity: 0, y: 50, scale: 0.9 }, // Estado inicial (invisible, desplazado y escalado)
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.8,
-        stagger: 0.2, // Retardo entre tarjetas
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: classesGridRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          toggleActions: "play none none none"
-        }
-      }
-    );
-  }, []);
-
     const { user } = useAuth(); // Obtén el nombre del usuario desde el contexto
 
+    useEffect(() => {
+        // Animación para las tarjetas de clase
+        if (classesGridRef.current) {
+            gsap.fromTo(
+                classesGridRef.current.children,
+                { opacity: 0, y: 50, scale: 0.9 }, // Estado inicial (invisible, desplazado y escalado)
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.8,
+                    stagger: 0.2, // Retardo entre tarjetas
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: classesGridRef.current,
+                        start: "top 80%",
+                        end: "bottom 20%",
+                        toggleActions: "play none none none"
+                    }
+                }
+            );
+        }
+    }, []);
 
     const getSaludo = () => {
         const hora = new Date().getHours();
@@ -50,10 +50,24 @@ export const ClassesSection = () => {
     };
 
     const obtenerPrimerNombre = (nombreCompleto) => {
-        const [apellidos, nombres] = nombreCompleto.split(", ");
-        const primerNombre = nombres.split(" ")[0]; // Obtiene solo el primer nombre
-        return primerNombre;
+        if (nombreCompleto) {
+            // Verifica si el nombre completo contiene una coma
+            if (nombreCompleto.includes(",")) {
+                const [apellidos, nombres] = nombreCompleto.split(", ");
+                if (nombres) {
+                    return nombres.split(" ")[0]; // Obtiene solo el primer nombre
+                }
+            } else {
+                // Si no hay coma, simplemente divide el nombre completo y devuelve el primer nombre
+                return nombreCompleto.split(" ")[0];
+            }
+        }
+        return "Usuario";
     };
+    
+
+    // Verifica si el usuario existe antes de intentar acceder a su nombre
+    const primerNombre = user ? obtenerPrimerNombre(user.nombre) : "Usuario";
 
     const classesData = [
         {
@@ -130,9 +144,9 @@ export const ClassesSection = () => {
 
     return (
         <MainContainer>
-            <SaludoContainer>
+           <SaludoContainer>
                 {/* Muestra el saludo seguido del primer nombre del usuario */}
-                <h2>{getSaludo()}, {user ? obtenerPrimerNombre(user.nombre) : "Usuario"}! Listo para aprender?</h2>
+                <h2>{getSaludo()}, {primerNombre}! Listo para aprender?</h2>
             </SaludoContainer>
             <TitleContainer>
                 <h1>MUESTRAS BIOLÓGICAS HUMANAS</h1>

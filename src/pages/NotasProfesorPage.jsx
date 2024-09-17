@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+
 export const NotasProfesorPage = () => {
     const [students, setStudents] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -33,12 +34,10 @@ export const NotasProfesorPage = () => {
     }, []);
 
     // Maneja los cambios en las notas
-    const handleNotaChange = (rowIndex, index, value) => {
+    const handleNotaChange = (rowIndex, examen, value) => {
         setStudents(prevState => {
             const updatedStudents = [...prevState];
-            const updatedNotas = [...updatedStudents[rowIndex].notas];
-            updatedNotas[index].nota = value === '' ? null : Number(value);
-            updatedStudents[rowIndex].notas = updatedNotas;
+            updatedStudents[rowIndex].notas[examen] = value === '' ? null : Number(value);
             return updatedStudents;
         });
     };
@@ -78,15 +77,15 @@ export const NotasProfesorPage = () => {
     };
 
     // Función para calcular el promedio de las notas válidas
-    const calcularPromedio = (notas) => {
-        // Filtra las notas que no sean null o undefined
-        const validNotas = notas.filter(nota => nota.nota !== null && nota.nota !== undefined);
+    const calcularPromedio = (notas, examenes) => {
+        // Filtrar las notas que no sean null o undefined
+        const validNotas = examenes.map(examen => notas[examen]).filter(nota => nota !== null && nota !== undefined);
     
         // Si no hay tres notas completas, no calculamos el promedio
         if (validNotas.length !== 3) return "-";
-        
-        // Extraemos las notas asegurándonos de que siempre trabajamos con números
-        const [nota1, nota2, nota3] = validNotas.map(nota => nota.nota);
+    
+        // Extraemos las notas
+        const [nota1, nota2, nota3] = validNotas;
     
         // Calculamos el promedio ponderado
         const promedio = (nota1 * 0.45 + nota2 * 0.35 + nota3 * 0.2);
@@ -94,7 +93,6 @@ export const NotasProfesorPage = () => {
         // Redondear hacia arriba si el decimal es .5 o mayor
         return Math.ceil(promedio); // Redondea hacia arriba el resultado final
     };
-    
 
     if (loading) {
         return <LoadingMessage>Cargando...</LoadingMessage>;
@@ -141,9 +139,9 @@ export const NotasProfesorPage = () => {
                         }
 
                         const { notas } = student;
-                        const semestre1 = notas.slice(0, 3);
-                        const semestre2 = notas.slice(3, 6);
-                        const semestre3 = notas.slice(6, 9);
+                        const semestre1 = ['1', '2', '3']; // Exámenes del primer semestre
+                        const semestre2 = ['4', '5', '6']; // Exámenes del segundo semestre
+                        const semestre3 = ['7', '8', '9']; // Exámenes del tercer semestre
 
                         const isEditing = editingRowIndex === rowIndex;
 
@@ -152,52 +150,52 @@ export const NotasProfesorPage = () => {
                                 <TableCell>{student.nombre}</TableCell>
 
                                 {/* Primer Semestre */}
-                                {semestre1.map((notaObj, index) => (
-                                    <TableCell key={`sem1-${index}`}>
+                                {semestre1.map(examen => (
+                                    <TableCell key={`sem1-${examen}`}>
                                         {isEditing ? (
                                             <InputNota
                                                 type="number"
-                                                value={notaObj.nota !== null ? notaObj.nota : ''}
-                                                onChange={(e) => handleNotaChange(rowIndex, index, e.target.value)}
+                                                value={notas[examen] !== null ? notas[examen] : ''}
+                                                onChange={(e) => handleNotaChange(rowIndex, examen, e.target.value)}
                                             />
                                         ) : (
-                                            notaObj.nota !== null ? notaObj.nota : "-"
+                                            notas[examen] !== null ? notas[examen] : "-"
                                         )}
                                     </TableCell>
                                 ))}
-                                <TableCell>{calcularPromedio(semestre1)}</TableCell>
+                                <TableCell>{calcularPromedio(notas, semestre1)}</TableCell>
 
                                 {/* Segundo Semestre */}
-                                {semestre2.map((notaObj, index) => (
-                                    <TableCell key={`sem2-${index}`}>
+                                {semestre2.map(examen => (
+                                    <TableCell key={`sem2-${examen}`}>
                                         {isEditing ? (
                                             <InputNota
                                                 type="number"
-                                                value={notaObj.nota !== null ? notaObj.nota : ''}
-                                                onChange={(e) => handleNotaChange(rowIndex, index + 3, e.target.value)}
+                                                value={notas[examen] !== null ? notas[examen] : ''}
+                                                onChange={(e) => handleNotaChange(rowIndex, examen, e.target.value)}
                                             />
                                         ) : (
-                                            notaObj.nota !== null ? notaObj.nota : "-"
+                                            notas[examen] !== null ? notas[examen] : "-"
                                         )}
                                     </TableCell>
                                 ))}
-                                <TableCell>{calcularPromedio(semestre2)}</TableCell>
+                                <TableCell>{calcularPromedio(notas, semestre2)}</TableCell>
 
                                 {/* Tercer Semestre */}
-                                {semestre3.map((notaObj, index) => (
-                                    <TableCell key={`sem3-${index}`}>
+                                {semestre3.map(examen => (
+                                    <TableCell key={`sem3-${examen}`}>
                                         {isEditing ? (
                                             <InputNota
                                                 type="number"
-                                                value={notaObj.nota !== null ? notaObj.nota : ''}
-                                                onChange={(e) => handleNotaChange(rowIndex, index + 6, e.target.value)}
+                                                value={notas[examen] !== null ? notas[examen] : ''}
+                                                onChange={(e) => handleNotaChange(rowIndex, examen, e.target.value)}
                                             />
                                         ) : (
-                                            notaObj.nota !== null ? notaObj.nota : "-"
+                                            notas[examen] !== null ? notas[examen] : "-"
                                         )}
                                     </TableCell>
                                 ))}
-                                <TableCell>{calcularPromedio(semestre3)}</TableCell>
+                                <TableCell>{calcularPromedio(notas, semestre3)}</TableCell>
 
                                 <TableCell>
                                     {isEditing ? (
@@ -214,6 +212,7 @@ export const NotasProfesorPage = () => {
         </PageContainer>
     );
 };
+
 
 // Styled Components
 const PageContainer = styled.div`

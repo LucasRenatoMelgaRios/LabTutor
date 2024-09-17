@@ -12,6 +12,12 @@ export const AuthProvider = ({ children }) => {
   // Función para iniciar sesión
   const login = async (dni, codigo) => {
     try {
+      // Verificar si se ingresaron valores válidos
+      if (!dni || !codigo) {
+        alert('Por favor ingresa tanto el DNI como el código.');
+        return;
+      }
+
       // Realizamos una petición a la API de Mock
       const response = await axios.get('https://66ca61e159f4350f064f0e88.mockapi.io/api/labtutor/users');
       const students = response.data; // Datos de los estudiantes
@@ -21,7 +27,7 @@ export const AuthProvider = ({ children }) => {
       // Buscamos si hay algún estudiante que coincida con el DNI y código
       const student = students.find(student => 
         String(student.dni).trim() === String(dni).trim() && 
-        student.codigo_estudiante.trim().toUpperCase() === codigo.trim().toUpperCase()
+        student.codigo.trim().toUpperCase() === codigo.trim().toUpperCase() // Cambiamos codigo_estudiante a codigo
       );
   
       if (student) {
@@ -29,7 +35,6 @@ export const AuthProvider = ({ children }) => {
         console.log("Usuario logueado:", student);
         
         // Guardamos la información del estudiante en el estado y localStorage
-        // Aquí nos aseguramos de que el id siempre sea tratado como string
         setUser({ id: String(student.id), nombre: student.nombre });
         localStorage.setItem('user', JSON.stringify({ id: String(student.id), nombre: student.nombre }));
         navigate('/home'); // Navegar después de iniciar sesión
@@ -53,7 +58,6 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
-      // Nos aseguramos de que el id se mantenga como string cuando restauramos el estado
       const parsedUser = JSON.parse(storedUser);
       setUser({ ...parsedUser, id: String(parsedUser.id) });
     }
