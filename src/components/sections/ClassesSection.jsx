@@ -1,10 +1,39 @@
+import { useEffect, useRef } from "react";
 import styled from "styled-components"
 import { CiCalendarDate } from "react-icons/ci";
 import { GiTeacher } from "react-icons/gi";
 import { Link } from "react-router-dom";  // Importa Link
 import { useAuth } from "../../context/AuthContext";
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
 
 export const ClassesSection = () => {
+    const classesGridRef = useRef(null); // Referencia para el grid de clases
+
+  useEffect(() => {
+    // Animación para las tarjetas de clase
+    gsap.fromTo(
+      classesGridRef.current.children,
+      { opacity: 0, y: 50, scale: 0.9 }, // Estado inicial (invisible, desplazado y escalado)
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.8,
+        stagger: 0.2, // Retardo entre tarjetas
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: classesGridRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none none"
+        }
+      }
+    );
+  }, []);
 
     const { user } = useAuth(); // Obtén el nombre del usuario desde el contexto
 
@@ -32,21 +61,21 @@ export const ClassesSection = () => {
             title: "Muestras Biológicas Humanas",
             fecha: "Agosto 12, 2024",
             profesor: "Rogelio Melgar Pérez",
-            img: "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/625d6f41-519c-4d72-adf9-382db270fbf5/thumb_man_coding_app_square.png"
+            img: "https://www.ufv.es/cetys/blog/wp-content/uploads/2023/06/cerrar-cientifico-borroso-sosteniendo-placa-petri-scaled.jpg"
         },
         {
             id: 2,
             title: "Factores Condicionantes de la Muestra",
             fecha: "Septiembre 12, 2024",
             profesor: "Rogelio Melgar Pérez",
-            img: "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/625d6f41-519c-4d72-adf9-382db270fbf5/thumb_man_coding_app_square.png"
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSo9Y2fQiCDXoRMKB9rmjcJiUwud4pM9HIhw&s"
         },
         {
             id: 3,
-            title: "Clase Adicional",
-            fecha: "Junio 14, 2024",
-            profesor: "Un Profesor Más",
-            img: "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/625d6f41-519c-4d72-adf9-382db270fbf5/thumb_man_coding_app_square.png"
+            title: "Recolección de Muestras De Orina",
+            fecha: "Septiembre 19, 2024",
+            profesor: "Rogelio Melgar Pérez",
+            img: "https://s2.abcstatics.com/abc/www/multimedia/salud/2023/02/20/muestra-orina-RKextZqw3bYT2jLhsQ2GagO-1200x840@abc.jpg"
         },
         {
             id: 4,
@@ -103,14 +132,14 @@ export const ClassesSection = () => {
         <MainContainer>
             <SaludoContainer>
                 {/* Muestra el saludo seguido del primer nombre del usuario */}
-                <h2>{getSaludo()}, {user ? obtenerPrimerNombre(user.nombre) : "Usuario"}! Que vamos a aprender hoy?</h2>
+                <h2>{getSaludo()}, {user ? obtenerPrimerNombre(user.nombre) : "Usuario"}! Listo para aprender?</h2>
             </SaludoContainer>
             <TitleContainer>
                 <h1>MUESTRAS BIOLÓGICAS HUMANAS</h1>
             </TitleContainer>
             <ClassesContainer>
                 <Title>Clases</Title>
-                <ClassesGridContainer>
+                <ClassesGridContainer ref={classesGridRef}>
                     {classesData.map((clase, index) => (
                         <StyledLink to={`/class/${clase.id}`} key={clase.id}>
                             <ClassCard index={index}>
@@ -140,11 +169,16 @@ export const ClassesSection = () => {
 const SaludoContainer = styled.div`
     margin-bottom: 20px;
     text-align: center;
+    
 
     h2 {
         font-size: clamp(18px, 4vw, 36px);
         font-weight: 500;
         color: #333;
+        color: transparent; /* Hace el texto transparente para que el gradiente se vea */
+        background: linear-gradient(90deg, #15d1c1 0%, #6487fa 100%);
+        -webkit-background-clip: text; /* Aplicar el background-clip en navegadores basados en WebKit */
+        background-clip: text; /* Clip del background al texto */
     }
 `;
 
@@ -266,6 +300,8 @@ const ContentContainer = styled.div`
     padding: 10px;
     flex-grow: 1;
     justify-content: space-between;
+    
+
 `;
 
 const FechaContainer = styled.div`
@@ -288,6 +324,18 @@ const ProfesorContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 5px;
+
+    p{
+        color: transparent; /* Hace el texto transparente para que el gradiente se vea */
+        background: linear-gradient(90deg, #15d1c1 0%, #6487fa 100%);
+        -webkit-background-clip: text; /* Aplicar el background-clip en navegadores basados en WebKit */
+        background-clip: text; /* Clip del background al texto */
+    }
+
+    svg{
+        color: #7b86e9;
+    }
+    
 `;
 
 const StyledLink = styled(Link)`

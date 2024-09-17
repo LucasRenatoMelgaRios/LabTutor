@@ -1,15 +1,21 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { FaClipboardList, FaBars, FaTimes, FaAngleDown, FaAngleUp } from "react-icons/fa";
+import { GiPapers } from "react-icons/gi";
 import { MdForum } from "react-icons/md";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { gsap } from "gsap";
 import { useAuth } from "../../context/AuthContext";
 import { ImExit } from "react-icons/im";
+import logo from "../../assets/logo.png"
+
 export const Header = () => {
     const navigate = useNavigate();
     const { user, logout } = useAuth(); // Obtener el usuario del contexto de autenticación
     const [isOpen, setIsOpen] = useState(false);
     const [isForumsOpen, setIsForumsOpen] = useState(false); // Estado para el submenú de foros
+    const logoRef = useRef(null); // Referencia al logo
+    const menuIconRef = useRef(null); // Referencia al ícono de menú (hamburguesa)
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -30,14 +36,27 @@ export const Header = () => {
 
     const forumLinks = Array.from({ length: 9 }, (_, i) => i + 1); // Crea un array con números del 1 al 9
 
+    // Animaciones con GSAP para la aparición del logo y menú
+    useEffect(() => {
+        gsap.fromTo(logoRef.current,
+            { opacity: 0, y: -20 }, // Estado inicial: oculto y desplazado hacia arriba
+            { opacity: 1, y: 0, duration: 1, ease: "power3.out" } // Aparece con desplazamiento hacia abajo
+        );
+
+        gsap.fromTo(menuIconRef.current,
+            { opacity: 0, scale: 0.8 }, // Estado inicial: oculto y más pequeño
+            { opacity: 1, scale: 1, duration: 1, ease: "elastic.out(1, 0.75)" } // Aparece con efecto de rebote
+        );
+    }, []); // Solo se ejecuta cuando el componente carga
+
     return (
         <>
             <MainContainer>
-                <TitleContainer onClick={() => navigate('/home')}>
-                    <img src="https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/625d6f41-519c-4d72-adf9-382db270fbf5/thumb_man_coding_app_square.png" alt="LabTutor Logo" />
+                <TitleContainer onClick={() => navigate('/home')} ref={logoRef}>
+                    <img src={logo} alt="LabTutor Logo" />
                     <p>LabTutor</p>
                 </TitleContainer>
-                <MenuIcon onClick={toggleMenu}>
+                <MenuIcon onClick={toggleMenu} ref={menuIconRef}>
                     <FaBars size={24} />
                 </MenuIcon>
                 <SideMenu isOpen={isOpen}>
@@ -53,7 +72,7 @@ export const Header = () => {
                         <DropdownItem onClick={() => handleNavigation('/notasProfesor')}>
                             <FlexContainer>
                                 <FaClipboardList size={20} />
-                                <span>Registro de Notas</span>
+                                <span>Registro</span>
                             </FlexContainer>
                         </DropdownItem>
                     ) : (
@@ -64,6 +83,13 @@ export const Header = () => {
                             </FlexContainer>
                         </DropdownItem>
                     )}
+
+                    <DropdownItem onClick={() => handleNavigation('/syllabus')}>
+                        <FlexContainer>
+                            <GiPapers size={20} />
+                            <span>Syllabus</span>
+                        </FlexContainer>
+                    </DropdownItem>
 
                     {/* Foros */}
                     <DropdownItem onClick={toggleForums}>
@@ -100,18 +126,21 @@ export const Header = () => {
     );
 };
 
+
 // Estilos para el contenedor principal
 const MainContainer = styled.header`
     width: 100%;
     display: flex;
     justify-content: space-between;
     padding: clamp(10px, 2vw, 20px); /* Responsive padding */
-    background-color: #d1eeea;
+    background-color: #b2ebf2; /* Cambié el color del fondo para mejor armonía */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     align-items: center;
     box-sizing: border-box;
     position: relative;
     z-index: 1000;
+    background: linear-gradient(90deg, #15d1c1 00%, #6487fa 100%); /* Degradado de verde agua a morado claro */
+
 `;
 
 const TitleContainer = styled.div`
@@ -119,18 +148,21 @@ const TitleContainer = styled.div`
     align-items: center;
     gap: 10px;
     cursor: pointer;
+    color: #ffff;
 
     img {
         width: clamp(30px, 5vw, 50px); /* Responsive width for logo */
         border-radius: 10px;
+        
     }
 
     p {
         font-size: clamp(1rem, 2.5vw, 1.5rem); /* Responsive font size */
         font-weight: bold;
-        color: #333;
+
     }
 `;
+
 
 const MenuIcon = styled.div`
     cursor: pointer;
@@ -139,7 +171,8 @@ const MenuIcon = styled.div`
 
     svg {
         font-size: clamp(24px, 3vw, 30px);
-        color: #333;
+        color: #ffffff;
+    
     }
 `;
 
@@ -148,8 +181,8 @@ const SideMenu = styled.div`
     top: 0;
     right: 0;
     height: 100%;
-    width: 200px;
-    background-color: #ffffff;
+    width: 220px;
+    background: linear-gradient(20deg, #15d1c1 00%, #6487fa 100%); /* Degradado de verde agua a morado claro */
     box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
@@ -167,13 +200,14 @@ const CloseButton = styled.div`
     margin-bottom: 20px;
     cursor: pointer;
 
+
     svg {
         font-size: clamp(24px, 3vw, 30px);
-        color: #333;
+        color: #4543b8;
         transition: color 0.3s ease;
 
         &:hover {
-            color: #ff5f5f;
+            color: #3f60bb;
         }
     }
 `;
@@ -190,15 +224,16 @@ const DropdownItem = styled.div`
     width: 100%;
     border-radius: 5px;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    color: #ffff;
+
 
     &:hover {
-        background-color: #e0f4f4;
         transform: translateX(5px);
     }
 
     svg {
         font-size: clamp(16px, 2.5vw, 20px);
-        color: #007a7a;
+        color: #ffffff;
     }
 `;
 

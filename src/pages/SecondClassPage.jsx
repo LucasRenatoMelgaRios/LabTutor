@@ -550,19 +550,6 @@ const Question = styled.p`
     color: #333;
 `;
 
-const InstructionList = styled.ol`
-    list-style: decimal;
-    font-size: clamp(0.9rem, 1.2vw, 1.2rem);
-    color: #333;
-    line-height: 1.5;
-    padding-left: 20px;
-`;
-
-const Instruction = styled.li`
-    margin-bottom: clamp(8px, 1.5vw, 15px);
-    list-style: none;
-`;
-
 const QuizButtonWrapper = styled.div`
     display: flex;
     justify-content: center;
@@ -749,10 +736,6 @@ const ItemDescription = styled.p`
     line-height: 1.5;
 `;
 
-const Highlight = styled.span`
-    color: #d9232d;
-    font-weight: bold;
-`;
 
 const ImageGrid = styled.div`
     display: grid;

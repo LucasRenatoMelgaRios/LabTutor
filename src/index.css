@@ -14,3 +14,8 @@ body{
   font-family: "Poppins", sans-serif;
 
 }
+
+.benefit-item {
+  opacity: 0;  /* Por defecto opaco */
+  transform: translateY(50px); /* Para que estén desplazados al iniciar */
+}

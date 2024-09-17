@@ -1,13 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useAuth } from "../context/AuthContext"; // Obtener usuario del contexto
 import axios from 'axios';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Registrar ScrollTrigger en GSAP
+gsap.registerPlugin(ScrollTrigger);
 
 export const NotasPage = () => {
     const { user } = useAuth(); // Obtenemos el usuario autenticado desde el AuthContext
     const [student, setStudent] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const titleRef = useRef(null); // Referencia para el título
+    const cardsRef = useRef([]); // Referencia para las tarjetas de notas
 
     useEffect(() => {
         const fetchStudentData = async () => {
@@ -30,17 +38,49 @@ export const NotasPage = () => {
         fetchStudentData();
     }, [user.id]);
 
+    useEffect(() => {
+        if (!loading && student) { // Esperamos a que los datos estén listos y el estado de carga sea falso
+            // Animación del título
+            if (titleRef.current) {
+                gsap.from(titleRef.current, {
+                    opacity: 1,
+                    y: -0,
+                    duration: 1,
+                    ease: 'power3.out'
+                });
+            }
+
+            // Animación de las tarjetas
+            if (cardsRef.current.length > 0) {
+                gsap.fromTo(
+                    cardsRef.current,
+                    { opacity: 0, y: 50 }, // Estado inicial
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1,
+                        stagger: 0.3, // Retraso entre cada tarjeta
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: cardsRef.current[0], // Activar la animación al llegar a la primera tarjeta
+                            start: "top 80%", // Iniciar cuando el 80% del contenedor está visible
+                            end: "bottom 20%",
+                            toggleActions: "play none none none" // Reproducir la animación solo una vez
+                        }
+                    }
+                );
+            }
+        }
+    }, [loading, student]);
+
     // Función para calcular el promedio ponderado
     const calcularPromedio = (notas) => {
-        // Verificamos si todas las notas están presentes y no son nulas
         if (notas.every(nota => nota !== null && nota !== undefined)) {
             const [nota1, nota2, nota3] = notas;
             const promedio = (nota1 * 0.45 + nota2 * 0.35 + nota3 * 0.2);
-
-            // Redondear hacia arriba si el decimal es .5 o mayor
             return Math.ceil(promedio);
         } else {
-            return "-"; // Si alguna nota está ausente, no calculamos el promedio
+            return "-";
         }
     };
 
@@ -70,10 +110,10 @@ export const NotasPage = () => {
 
     return (
         <PageContainer>
-            <Title>Notas de {nombre}</Title>
+            <Title ref={titleRef}>Notas de {nombre}</Title>
             <NotasContainer>
                 {/* Primer Semestre */}
-                <NotasCard>
+                <NotasCard ref={(el) => (cardsRef.current[0] = el)}>
                     <SemesterTitle>Primera etapa</SemesterTitle>
                     <NotaRow><span>P:</span> <Nota>{mostrarNota(semestre1[0])}</Nota></NotaRow>
                     <NotaRow><span>C:</span> <Nota>{mostrarNota(semestre1[1])}</Nota></NotaRow>
@@ -82,7 +122,7 @@ export const NotasPage = () => {
                 </NotasCard>
 
                 {/* Segundo Semestre */}
-                <NotasCard>
+                <NotasCard ref={(el) => (cardsRef.current[1] = el)}>
                     <SemesterTitle>Segunda etapa</SemesterTitle>
                     <NotaRow><span>P:</span> <Nota>{mostrarNota(semestre2[0])}</Nota></NotaRow>
                     <NotaRow><span>C:</span> <Nota>{mostrarNota(semestre2[1])}</Nota></NotaRow>
@@ -91,7 +131,7 @@ export const NotasPage = () => {
                 </NotasCard>
 
                 {/* Tercer Semestre */}
-                <NotasCard>
+                <NotasCard ref={(el) => (cardsRef.current[2] = el)}>
                     <SemesterTitle>Tercera etapa</SemesterTitle>
                     <NotaRow><span>P:</span> <Nota>{mostrarNota(semestre3[0])}</Nota></NotaRow>
                     <NotaRow><span>C:</span> <Nota>{mostrarNota(semestre3[1])}</Nota></NotaRow>
@@ -102,6 +142,7 @@ export const NotasPage = () => {
         </PageContainer>
     );
 };
+
 // Styled Components
 const PageContainer = styled.div`
     padding: 20px;
@@ -132,7 +173,6 @@ const NotasCard = styled.div`
     gap: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
-    /* Estilos responsive: Cuando la pantalla es pequeña (mobile), las columnas se convierten en filas */
     @media (max-width: 600px) {
         padding: 15px;
     }

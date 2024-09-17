@@ -14,6 +14,7 @@ import { FirstClassForum } from '../components/forum/FirstClassForum';
 import { LandingPage } from '../pages/LandingPage';
 import { NotasProfesorPage } from '../pages/NotasProfesorPage';
 import { NotasProfesorRoute } from '../components/NotasProfesorRoute';
+import { SyllabusPage } from "../pages/SyllabusPage"
 
 const RoutesWrapper = () => {
   const { user } = useAuth(); // Asegúrate de que el contexto provee un token o estado de autenticación
@@ -85,6 +86,13 @@ const RoutesWrapper = () => {
         <PrivateRoute>
           <Header />
           <NotasPage />
+          <Footer />
+        </PrivateRoute>
+      } />
+      <Route path="/syllabus" element={
+        <PrivateRoute>
+          <Header />
+          <SyllabusPage />
           <Footer />
         </PrivateRoute>
       } />

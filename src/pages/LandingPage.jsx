@@ -1,31 +1,115 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { FaReact } from "react-icons/fa";  // Icono de React
-import { FaHtml5 } from "react-icons/fa";  // Icono de HTML5
-import { FaCss3Alt } from "react-icons/fa"; // Icono de CSS3
-import { FaJsSquare } from "react-icons/fa"; // Icono de JavaScript
-import { FaGraduationCap, FaBookOpen, FaChalkboardTeacher, FaVideo } from 'react-icons/fa';
+import { FaReact, FaHtml5, FaCss3Alt, FaJsSquare, FaGraduationCap, FaChalkboardTeacher, FaVideo } from 'react-icons/fa';
 import { IoBookOutline } from "react-icons/io5";
-
 import { useNavigate } from "react-router-dom";
-import imagen from "../assets/image.png";
-import hero1 from "../assets/hero1.png"
-import hero2 from "../assets/hero2.png"
-import hero3 from "../assets/hero3.png"
-import hero4 from "../assets/hero4.png"
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import imagen from "../assets/image.png";
+import hero1 from "../assets/hero1.png";
+import hero2 from "../assets/hero2.png";
+import hero3 from "../assets/hero3.png";
+import hero4 from "../assets/hero4.png";
 import logo from "../assets/logo.png"; // Asegúrate de que esta ruta sea correcta
 
+gsap.registerPlugin(ScrollTrigger);
+
 export const LandingPage = () => {
-  const navigate = useNavigate(); // Instancia de useNavigate
+  const navigate = useNavigate();
+  const heroTitleRef = useRef(null);
+  const buttonRef = useRef(null);
+  const imageContainerRef = useRef(null);
+  const sponsorIconsRef = useRef(null);
+  const navbarRef = useRef(null); // Ref para el Navbar
 
   const handleLogin = () => {
-    navigate("/login"); // Redirige a la página de login
+    navigate("/login");
   };
+  const benefitsImageContainerRef = useRef(null); // Referencia para el contenedor de imágenes
+
+
+  useEffect(() => {
+    // Animación del Navbar
+    gsap.fromTo(navbarRef.current,
+      { opacity: 0, y: -100 },  // Estado inicial, fuera de la pantalla
+      { opacity: 1, y: 0, duration: 1, ease: 'power3.out' } // Estado final, en posición y visible
+    );
+
+    // Animación de título y subtítulo
+    gsap.fromTo(heroTitleRef.current,
+      { opacity: 0, y: -50 },  // Estado inicial
+      { opacity: 1, y: 0, duration: 1, ease: 'power3.out' } // Estado final
+    );
+
+    // Animación de los botones
+    gsap.fromTo(buttonRef.current.children,
+      { opacity: 0, y: 50 }, // Estado inicial
+      { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out' } // Estado final
+    );
+
+    // Animación de la imagen del héroe
+    gsap.fromTo(imageContainerRef.current,
+      { opacity: 0, scale: 0.8 },  // Estado inicial
+      { opacity: 1, scale: 1, duration: 1, ease: 'back.out(1.4)' }  // Estado final
+    );
+
+    // Animación de los íconos de tecnologías
+    gsap.fromTo(sponsorIconsRef.current.children,
+      { opacity: 0, scale: 0 },  // Estado inicial
+      { opacity: 1, scale: 1, duration: 0.5, stagger: 0.2, ease: 'back.out(1.4)' }  // Estado final
+    );
+  }, []);
+
+  useEffect(() => {
+    // Esperar que el DOM esté listo
+    setTimeout(() => {
+      gsap.fromTo(
+        ".benefit-item",
+        { opacity: 0, y: 50 }, // Estado inicial
+        {
+          scrollTrigger: {
+            trigger: ".benefits-section",
+            start: "top 80%", // Inicia la animación cuando el 80% del elemento es visible
+            end: "bottom 20%",
+            toggleActions: "play none none none", // Reproducir la animación solo una vez
+          },
+          opacity: 1,
+          y: 0, // Se mueve a la posición original
+          duration: 1.2,
+          stagger: 0.3, // Retraso entre elementos
+          ease: "power2.out", // Efecto de suavizado
+        }
+      );
+    }, 500);  // Esperar 500ms para asegurar que el DOM está listo
+  }, []);
+
+  useEffect(() => {
+    // Animación para las imágenes dentro de BenefitsImageContainer
+    gsap.fromTo(
+      benefitsImageContainerRef.current.children,
+      { opacity: 0, scale: 0.8, y: 50 }, // Estado inicial
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: benefitsImageContainerRef.current,
+          start: "top 80%", // Inicia la animación cuando el 80% del contenedor es visible
+          end: "bottom 20%",
+          toggleActions: "play none none none", // Reproduce la animación una vez
+        },
+      }
+    );
+  }, []);
 
   return (
     <PageContainer>
-      <Navbar>
+      {/* Agregamos la referencia del Navbar */}
+      <Navbar ref={navbarRef}>
         <LogoContainer>
           <LogoImage src={logo} alt="LabTutor Logo" />
           <LogoText>LabTutor</LogoText>
@@ -36,7 +120,7 @@ export const LandingPage = () => {
       </Navbar>
 
       <HeroSection>
-        <HeroContent>
+        <HeroContent ref={heroTitleRef}>
           <Title>
             Potenciando tu aprendizaje con <span style={{
               background: 'linear-gradient(90deg, #15d1c1 0%, #6487fa 100%)',
@@ -54,48 +138,46 @@ export const LandingPage = () => {
             Explora tus clases más a detalle con más recursos hechos para tu aprendizaje:
             videos, libros, artículos de clase, glosario, foros y más!
           </Subtitle>
-          <ButtonContainer>
+          <ButtonContainer ref={buttonRef}>
             <Button primary>Inscribirse ahora</Button>
             <Button secondary onClick={handleLogin}>Comenzar</Button>
           </ButtonContainer>
         </HeroContent>
-        <HeroImageContainer>
+        <HeroImageContainer ref={imageContainerRef}>
           <HeroImage src={imagen} alt="Hero" />
-
         </HeroImageContainer>
-
-
       </HeroSection>
 
       {/* Sección de tecnologías con íconos de React Icons */}
-      {/* <h2 style={{textAlign:"center", margin:"30px"}}>Plataforma desarrollada con:</h2> */}
-      <SponsorSection>
+      <SponsorSection ref={sponsorIconsRef}>
         <LogoText>Desarrollado con:</LogoText>
         <SponsorLogo>
-          <FaReact size={80} color="#0a4658" /> {/* React Icon */}
+          <FaReact size={80} color="#0a4658" />
           <IconLabel>React 18</IconLabel>
         </SponsorLogo>
         <SponsorLogo>
-          <FaHtml5 size={80} color="#0a4658" /> {/* HTML5 Icon */}
+          <FaHtml5 size={80} color="#0a4658" />
           <IconLabel>HTML5</IconLabel>
         </SponsorLogo>
         <SponsorLogo>
-          <FaCss3Alt size={80} color="#0a4658" /> {/* CSS3 Icon */}
+          <FaCss3Alt size={80} color="#0a4658" />
           <IconLabel>CSS3</IconLabel>
         </SponsorLogo>
         <SponsorLogo>
-          <FaJsSquare size={80} color="#0a4658" /> {/* JavaScript Icon */}
+          <FaJsSquare size={80} color="#0a4658" />
           <IconLabel>JavaScript</IconLabel>
         </SponsorLogo>
       </SponsorSection>
 
-      {/* Nueva sección de Beneficios */}
-      <BenefitsSection>
-        <BenefitsImageContainer>
-          <ImageGridElement style={{ borderTopLeftRadius: "60px", borderBottomRightRadius: "60px", backgroundColor: "#15d1c1",  /* Rotar la imagen en el eje X */
- }} >
-            <BenefitsImage
-              src={hero1} alt="Beneficios" />
+      {/* Sección de Beneficios */}
+      <BenefitsSection className="benefits-section">
+        <BenefitsImageContainer ref={benefitsImageContainerRef}>
+          <ImageGridElement style={{
+            borderTopLeftRadius: "60px",
+            borderBottomRightRadius: "60px",
+            backgroundColor: "#15d1c1",
+          }}>
+            <BenefitsImage src={hero1} alt="Beneficios" />
           </ImageGridElement>
           <ImageGridElement style={{ borderTopRightRadius: "60px", borderBottomLeftRadius: "60px", backgroundColor: "#6487fa" }}>
             <BenefitsImage src={hero2} alt="Beneficios" />
@@ -106,66 +188,64 @@ export const LandingPage = () => {
           <ImageGridElement style={{ borderTopLeftRadius: "60px", borderBottomRightRadius: "60px", backgroundColor: "#15d1c1" }}>
             <BenefitsImage src={hero4} alt="Beneficios" />
           </ImageGridElement>
-
         </BenefitsImageContainer>
 
         <BenefitsContent>
-      <BenefitsTitle>
-        <span style={{
-          background: 'linear-gradient(90deg, #15d1c1 0%, #6487fa 100%)',
-          WebkitBackgroundClip: 'text',
-          backgroundClip: 'text',
-          color: 'transparent'
-        }}>
-          Beneficios
-        </span> De Nuestro Aprendizaje en Línea
-      </BenefitsTitle>
-      
-      <BenefitItem>
-        <BenefitIcon style={{backgroundColor:"#6487fa"}}>
-          <FaGraduationCap color="#ffffff" />
-        </BenefitIcon>
-        <BenefitText>
-          <h4>Recursos de clases en línea</h4>
-          <p>Obtén los recursos de las clases más extras elegidos especialmente para tu aprendizaje.</p>
-        </BenefitText>
-      </BenefitItem>
+          <BenefitsTitle>
+            <span style={{
+              background: 'linear-gradient(90deg, #15d1c1 0%, #6487fa 100%)',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              color: 'transparent'
+            }}>
+              Beneficios
+            </span> De Nuestro Aprendizaje en Línea
+          </BenefitsTitle>
 
-      <BenefitItem>
-        <BenefitIcon>
-          <IoBookOutline  color="#ffffff" />
-        </BenefitIcon>
-        <BenefitText>
-          <h4>Glosario</h4>
-          <p>Mejora tus comprensión y entendimiento de diversas clases con el glosario incluido en los artículos de clase.</p>
-        </BenefitText>
-      </BenefitItem>
+          <BenefitItem className="benefit-item">
+            <BenefitIcon style={{ backgroundColor: "#6487fa" }}>
+              <FaGraduationCap color="#ffffff" />
+            </BenefitIcon>
+            <BenefitText>
+              <h4>Recursos de clases en línea</h4>
+              <p>Obtén los recursos de las clases más extras elegidos especialmente para tu aprendizaje.</p>
+            </BenefitText>
+          </BenefitItem>
 
-      <BenefitItem>
-        <BenefitIcon style={{backgroundColor:"#6487fa"}}>
-          <FaChalkboardTeacher color="#ffffff" />
-        </BenefitIcon>
-        <BenefitText>
-          <h4>Foros</h4>
-          <p>Debate y comparte tu opinión en los foros de cada clase.</p>
-        </BenefitText>
-      </BenefitItem>
+          <BenefitItem className="benefit-item">
+            <BenefitIcon>
+              <IoBookOutline color="#ffffff" />
+            </BenefitIcon>
+            <BenefitText>
+              <h4>Glosario</h4>
+              <p>Mejora tus comprensión y entendimiento de diversas clases con el glosario incluido en los artículos de clase.</p>
+            </BenefitText>
+          </BenefitItem>
 
-      <BenefitItem>
-        <BenefitIcon>
-          <FaVideo color="#ffffff" />
-        </BenefitIcon>
-        <BenefitText>
-          <h4>Videos</h4>
-          <p>Accede a una gran cantidad de videos por clase para profundizar más en los temas.</p>
-        </BenefitText>
-      </BenefitItem>
-    </BenefitsContent>
+          <BenefitItem className="benefit-item">
+            <BenefitIcon style={{ backgroundColor: "#6487fa" }}>
+              <FaChalkboardTeacher color="#ffffff" />
+            </BenefitIcon>
+            <BenefitText>
+              <h4>Foros</h4>
+              <p>Debate y comparte tu opinión en los foros de cada clase.</p>
+            </BenefitText>
+          </BenefitItem>
+
+          <BenefitItem className="benefit-item">
+            <BenefitIcon>
+              <FaVideo color="#ffffff" />
+            </BenefitIcon>
+            <BenefitText>
+              <h4>Videos</h4>
+              <p>Accede a una gran cantidad de videos por clase para profundizar más en los temas.</p>
+            </BenefitText>
+          </BenefitItem>
+        </BenefitsContent>
       </BenefitsSection>
     </PageContainer>
   );
 };
-
 // Styled Components
 
 const PageContainer = styled.div`
@@ -179,7 +259,6 @@ const Navbar = styled.nav`
   align-items: center;
   padding: 20px 50px;
   background-color: #b2ebf2;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 768px) {
     padding: 15px;
@@ -448,6 +527,7 @@ const ImageGridElement = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+
 `;
 
 const BenefitsImageContainer = styled.div`
@@ -552,3 +632,10 @@ const BenefitText = styled.p`
     color: #000000;
   }
 `;
+
+
+
+
+
+
+
