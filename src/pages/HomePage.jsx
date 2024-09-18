@@ -4,11 +4,19 @@ import { gsap } from "gsap";
 import { ClassesSection } from "../components/sections/ClassesSection";
 
 export const HomePage = () => {
-    const [showMessage, setShowMessage] = useState(true);
+    const [showMessage, setShowMessage] = useState(false);
     const messageRef = useRef(null); // Referencia para el mensaje
     const backdropRef = useRef(null); // Referencia para el fondo oscurecido
 
-    // Animación para mostrar el mensaje cuando el componente se monta
+    useEffect(() => {
+        // Verifica si el usuario ya ha visto el mensaje
+        const hasSeenMessage = localStorage.getItem("hasSeenMessage");
+        
+        if (!hasSeenMessage) {
+            setShowMessage(true); // Mostrar el mensaje si no lo ha visto
+        }
+    }, []);
+
     useEffect(() => {
         if (showMessage) {
             gsap.fromTo(
@@ -16,7 +24,6 @@ export const HomePage = () => {
                 { scale: 0, opacity: 0 },
                 { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.7)" }
             );
-
             gsap.to(backdropRef.current, { opacity: 0.5, duration: 0.8 }); // Oscurecer el fondo
         }
     }, [showMessage]);
@@ -28,7 +35,10 @@ export const HomePage = () => {
             opacity: 0,
             duration: 0.5,
             ease: "back.in(1.7)",
-            onComplete: () => setShowMessage(false), // Cerrar el mensaje después de la animación
+            onComplete: () => {
+                setShowMessage(false); // Cerrar el mensaje después de la animación
+                localStorage.setItem("hasSeenMessage", "true"); // Guardar en localStorage que el mensaje ha sido visto
+            },
         });
 
         gsap.to(backdropRef.current, { opacity: 0, duration: 0.5 }); // Restaurar el fondo

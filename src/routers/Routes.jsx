@@ -15,6 +15,7 @@ import { LandingPage } from '../pages/LandingPage';
 import { NotasProfesorPage } from '../pages/NotasProfesorPage';
 import { NotasProfesorRoute } from '../components/NotasProfesorRoute';
 import { SyllabusPage } from "../pages/SyllabusPage"
+import EmojiStore from '../pages/EmojiStore';
 
 const RoutesWrapper = () => {
   const { user } = useAuth(); // Asegúrate de que el contexto provee un token o estado de autenticación
@@ -93,6 +94,14 @@ const RoutesWrapper = () => {
         <PrivateRoute>
           <Header />
           <SyllabusPage />
+          <Footer />
+        </PrivateRoute>
+      } />
+
+      <Route path="/emojisStore" element={
+        <PrivateRoute>
+          <Header />
+          <EmojiStore />
           <Footer />
         </PrivateRoute>
       } />

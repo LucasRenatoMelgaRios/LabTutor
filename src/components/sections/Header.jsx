@@ -4,6 +4,7 @@ import { FaClipboardList, FaBars, FaTimes, FaAngleDown, FaAngleUp } from "react-
 import { FaUserAlt, FaCoins } from "react-icons/fa"; // Icono de usuario y monedas
 import { BiSolidCoinStack } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
+import { LuStore } from "react-icons/lu";
 
 import axios from 'axios'; // Para hacer la consulta a la API
 import { GiPapers } from "react-icons/gi";
@@ -236,6 +237,12 @@ export const Header = () => {
                         <FlexContainer>
                             <GiPapers size={20} />
                             <span>Syllabus</span>
+                        </FlexContainer>
+                    </DropdownItem>
+                    <DropdownItem onClick={() => handleNavigation('/emojisStore')}>
+                        <FlexContainer>
+                        <LuStore size={20} />
+                        <span>Tienda</span>
                         </FlexContainer>
                     </DropdownItem>
 
