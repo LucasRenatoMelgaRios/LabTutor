@@ -64,7 +64,7 @@ const CircleTitle = styled.h2`
 `;
 
 const CircleText = styled.p`
-  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  font-size: clamp(0.6rem, 1vw, 1rem);
   color: #3d7a8c;
 `;
 
