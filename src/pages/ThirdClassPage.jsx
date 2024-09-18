@@ -11,6 +11,7 @@ import imagen5 from "../assets/classes/class2/imagen5.PNG";
 import imagen6 from "../assets/classes/class2/imagen6.PNG";
 import imagen7 from "../assets/classes/class2/imagen7.PNG";
 import imagen8 from "../assets/classes/class2/imagen8.PNG";
+import { IdeasFuerza } from "../components/sections/IdeasFuerza";
 
 export const ThirdClassPage = () => {
     const navigate = useNavigate();
@@ -125,91 +126,112 @@ export const ThirdClassPage = () => {
     return (
         <ClassContainer>
 
-        {/* Sección de introducción */}
-        <Section>
-            <FlexContainer>
-                <BackButton onClick={() => navigate(-1)}>
-                    <FaArrowLeft />
-                </BackButton>
-                <ClassTitle style={{color: "green"}}>Recolección de Muestras de Orina</ClassTitle>
-                <BackButton>
-                    <FaArrowRight />
-                </BackButton>
-            </FlexContainer>
+            {/* Sección de introducción */}
+            <Section>
+                <FlexContainer>
+                    <BackButton onClick={() => navigate(-1)}>
+                        <FaArrowLeft />
+                    </BackButton>
+                    <ClassTitle style={{ color: "green" }}>Recolección de Muestras de Orina</ClassTitle>
+                    <BackButton>
+                        <FaArrowRight />
+                    </BackButton>
+                </FlexContainer>
 
-            <VideoWrapper>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/A6DAupI458Y?si=RaMG0u7k6xOwXMgg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </VideoWrapper>
-        </Section>
+                <VideoWrapper>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/A6DAupI458Y?si=RaMG0u7k6xOwXMgg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </VideoWrapper>
+            </Section>
 
-        {/* Sección de dialogamos */}
-        <Section>
-            <DialogamosContainer>
-                <DialogamosTitle>Dialogamos</DialogamosTitle>
-                <QuestionList>
-                    {dialogamosQuestions.map((question, index) => (
-                        <QuestionItem key={index}>
-                            <Question>* {question}</Question>
-                        </QuestionItem>
-                    ))}
-                </QuestionList>
-            </DialogamosContainer>
-        </Section>
-
-        {/* Sección de Instrucciones */}
-        <Section>
-            <SectionTitle>Instrucciones Básicas</SectionTitle>
-            {instructions.map((instruction, index) => (
-                <InstructionContainer key={index}>
-                    <InstructionTitle>{instruction.title}</InstructionTitle>
-                    <InstructionDescription>{instruction.description}</InstructionDescription>
-                    <InstructionSteps>
-                        {instruction.steps.map((step, stepIndex) => (
-                            <StepItem key={stepIndex}>{step}</StepItem>
+            {/* Sección de dialogamos */}
+            <Section>
+                <DialogamosContainer>
+                    <DialogamosTitle>Dialogamos</DialogamosTitle>
+                    <QuestionList>
+                        {dialogamosQuestions.map((question, index) => (
+                            <QuestionItem key={index}>
+                                <Question>* {question}</Question>
+                            </QuestionItem>
                         ))}
-                    </InstructionSteps>
-                    <InstructionImage src={instruction.image} alt={`Imagen ${instruction.title}`} />
-                </InstructionContainer>
-            ))}
-        </Section>
+                    </QuestionList>
+                </DialogamosContainer>
+            </Section>
 
-        <Section>
-            <CierreUno />
-        </Section>
+            {/* Sección de Instrucciones */}
+            <Section>
+                <SectionTitle>Instrucciones Básicas</SectionTitle>
+                {instructions.map((instruction, index) => (
+                    <InstructionContainer key={index}>
+                        <InstructionTitle>{instruction.title}</InstructionTitle>
+                        <InstructionDescription>{instruction.description}</InstructionDescription>
+                        <InstructionSteps>
+                            {instruction.steps.map((step, stepIndex) => (
+                                <StepItem key={stepIndex}>{step}</StepItem>
+                            ))}
+                        </InstructionSteps>
+                        <InstructionImage src={instruction.image} alt={`Imagen ${instruction.title}`} />
+                    </InstructionContainer>
+                ))}
+            </Section>
 
-        {/* Sección del Cuestionario */}
-        <Section>
-            <SectionTitle>Cuestionario</SectionTitle>
-            <QuestionList>
-                <QuestionItem>
-                    <Question>1. ¿Por qué es importante seguir correctamente las instrucciones para recolectar la muestra de orina?</Question>
-                </QuestionItem>
-                <QuestionItem>
-                    <Question>2. ¿Cuál es la importancia de desechar los primeros 20-25 mL de orina?</Question>
-                </QuestionItem>
-                <QuestionItem>
-                    <Question>3. ¿Cómo se debe recolectar la orina en pacientes con sonda vesical?</Question>
-                </QuestionItem>
-                <QuestionItem>
-                    <Question>4. ¿Qué medidas higiénicas se deben seguir antes de la recolección de orina en niños?</Question>
-                </QuestionItem>
-            </QuestionList>
-        </Section>
+            <Section>
+                <CierreUno />
+                <IdeasFuerza />
+            </Section>
 
-        {/* Botones para Quiz y Foro */}
-        <Section style={{ display: "flex" }}>
-            <QuizButtonWrapper>
-                <Link to="/urineCollectionQuiz">
-                    <QuizButton>Tomar el Quiz</QuizButton>
-                </Link>
-            </QuizButtonWrapper>
-            <QuizButtonWrapper>
-                <Link to="/foro/urineCollection">
-                    <QuizButton>Foro</QuizButton>
-                </Link>
-            </QuizButtonWrapper>
-        </Section>
-    </ClassContainer>
+            {/* Sección del Cuestionario */}
+            <Section>
+                <SectionTitle>Cuestionario</SectionTitle>
+                <QuestionList>
+                    <QuestionItem>
+                        <Question>1. ¿Cuál es el procedimiento correcto para la recolección de una muestra de orina?</Question>
+                    </QuestionItem>
+                    <QuestionItem>
+                        <Question>2. ¿Qué factores pueden afectar la calidad de una muestra de orina?</Question>
+                    </QuestionItem>
+                    <QuestionItem>
+                        <Question>3. ¿Cuánto tiempo puede almacenarse una muestra de orina antes de ser analizada sin comprometer su calidad?</Question>
+                    </QuestionItem>
+                    <QuestionItem>
+                        <Question>4. ¿Es necesario seguir alguna preparación especial antes de recolectar una muestra de orina, como ayuno o evitar ciertos medicamentos?</Question>
+                    </QuestionItem>
+                    <QuestionItem>
+                        <Question>5. ¿Qué tipo de recipiente debe usarse para la recolección de orina y cómo debe estar esterilizado?</Question>
+                    </QuestionItem>
+                    <QuestionItem>
+                        <Question>6. ¿Existen diferencias en la recolección de muestras de orina según el tipo de análisis (por ejemplo, análisis de rutina, cultivo, orina de 24 horas)?</Question>
+                    </QuestionItem>
+                    <QuestionItem>
+                        <Question>7. ¿Cómo se debe recolectar una muestra de orina de un paciente pediátrico o de una persona con movilidad reducida?</Question>
+                    </QuestionItem>
+                    <QuestionItem>
+                        <Question>8. ¿Qué medidas deben tomarse para evitar la contaminación de la muestra durante el proceso de recolección?</Question>
+                    </QuestionItem>
+                    <QuestionItem>
+                        <Question>9. ¿Cómo afecta la hidratación del paciente a los resultados del análisis de orina?</Question>
+                    </QuestionItem>
+                    <QuestionItem>
+                        <Question>10. ¿Cuáles son los errores más comunes que pueden ocurrir durante la recolección de orina y cómo se pueden evitar?</Question>
+                    </QuestionItem>
+                </QuestionList>
+            </Section>
+
+
+
+            {/* Botones para Quiz y Foro */}
+            <Section style={{ display: "flex" }}>
+                <QuizButtonWrapper>
+                    <Link to="/urineCollectionQuiz">
+                        <QuizButton>Tomar el Quiz</QuizButton>
+                    </Link>
+                </QuizButtonWrapper>
+                <QuizButtonWrapper>
+                    <Link to="/foro/urineCollection">
+                        <QuizButton>Foro</QuizButton>
+                    </Link>
+                </QuizButtonWrapper>
+            </Section>
+        </ClassContainer>
     );
 };
 

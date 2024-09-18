@@ -11,6 +11,7 @@ import imagen5 from "../assets/classes/class1/imagen5.PNG"
 import imagen6 from "../assets/classes/class1/imagen6.PNG"
 import imagen7 from "../assets/classes/class1/imagen7.PNG"
 import imagen8 from "../assets/classes/class1/imagen8.PNG"
+import { IdeasFuerza } from "../components/sections/IdeasFuerza";
 
 
 export const FirstClassPage = () => {
@@ -356,6 +357,7 @@ export const FirstClassPage = () => {
 
             <Section>
                 <CierreUno/>
+                <IdeasFuerza/>
             </Section>
 
             {/* Sección del cuestionario */}

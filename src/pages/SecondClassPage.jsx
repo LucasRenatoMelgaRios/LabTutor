@@ -11,6 +11,7 @@ import imagen5 from "../assets/classes/class2/imagen5.PNG"
 import imagen6 from "../assets/classes/class2/imagen6.PNG"
 import imagen7 from "../assets/classes/class2/imagen7.PNG"
 import imagen8 from "../assets/classes/class2/imagen8.PNG"
+import { IdeasFuerza } from "../components/sections/IdeasFuerza";
 
 export const SecondClassPage = () => {
     const navigate = useNavigate();
@@ -410,6 +411,7 @@ export const SecondClassPage = () => {
 
             <Section>
                 <CierreUno />
+                <IdeasFuerza/>
             </Section>
 
             {/* Sección del cuestionario */}
