@@ -14,6 +14,7 @@ import { gsap } from "gsap";
 import { useAuth } from "../../context/AuthContext";
 import { ImExit } from "react-icons/im";
 import logo from "../../assets/logo.png"
+import { FaUser } from "react-icons/fa6";
 
 export const Header = () => {
     const navigate = useNavigate();
@@ -216,6 +217,13 @@ export const Header = () => {
                     <CloseButton onClick={toggleMenu}>
                         <FaTimes size={24} />
                     </CloseButton>
+                    <DropdownItem onClick={() => handleNavigation('/userInfo')}>
+                        <FlexContainer>
+                        <FaUser size={20} />
+                        <span>Cuenta</span>
+                        </FlexContainer>
+                    </DropdownItem>
+
 
                     {user?.id === "51" ? (
                         <DropdownItem onClick={() => handleNavigation('/notasProfesor')}>
@@ -245,7 +253,7 @@ export const Header = () => {
                         <span>Tienda</span>
                         </FlexContainer>
                     </DropdownItem>
-
+    
                     {/* Foros */}
                     <DropdownItem onClick={toggleForums}>
                         <FlexContainer>

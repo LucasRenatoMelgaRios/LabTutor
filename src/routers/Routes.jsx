@@ -16,7 +16,7 @@ import { NotasProfesorPage } from '../pages/NotasProfesorPage';
 import { NotasProfesorRoute } from '../components/NotasProfesorRoute';
 import { SyllabusPage } from "../pages/SyllabusPage"
 import EmojiStore from '../pages/EmojiStore';
-
+import { UsuarioInfoPage } from '../pages/UsuarioInfoPage';
 const RoutesWrapper = () => {
   const { user } = useAuth(); // Asegúrate de que el contexto provee un token o estado de autenticación
 
@@ -102,6 +102,13 @@ const RoutesWrapper = () => {
         <PrivateRoute>
           <Header />
           <EmojiStore />
+          <Footer />
+        </PrivateRoute>
+      } />
+            <Route path="/userInfo" element={
+        <PrivateRoute>
+          <Header />
+          <UsuarioInfoPage />
           <Footer />
         </PrivateRoute>
       } />
