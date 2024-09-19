@@ -25,6 +25,18 @@ export const Header = () => {
     const [showBubble, setShowBubble] = useState(false); // Controla la visibilidad del mensaje burbuja
 
     const [isForumsOpen, setIsForumsOpen] = useState(false);
+    const [isRubricasOpen, setIsRubricasOpen] = useState(false);
+
+    const toggleRubricas = () => {
+        setIsRubricasOpen(!isRubricasOpen);
+    };
+
+    const rubricaLinks = [
+        { id: 1, title: 'Rúbrica de Prácticas', path: '/RubricaDePracticas' },
+        { id: 2, title: 'Ficha de Evaluación', path: '/FichaDeEvaluacion' },
+    ];
+
+
     const logoRef = useRef(null);
     const menuIconRef = useRef(null);
     const modalRef = useRef(null);
@@ -127,7 +139,7 @@ export const Header = () => {
             );
         }
     }, []);
-    
+
     // Función para ocultar el mensaje burbuja y guardarlo en localStorage
     const closeBubble = () => {
         setShowBubble(false);
@@ -196,9 +208,9 @@ export const Header = () => {
 
                 {/* Modal con las estadísticas del usuario */}
                 {isModalOpen && (
-                    <ModalBackdrop onClick={toggleModal}  ref={modalRef} >
+                    <ModalBackdrop onClick={toggleModal} ref={modalRef} >
                         <Modal ref={modalRef} onClick={(e) => e.stopPropagation()}>
-                            <p><strong>Monedas:</strong> {monedas} <BiSolidCoinStack color="#00cedd"/>
+                            <p><strong>Monedas:</strong> {monedas} <BiSolidCoinStack color="#00cedd" />
                             </p>
                             <p><strong>Nivel:</strong> {nivel}<FaStar color="#00cedd" />
                             </p>
@@ -219,8 +231,8 @@ export const Header = () => {
                     </CloseButton>
                     <DropdownItem onClick={() => handleNavigation('/userInfo')}>
                         <FlexContainer>
-                        <FaUser size={20} />
-                        <span>Cuenta</span>
+                            <FaUser size={20} />
+                            <span>Cuenta</span>
                         </FlexContainer>
                     </DropdownItem>
 
@@ -249,11 +261,11 @@ export const Header = () => {
                     </DropdownItem>
                     <DropdownItem onClick={() => handleNavigation('/emojisStore')}>
                         <FlexContainer>
-                        <LuStore size={20} />
-                        <span>Tienda</span>
+                            <LuStore size={20} />
+                            <span>Tienda</span>
                         </FlexContainer>
                     </DropdownItem>
-    
+
                     {/* Foros */}
                     <DropdownItem onClick={toggleForums}>
                         <FlexContainer>
@@ -267,6 +279,24 @@ export const Header = () => {
                             <DropdownItem key={forum} onClick={() => handleNavigation(`/foro/${forum}`)}>
                                 <FlexContainer>
                                     <span>Foro {forum}</span>
+                                </FlexContainer>
+                            </DropdownItem>
+                        ))}
+                    </SubMenu>
+
+                    {/* Rubricas */}
+                    <DropdownItem onClick={toggleRubricas}>
+                        <FlexContainer>
+                            <MdForum size={20} />
+                            <span>Rúbricas</span>
+                            {isRubricasOpen ? <FaAngleUp size={16} /> : <FaAngleDown size={16} />}
+                        </FlexContainer>
+                    </DropdownItem>
+                    <SubMenu isOpen={isRubricasOpen}>
+                        {rubricaLinks.map((rubrica) => (
+                            <DropdownItem key={rubrica.id} onClick={() => handleNavigation(rubrica.path)}>
+                                <FlexContainer>
+                                    <span>{rubrica.title}</span>
                                 </FlexContainer>
                             </DropdownItem>
                         ))}

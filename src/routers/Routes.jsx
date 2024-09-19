@@ -19,6 +19,8 @@ import EmojiStore from '../pages/EmojiStore';
 import { UsuarioInfoPage } from '../pages/UsuarioInfoPage';
 import { SecondClassForum } from '../components/forum/SecondClassForum';
 import { ThirdClassForum } from '../components/forum/ThirdClassForum';
+import { RubricaInformeDePracticasPage } from '../pages/Rubricas/RubricaInformeDePracticasPage';
+import { FichaDeEvaluacionPage } from '../pages/Rubricas/FichaDeEvaluaciónPage';
 const RoutesWrapper = () => {
   const { user } = useAuth(); // Asegúrate de que el contexto provee un token o estado de autenticación
 
@@ -110,6 +112,20 @@ const RoutesWrapper = () => {
         <PrivateRoute>
           <Header />
           <SyllabusPage />
+          <Footer />
+        </PrivateRoute>
+      } />
+      <Route path="/RubricaDePracticas" element={
+        <PrivateRoute>
+          <Header />
+          <RubricaInformeDePracticasPage />
+          <Footer />
+        </PrivateRoute>
+      } />
+      <Route path="/FichaDeEvaluacion" element={
+        <PrivateRoute>
+          <Header />
+          <FichaDeEvaluacionPage />
           <Footer />
         </PrivateRoute>
       } />
