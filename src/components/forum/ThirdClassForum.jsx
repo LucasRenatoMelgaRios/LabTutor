@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { CiCalendarDate } from "react-icons/ci";
-import { GiTeacher } from "react-icons/gi";
-import { Link } from "react-router-dom";  // Importa Link
-import { useAuth } from "../../context/AuthContext"; // Obtener usuario del contexto
+import { useAuth } from "../../context/AuthContext";
 
-export const FirstClassForum = () => {
+export const ThirdClassForum = () => {
     const { user } = useAuth();
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
@@ -19,8 +16,8 @@ export const FirstClassForum = () => {
         const fetchComments = async () => {
             try {
                 const response = await axios.get(API_COMMENTS_URL);
-                // Filtrar comentarios por preguntaId correspondiente al foro 1
-                setComments(response.data.filter(comment => comment.preguntaId === 1));
+                // Filtrar comentarios por preguntaId correspondiente al foro 3
+                setComments(response.data.filter(comment => comment.preguntaId === 3));
             } catch (error) {
                 console.error("Error al obtener comentarios:", error);
             }
@@ -39,7 +36,7 @@ export const FirstClassForum = () => {
             content: newComment,
             date: new Date().toLocaleString(),
             replies: [],
-            preguntaId: 1 // ID de la pregunta para el foro 3
+            preguntaId: 3 // ID de la pregunta para el foro 3
         };
         try {
             const response = await axios.post(API_COMMENTS_URL, comment);
@@ -51,7 +48,6 @@ export const FirstClassForum = () => {
         }
     };
 
-    // Función para responder a un comentario en la API
     const handleAddReply = async (commentId, replyContent) => {
         if (!replyContent.trim()) {
             setErrorMessage("La respuesta no puede estar vacía.");
@@ -82,65 +78,55 @@ export const FirstClassForum = () => {
     };
 
     return (
-        <>
-            <MainContainer>
-                <QuestionContainer>
-                    <QuestionBox>
-                        <h2>¿Qué información se debe registrar al recolectar una muestra biológica humana?</h2>
-                        <p>Descr.</p>
-                    </QuestionBox>
-
-                    <CommentsSection>
-                        {/* Formulario para agregar nuevo comentario */}
-                        <CommentForm>
-                            <textarea
-                                value={newComment}
-                                onChange={(e) => setNewComment(e.target.value)}
-                                placeholder="Escribe un comentario..."
-                            />
-                            {errorMessage && <ErrorLabel>{errorMessage}</ErrorLabel>}
-                            <SubmitButton onClick={handleAddComment}>Enviar</SubmitButton>
-                        </CommentForm>
-
-                        {/* Mostrar todos los comentarios */}
-                        {comments.map(comment => (
-                            <Comment key={comment.id}>
-                                <CommentHeader>
-                                    <UserName>{comment.author}</UserName>
-                                    <CommentDate>{comment.date}</CommentDate>
-                                </CommentHeader>
-                                <CommentBody>{comment.content}</CommentBody>
-                                <ReplyButton onClick={() => setReplyingTo(comment.id)}>Responder</ReplyButton>
-
-                                {/* Mostrar respuestas */}
-                                <RepliesContainer>
-                                    {comment.replies.map((reply, index) => (
-                                        <Reply key={index}>
-                                            <CommentHeader>
-                                                <UserName>{reply.author}</UserName>
-                                                <CommentDate>{reply.date}</CommentDate>
-                                            </CommentHeader>
-                                            <CommentBody>{reply.content}</CommentBody>
-                                        </Reply>
-                                    ))}
-                                </RepliesContainer>
-
-                                {/* Formulario de respuesta */}
-                                {replyingTo === comment.id && (
-                                    <CommentForm>
-                                        <textarea
-                                            placeholder="Escribe una respuesta..."
-                                            onBlur={(e) => handleAddReply(comment.id, e.target.value)}
-                                        />
-                                        <SubmitButton onClick={() => handleAddReply(comment.id, newComment)}>Responder</SubmitButton>
-                                    </CommentForm>
-                                )}
-                            </Comment>
-                        ))}
-                    </CommentsSection>
-                </QuestionContainer>
-            </MainContainer>
-        </>
+        <MainContainer>
+            <QuestionContainer>
+                <QuestionBox>
+                    <h2>¿Cuáles son los errores más comunes que pueden ocurrir durante la recolección de orina y cómo se pueden evitar?</h2>
+                    <p>Deja tu respuesta abajo y abre un debate con tus compañeros.</p>
+                </QuestionBox>
+                <CommentsSection>
+                    <CommentForm>
+                        <textarea
+                            value={newComment}
+                            onChange={(e) => setNewComment(e.target.value)}
+                            placeholder="Escribe un comentario..."
+                        />
+                        {errorMessage && <ErrorLabel>{errorMessage}</ErrorLabel>}
+                        <SubmitButton onClick={handleAddComment}>Enviar</SubmitButton>
+                    </CommentForm>
+                    {comments.map(comment => (
+                        <Comment key={comment.id}>
+                            <CommentHeader>
+                                <UserName>{comment.author}</UserName>
+                                <CommentDate>{comment.date}</CommentDate>
+                            </CommentHeader>
+                            <CommentBody>{comment.content}</CommentBody>
+                            <ReplyButton onClick={() => setReplyingTo(comment.id)}>Responder</ReplyButton>
+                            <RepliesContainer>
+                                {comment.replies.map((reply, index) => (
+                                    <Reply key={index}>
+                                        <CommentHeader>
+                                            <UserName>{reply.author}</UserName>
+                                            <CommentDate>{reply.date}</CommentDate>
+                                        </CommentHeader>
+                                        <CommentBody>{reply.content}</CommentBody>
+                                    </Reply>
+                                ))}
+                            </RepliesContainer>
+                            {replyingTo === comment.id && (
+                                <CommentForm>
+                                    <textarea
+                                        placeholder="Escribe una respuesta..."
+                                        onBlur={(e) => handleAddReply(comment.id, e.target.value)}
+                                    />
+                                    <SubmitButton onClick={() => handleAddReply(comment.id, newComment)}>Responder</SubmitButton>
+                                </CommentForm>
+                            )}
+                        </Comment>
+                    ))}
+                </CommentsSection>
+            </QuestionContainer>
+        </MainContainer>
     );
 };
 

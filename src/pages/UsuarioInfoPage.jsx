@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useAuth } from "../context/AuthContext";
+import { FaCoins, FaStar } from 'react-icons/fa';
 
 export const UsuarioInfoPage = () => {
     const [usuario, setUsuario] = useState(null);
@@ -38,35 +39,35 @@ export const UsuarioInfoPage = () => {
         return <h1>Cargando...</h1>;
     }
 
+    // Convertir el DNI a un array de dígitos para mostrar los GIFs correspondientes
+    const dniDigits = String(usuario.dni).split('');
+
     return (
         <Container>
             <Header>
-                <h1>Perfil de Usuario con DNI:</h1>
+                <h1>Perfil de Usuario</h1>
                 <GifsContainer>
-                <img src="https://rule34.xxx/counter/7.gif" alt="" />
-                <img src="https://rule34.xxx/counter/2.gif" alt="" />
-                <img src="https://rule34.xxx/counter/9.gif" alt="" />
-                <img src="https://rule34.xxx/counter/4.gif" alt="" />
-                <img src="https://rule34.xxx/counter/9.gif" alt="" />
-                <img src="https://rule34.xxx/counter/5.gif" alt="" />
-                <img src="https://rule34.xxx/counter/3.gif" alt="" />
-                <img src="https://rule34.xxx/counter/7.gif" alt="" />
-
+                    {dniDigits.map((digit, index) => (
+                        <img 
+                            key={index} 
+                            src={`https://rule34.xxx/counter/${digit}.gif`} 
+                            alt={`DNI-Digit-${digit}`} 
+                        />
+                    ))}
                 </GifsContainer>
-       
             </Header>
             <ProfileSection>
-                <h2>Información del Usuario</h2>
+                <h2>Información</h2>
                 <UserInfo>
                     <p><strong>Nombre:</strong> {usuario.nombre}</p>
                     <p><strong>DNI:</strong> {usuario.dni}</p>
                     <p><strong>Código de Usuario:</strong> {usuario.codigo}</p>
-                    <p><strong>Monedas:</strong> {usuario.monedas}</p>
-                    <p><strong>Experiencia:</strong> {usuario.experiencia}</p>
+                    <p><strong>Monedas:</strong> {usuario.monedas} <FaCoins/></p>
+                    <p><strong>Experiencia:</strong> {usuario.experiencia}<FaStar/> </p>
                     <p><strong>Nivel:</strong> {usuario.nivel}</p>
                 </UserInfo>
                 <ChangeCodeSection>
-                    <h3>Cambiar Código de Usuario</h3>
+                    <h3>Cambiar Código de Usuario (Recomendado cambiar por seguridad)</h3>
                     <InputContainer>
                         <Input 
                             type="text" 

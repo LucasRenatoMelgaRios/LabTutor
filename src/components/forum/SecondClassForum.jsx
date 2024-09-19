@@ -6,7 +6,7 @@ import { GiTeacher } from "react-icons/gi";
 import { Link } from "react-router-dom";  // Importa Link
 import { useAuth } from "../../context/AuthContext"; // Obtener usuario del contexto
 
-export const FirstClassForum = () => {
+export const SecondClassForum = () => {
     const { user } = useAuth();
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
@@ -19,8 +19,8 @@ export const FirstClassForum = () => {
         const fetchComments = async () => {
             try {
                 const response = await axios.get(API_COMMENTS_URL);
-                // Filtrar comentarios por preguntaId correspondiente al foro 1
-                setComments(response.data.filter(comment => comment.preguntaId === 1));
+                // Filtrar comentarios por preguntaId correspondiente al foro 3
+                setComments(response.data.filter(comment => comment.preguntaId === 2));
             } catch (error) {
                 console.error("Error al obtener comentarios:", error);
             }
@@ -39,7 +39,7 @@ export const FirstClassForum = () => {
             content: newComment,
             date: new Date().toLocaleString(),
             replies: [],
-            preguntaId: 1 // ID de la pregunta para el foro 3
+            preguntaId: 2 // ID de la pregunta para el foro 3
         };
         try {
             const response = await axios.post(API_COMMENTS_URL, comment);
@@ -86,8 +86,8 @@ export const FirstClassForum = () => {
             <MainContainer>
                 <QuestionContainer>
                     <QuestionBox>
-                        <h2>¿Qué información se debe registrar al recolectar una muestra biológica humana?</h2>
-                        <p>Descr.</p>
+                        <h2>¿Cuáles son las principales ventajas de la punción capilar frente a otros métodos de extracción de sangre?</h2>
+                        <p>Deja tu respuesta abajo y abre un debate con tus compañeros.</p>
                     </QuestionBox>
 
                     <CommentsSection>

@@ -17,6 +17,8 @@ import { NotasProfesorRoute } from '../components/NotasProfesorRoute';
 import { SyllabusPage } from "../pages/SyllabusPage"
 import EmojiStore from '../pages/EmojiStore';
 import { UsuarioInfoPage } from '../pages/UsuarioInfoPage';
+import { SecondClassForum } from '../components/forum/SecondClassForum';
+import { ThirdClassForum } from '../components/forum/ThirdClassForum';
 const RoutesWrapper = () => {
   const { user } = useAuth(); // Asegúrate de que el contexto provee un token o estado de autenticación
 
@@ -83,6 +85,20 @@ const RoutesWrapper = () => {
           <Footer />
         </PrivateRoute>
       } />
+      <Route path="/foro/2" element={
+        <PrivateRoute>
+          <Header />
+          <SecondClassForum />
+          <Footer />
+        </PrivateRoute>
+      } />
+      <Route path="/foro/3" element={
+        <PrivateRoute>
+          <Header />
+          <ThirdClassForum />
+          <Footer />
+        </PrivateRoute>
+      } />
       <Route path="/notas" element={
         <PrivateRoute>
           <Header />
@@ -105,7 +121,7 @@ const RoutesWrapper = () => {
           <Footer />
         </PrivateRoute>
       } />
-            <Route path="/userInfo" element={
+      <Route path="/userInfo" element={
         <PrivateRoute>
           <Header />
           <UsuarioInfoPage />
