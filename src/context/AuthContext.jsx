@@ -12,29 +12,20 @@ export const AuthProvider = ({ children }) => {
   // Función para iniciar sesión
   const login = async (dni, codigo) => {
     try {
-      // Verificar si se ingresaron valores válidos
       if (!dni || !codigo) {
         alert('Por favor ingresa tanto el DNI como el código.');
         return;
       }
 
-      // Realizamos una petición a la API de Mock
       const response = await axios.get('https://66ca61e159f4350f064f0e88.mockapi.io/api/labtutor/users');
       const students = response.data; // Datos de los estudiantes
-      
-      console.log("Datos recibidos de la API:", students); // Verifica si students es un array
-      
-      // Buscamos si hay algún estudiante que coincida con el DNI y código
+
       const student = students.find(student => 
         String(student.dni).trim() === String(dni).trim() && 
-        student.codigo.trim().toUpperCase() === codigo.trim().toUpperCase() // Cambiamos codigo_estudiante a codigo
+        student.codigo.trim().toUpperCase() === codigo.trim().toUpperCase()
       );
-  
+
       if (student) {
-        // Si coincide, mostramos en consola quién es el usuario que ha ingresado
-        console.log("Usuario logueado:", student);
-        
-        // Guardamos la información del estudiante en el estado y localStorage
         setUser({ id: String(student.id), nombre: student.nombre });
         localStorage.setItem('user', JSON.stringify({ id: String(student.id), nombre: student.nombre }));
         navigate('/home'); // Navegar después de iniciar sesión
@@ -47,14 +38,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Función para cerrar sesión
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('user'); // Eliminamos el usuario de localStorage
+    localStorage.removeItem('user');
     navigate('/login');
   };
 
-  // Efecto para restaurar el usuario desde localStorage al cargar la aplicación
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
@@ -64,7 +53,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, setUser, login, logout }}> {/* Asegúrate de pasar setUser aquí */}
       {children}
     </AuthContext.Provider>
   );

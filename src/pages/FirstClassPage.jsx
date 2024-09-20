@@ -407,7 +407,7 @@ export const FirstClassPage = () => {
             <Section style={{display: "flex"}}>
                 <QuizButtonWrapper>
                     <Link to="/firstQuizz">
-                        <QuizButton disabled>Tomar el Quiz</QuizButton>
+                        <QuizButton>Tomar el Quiz</QuizButton>
                     </Link>
                 </QuizButtonWrapper>
                 <QuizButtonWrapper>
