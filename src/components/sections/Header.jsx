@@ -16,7 +16,7 @@ import { ImExit } from "react-icons/im";
 import logo from "../../assets/logo.png"
 import { FaUser } from "react-icons/fa6";
 
-export const Header = () => {
+export const Header = ( {acquiredEmojis, updateEmojis} ) => {
     const navigate = useNavigate();
     const { user, logout } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
@@ -68,6 +68,11 @@ export const Header = () => {
             const response = await axios.get('https://66ca61e159f4350f064f0e88.mockapi.io/api/labtutor/users');
             const currentUser = response.data.find(u => u.id === user?.id);
             setUserData(currentUser);
+
+            // Llama a la función de actualización de emojis
+            if (currentUser) {
+                updateEmojis(currentUser.emojisComprados);
+            }
         } catch (error) {
             console.error('Error al obtener los datos del usuario:', error);
         }
@@ -77,7 +82,7 @@ export const Header = () => {
         if (user) {
             fetchUserData();
         }
-    }, [user]);
+    }, [user, acquiredEmojis]); // Añadir acquiredEmojis como dependencia
 
     useEffect(() => {
         gsap.fromTo(logoRef.current,

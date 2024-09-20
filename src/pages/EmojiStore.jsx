@@ -26,7 +26,7 @@ const emojiData = [
   { id: 9, name: 'Glass', price: '170', image: emoji9 },
 ];
 
-export const EmojiStore = () => {
+export const EmojiStore = ( {updateEmojis} ) => {
   const storeRef = useRef(null);
   const infoIconRef = useRef(null);
   const [showInfo, setShowInfo] = useState(false);
@@ -101,40 +101,32 @@ export const EmojiStore = () => {
 
   const handleConfirmPurchase = async () => {
     try {
-      // 1. Verificar que el usuario esté autenticado
-      if (!user) return;
-      
-      // 2. Obtener la información actual del usuario
-      const response = await axios.get(`https://66ca61e159f4350f064f0e88.mockapi.io/api/labtutor/users/${user.id}`);
-      const userData = response.data;
-  
-      // 3. Verificar si el usuario tiene suficientes monedas
-      if (userData.monedas >= selectedEmoji.price) {
-        // 4. Actualizar la lista de emojis comprados y las monedas del usuario
-        const updatedEmojis = [...userData.emojisComprados, selectedEmoji.id];
-        const updatedMonedas = userData.monedas - selectedEmoji.price;
-  
-        // 5. Hacer la solicitud PUT para actualizar el usuario
-        await axios.put(`https://66ca61e159f4350f064f0e88.mockapi.io/api/labtutor/users/${user.id}`, {
-          emojisComprados: updatedEmojis,
-          monedas: updatedMonedas,
-        });
+        if (!user) return;
 
-        // Actualizar la lista de emojis comprados en el estado
-        setEmojisComprados(updatedEmojis);
-  
-        console.log('Compra confirmada');
-        setShowModal(false); // Cierra el modal de confirmación de compra
-      } else {
-        // Si no tiene suficientes monedas, muestra el modal de fondos insuficientes
-        setShowModal(false);
-        setShowInsufficientFundsModal(true); // Mostrar el modal de fondos insuficientes
-      }
+        const response = await axios.get(`https://66ca61e159f4350f064f0e88.mockapi.io/api/labtutor/users/${user.id}`);
+        const userData = response.data;
+
+        if (userData.monedas >= selectedEmoji.price) {
+            const updatedEmojis = [...userData.emojisComprados, selectedEmoji.id];
+            const updatedMonedas = userData.monedas - selectedEmoji.price;
+
+            await axios.put(`https://66ca61e159f4350f064f0e88.mockapi.io/api/labtutor/users/${user.id}`, {
+                emojisComprados: updatedEmojis,
+                monedas: updatedMonedas,
+            });
+
+            setEmojisComprados(updatedEmojis);
+            updateEmojis(updatedEmojis); // Asegúrate de llamar a esta función
+            setShowModal(false);
+        } else {
+            setShowModal(false);
+            setShowInsufficientFundsModal(true);
+        }
     } catch (error) {
-      console.error('Error al confirmar la compra:', error);
+        console.error('Error al confirmar la compra:', error);
     }
-  };
-  
+};
+
   const handleCancelPurchase = () => {
     setShowModal(false); // Cierra el modal de confirmación de compra
   };

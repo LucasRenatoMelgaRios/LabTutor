@@ -1,4 +1,6 @@
 import { Routes, Route, HashRouter, Navigate } from 'react-router-dom';
+import { useState } from "react";
+
 import { HomePage } from '../pages/HomePage';
 import { FirstClassPage } from '../pages/FirstClassPage';
 import { SecondClassPage } from '../pages/SecondClassPage';
@@ -23,6 +25,11 @@ import { RubricaInformeDePracticasPage } from '../pages/Rubricas/RubricaInformeD
 import { FichaDeEvaluacionPage } from '../pages/Rubricas/FichaDeEvaluaciónPage';
 const RoutesWrapper = () => {
   const { user } = useAuth(); // Asegúrate de que el contexto provee un token o estado de autenticación
+  const [acquiredEmojis, setAcquiredEmojis] = useState([]);
+
+  const updateEmojis = (newEmojis) => {
+      setAcquiredEmojis(newEmojis);
+  };
 
   return (
     <Routes>
@@ -47,84 +54,84 @@ const RoutesWrapper = () => {
       {/* Rutas privadas solo accesibles si el usuario está autenticado */}
       <Route path="/home" element={
         <PrivateRoute>
-          <Header /> {/* Header visible solo en rutas privadas */}
+          <Header updateEmojis={updateEmojis} acquiredEmojis={acquiredEmojis}/> {/* Header visible solo en rutas privadas */}
           <HomePage />
           <Footer /> {/* Footer visible solo en rutas privadas */}
         </PrivateRoute>
       } />
       <Route path="/class/1" element={
         <PrivateRoute>
-          <Header />
+          <Header updateEmojis={updateEmojis} acquiredEmojis={acquiredEmojis}/>
           <FirstClassPage />
           <Footer />
         </PrivateRoute>
       } />
       <Route path="/class/2" element={
         <PrivateRoute>
-          <Header />
+          <Header updateEmojis={updateEmojis} acquiredEmojis={acquiredEmojis}/>
           <SecondClassPage />
           <Footer />
         </PrivateRoute>
       } />
       <Route path="/class/3" element={
         <PrivateRoute>
-          <Header />
+          <Header updateEmojis={updateEmojis} acquiredEmojis={acquiredEmojis}/>
           <ThirdClassPage />
           <Footer />
         </PrivateRoute>
       } />
       <Route path="/firstQuizz" element={
         <PrivateRoute>
-          <Header />
+          <Header updateEmojis={updateEmojis} acquiredEmojis={acquiredEmojis}/>
           <QuizzPage />
           <Footer />
         </PrivateRoute>
       } />
       <Route path="/foro/1" element={
         <PrivateRoute>
-          <Header />
+          <Header updateEmojis={updateEmojis} acquiredEmojis={acquiredEmojis}/>
           <FirstClassForum />
           <Footer />
         </PrivateRoute>
       } />
       <Route path="/foro/2" element={
         <PrivateRoute>
-          <Header />
+          <Header updateEmojis={updateEmojis} acquiredEmojis={acquiredEmojis}/>
           <SecondClassForum />
           <Footer />
         </PrivateRoute>
       } />
       <Route path="/foro/3" element={
         <PrivateRoute>
-          <Header />
+          <Header updateEmojis={updateEmojis} acquiredEmojis={acquiredEmojis}/>
           <ThirdClassForum />
           <Footer />
         </PrivateRoute>
       } />
       <Route path="/notas" element={
         <PrivateRoute>
-          <Header />
+          <Header updateEmojis={updateEmojis} acquiredEmojis={acquiredEmojis} />
           <NotasPage />
           <Footer />
         </PrivateRoute>
       } />
       <Route path="/syllabus" element={
         <PrivateRoute>
-          <Header />
+          <Header updateEmojis={updateEmojis} acquiredEmojis={acquiredEmojis}/>
           <SyllabusPage />
           <Footer />
         </PrivateRoute>
       } />
       <Route path="/RubricaDePracticas" element={
         <PrivateRoute>
-          <Header />
+          <Header updateEmojis={updateEmojis} acquiredEmojis={acquiredEmojis}/>
           <RubricaInformeDePracticasPage />
           <Footer />
         </PrivateRoute>
       } />
       <Route path="/FichaDeEvaluacion" element={
         <PrivateRoute>
-          <Header />
+          <Header updateEmojis={updateEmojis} acquiredEmojis={acquiredEmojis}/>
           <FichaDeEvaluacionPage />
           <Footer />
         </PrivateRoute>
@@ -132,14 +139,14 @@ const RoutesWrapper = () => {
 
       <Route path="/emojisStore" element={
         <PrivateRoute>
-          <Header />
-          <EmojiStore />
+          <Header updateEmojis={updateEmojis} acquiredEmojis={acquiredEmojis}/>
+          <EmojiStore updateEmojis={updateEmojis} acquiredEmojis={acquiredEmojis}/>
           <Footer />
         </PrivateRoute>
       } />
       <Route path="/userInfo" element={
         <PrivateRoute>
-          <Header />
+          <Header updateEmojis={updateEmojis} acquiredEmojis={acquiredEmojis}/>
           <UsuarioInfoPage />
           <Footer />
         </PrivateRoute>

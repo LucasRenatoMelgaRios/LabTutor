@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { gsap } from "gsap";
 import { ClassesSection } from "../components/sections/ClassesSection";
+import { FaGrinTongueWink } from "react-icons/fa";
+
 
 export const HomePage = () => {
     const [showMessage, setShowMessage] = useState(false);
@@ -58,8 +60,9 @@ export const HomePage = () => {
                                 <h2>¡Novedad!</h2>
                                 <p>
                                     Ahora puedes ganar <span>monedas</span> y subir de <span>nivel</span> acumulando{" "}
-                                    <span>experiencia</span>. Usa las monedas para comprar cosas en la tienda y alcanzar
-                                    nuevos logros. ¡Cada actividad te dará más experiencia para subir de nivel!
+                                    <span>experiencia</span> contestando correctamente en los exámenes! Usa las monedas para comprar cosas en la tienda y alcanzar
+                                    nuevos logros. Revisa tus estadísticas en tu perfil o en la parte de arriba dando click ✨
+
                                 </p>
                                 <Button onClick={handleCloseMessage}>Entendido</Button>
                             </MessageContent>
@@ -108,9 +111,13 @@ const InfoMessage = styled.div`
 
 const MessageContent = styled.div`
   h2 {
-    color: #4a90e2;
     margin-bottom: clamp(10px, 1vw, 20px);
     font-size: clamp(1.5rem, 2.5vw, 2rem);
+    color: transparent; /* Hace el texto transparente para que el gradiente se vea */
+
+    background: linear-gradient(90deg, #15d1c1 0%, #6487fa 100%);
+        -webkit-background-clip: text; /* Aplicar el background-clip en navegadores basados en WebKit */
+        background-clip: text; /* Clip del background al texto */
   }
 
   p {
@@ -122,6 +129,11 @@ const MessageContent = styled.div`
     span {
       font-weight: bold;
       color: #ffb74d; /* Resalta monedas, niveles y experiencia */
+      color: transparent; /* Hace el texto transparente para que el gradiente se vea */
+
+background: linear-gradient(90deg, #15d1c1 0%, #6487fa 100%);
+    -webkit-background-clip: text; /* Aplicar el background-clip en navegadores basados en WebKit */
+    background-clip: text; /* Clip del background al texto */
     }
   }
 `;

@@ -254,7 +254,6 @@ export const FirstClassForum = () => {
 // Styled Components
 const MainContainer = styled.section`
   width: 100%;
-  padding: clamp(10px, 5vw, 20px); 
   background-color: #f9fbfc;
   display: flex;
   justify-content: center;
@@ -262,7 +261,7 @@ const MainContainer = styled.section`
 `;
 
 const QuestionContainer = styled.div`
-  width: clamp(80%, 70vw, 60%);
+  width: 100%;
   background-color: white;
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
