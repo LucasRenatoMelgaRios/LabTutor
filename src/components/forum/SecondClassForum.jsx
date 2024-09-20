@@ -13,7 +13,6 @@ import emoji7 from "../../assets/emojis/emoji7.png";
 import emoji8 from "../../assets/emojis/emoji8.png";
 import emoji9 from "../../assets/emojis/emoji9.png";
 
-
 export const SecondClassForum = () => {
   const { user } = useAuth();
   const [comments, setComments] = useState([]);
@@ -104,23 +103,40 @@ export const SecondClassForum = () => {
     { id: 7, src: emoji7, name: ":emoji7:" },
     { id: 8, src: emoji8, name: ":emoji8:" },
     { id: 9, src: emoji9, name: ":emoji9:" },
-
   ];
 
   // Manejar la selección de emoji personalizado
   const onCustomEmojiClick = (emoji) => {
     const emojiTag = document.createTextNode(emoji.name); // Crear texto del emoji
     inputRef.current.appendChild(emojiTag); // Agregar el identificador del emoji al input editable
+    handleInputChange(); // Llamar a la función para procesar el input
   };
 
-  // Reemplazar identificadores de emojis personalizados con imágenes
-  const renderWithEmojis = (text) => {
-    let formattedText = text;
+  // Manejar cambios en el input y reemplazar nombres de emoji por imágenes
+  const handleInputChange = () => {
+    const currentInput = inputRef.current.innerHTML;
+    let updatedInput = currentInput;
+
     customEmojis.forEach(emoji => {
-      const regex = new RegExp(emoji.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), "g"); // Escapar caracteres especiales
-      formattedText = formattedText.replace(regex, `<img src="${emoji.src}" alt="${emoji.name}" class="custom-emoji"/>`);
+      const regex = new RegExp(`(${emoji.name})`, "g"); // Crear regex para el nombre del emoji
+      updatedInput = updatedInput.replace(regex, `<img src="${emoji.src}" alt="${emoji.name}" class="custom-emoji"/>`);
     });
-    return formattedText;
+
+    if (updatedInput !== currentInput) {
+      inputRef.current.innerHTML = updatedInput; // Actualizar el input solo si ha cambiado
+      placeCaretAtEnd(inputRef.current); // Mantener el cursor al final
+    }
+  };
+
+  // Función para mantener el cursor al final del input
+  const placeCaretAtEnd = (el) => {
+    el.focus();
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    range.collapse(false);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
   };
 
   // Extraer emojis reemplazando las imágenes con los identificadores
@@ -131,6 +147,15 @@ export const SecondClassForum = () => {
       extractedText = extractedText.replace(regex, emoji.name);
     });
     return extractedText;
+  };
+
+  const renderWithEmojis = (text) => {
+    let formattedText = text;
+    customEmojis.forEach(emoji => {
+      const regex = new RegExp(emoji.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), "g"); // Escapar caracteres especiales
+      formattedText = formattedText.replace(regex, `<img src="${emoji.src}" alt="${emoji.name}" class="custom-emoji"/>`);
+    });
+    return formattedText;
   };
 
   return (
@@ -148,7 +173,7 @@ export const SecondClassForum = () => {
                 ref={inputRef}
                 contentEditable="true"
                 placeholder="Escribe un comentario..."
-                onInput={() => setErrorMessage("")}
+                onInput={handleInputChange} // Cambiar a esta función
               />
               <EmojiButton onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
                 <FaSmile size={24} />
