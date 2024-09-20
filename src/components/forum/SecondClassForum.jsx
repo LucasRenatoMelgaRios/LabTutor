@@ -14,223 +14,236 @@ import emoji8 from "../../assets/emojis/emoji8.png";
 import emoji9 from "../../assets/emojis/emoji9.png";
 
 export const SecondClassForum = () => {
-  const { user } = useAuth();
-  const [comments, setComments] = useState([]);
-  const [replyingTo, setReplyingTo] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-
-  const inputRef = useRef(); // Referencia para el input editable
-
-  const API_COMMENTS_URL = "https://66ca61e159f4350f064f0e88.mockapi.io/api/labtutor/comentarios";
-
-  useEffect(() => {
-    const fetchComments = async () => {
+    const { user } = useAuth();
+    const [comments, setComments] = useState([]);
+    const [replyingTo, setReplyingTo] = useState(null);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+    const [acquiredEmojis, setAcquiredEmojis] = useState([]);
+  
+    const inputRef = useRef(); 
+  
+    const API_COMMENTS_URL = "https://66ca61e159f4350f064f0e88.mockapi.io/api/labtutor/comentarios";
+    const API_USER_URL = "https://66ca61e159f4350f064f0e88.mockapi.io/api/labtutor/users"; 
+  
+    useEffect(() => {
+      const fetchComments = async () => {
+        try {
+          const response = await axios.get(API_COMMENTS_URL);
+          setComments(response.data.filter(comment => comment.preguntaId === 2));
+        } catch (error) {
+          console.error("Error al obtener comentarios:", error);
+        }
+      };
+      fetchComments();
+    }, []);
+  
+    useEffect(() => {
+      const fetchUserData = async () => {
+        try {
+          const response = await axios.get(`${API_USER_URL}/${user.id}`); 
+          const userEmojis = response.data.emojisComprados; 
+          setAcquiredEmojis(userEmojis); 
+        } catch (error) {
+          console.error("Error al obtener datos del usuario:", error);
+        }
+      };
+  
+      fetchUserData();
+    }, [user.id]); 
+  
+    const handleAddComment = async () => {
+      const commentText = inputRef.current.innerHTML.trim(); 
+      if (!commentText) {
+        setErrorMessage("El comentario no puede estar vacío.");
+        return;
+      }
+  
+      const commentWithEmojis = extractEmojis(commentText);
+  
+      const comment = {
+        author: user.nombre,
+        content: commentWithEmojis,
+        date: new Date().toLocaleString(),
+        replies: [],
+        preguntaId: 2,
+      };
       try {
-        const response = await axios.get(API_COMMENTS_URL);
-        setComments(response.data.filter(comment => comment.preguntaId === 2));
+        const response = await axios.post(API_COMMENTS_URL, comment);
+        setComments([response.data, ...comments]);
+        inputRef.current.innerHTML = ""; 
+        setErrorMessage("");
+        setShowEmojiPicker(false);
       } catch (error) {
-        console.error("Error al obtener comentarios:", error);
+        console.error("Error al agregar comentario:", error);
       }
     };
-    fetchComments();
-  }, []);
-
-  const handleAddComment = async () => {
-    const commentText = inputRef.current.innerHTML.trim(); // Obtener el contenido del input editable
-    if (!commentText) {
-      setErrorMessage("El comentario no puede estar vacío.");
-      return;
-    }
-
-    // Reemplazar imágenes con su identificador correspondiente antes de guardar
-    const commentWithEmojis = extractEmojis(commentText);
-
-    const comment = {
-      author: user.nombre,
-      content: commentWithEmojis,
-      date: new Date().toLocaleString(),
-      replies: [],
-      preguntaId: 2
+  
+    const handleAddReply = async (commentId, replyContent) => {
+      if (!replyContent.trim()) {
+        setErrorMessage("La respuesta no puede estar vacía.");
+        return;
+      }
+  
+      const commentToUpdate = comments.find(comment => comment.id === commentId);
+      const updatedComment = {
+        ...commentToUpdate,
+        replies: [
+          ...commentToUpdate.replies,
+          {
+            author: user.nombre,
+            content: replyContent,
+            date: new Date().toLocaleString(),
+          }
+        ]
+      };
+  
+      try {
+        const response = await axios.put(`${API_COMMENTS_URL}/${commentId}`, updatedComment);
+        setComments(comments.map(comment => comment.id === commentId ? response.data : comment));
+        setReplyingTo(null);
+        setErrorMessage("");
+      } catch (error) {
+        console.error("Error al agregar respuesta:", error);
+      }
     };
-    try {
-      const response = await axios.post(API_COMMENTS_URL, comment);
-      setComments([response.data, ...comments]);
-      inputRef.current.innerHTML = ""; // Limpiar el input editable
-      setErrorMessage("");
-      setShowEmojiPicker(false);
-    } catch (error) {
-      console.error("Error al agregar comentario:", error);
-    }
-  };
-
-  const handleAddReply = async (commentId, replyContent) => {
-    if (!replyContent.trim()) {
-      setErrorMessage("La respuesta no puede estar vacía.");
-      return;
-    }
-
-    const commentToUpdate = comments.find(comment => comment.id === commentId);
-    const updatedComment = {
-      ...commentToUpdate,
-      replies: [
-        ...commentToUpdate.replies,
-        {
-          author: user.nombre,
-          content: replyContent,
-          date: new Date().toLocaleString(),
-        }
-      ]
+  
+    const customEmojis = [
+      { id: 1, src: emoji1, name: ":emoji1:" },
+      { id: 2, src: emoji2, name: ":emoji2:" },
+      { id: 3, src: emoji3, name: ":emoji3:" },
+      { id: 4, src: emoji4, name: ":emoji4:" },
+      { id: 5, src: emoji5, name: ":emoji5:" },
+      { id: 6, src: emoji6, name: ":emoji6:" },
+      { id: 7, src: emoji7, name: ":emoji7:" },
+      { id: 8, src: emoji8, name: ":emoji8:" },
+      { id: 9, src: emoji9, name: ":emoji9:" },
+    ];
+  
+    const filteredEmojis = customEmojis.filter(emoji => acquiredEmojis.includes(emoji.id));
+  
+    const onCustomEmojiClick = (emoji) => {
+      const imgTag = `<img src="${emoji.src}" alt="${emoji.name}" class="custom-emoji"/>`;
+      inputRef.current.innerHTML += imgTag; 
+      handleInputChange(); 
     };
-
-    try {
-      const response = await axios.put(`${API_COMMENTS_URL}/${commentId}`, updatedComment);
-      setComments(comments.map(comment => comment.id === commentId ? response.data : comment));
-      setReplyingTo(null);
-      setErrorMessage("");
-    } catch (error) {
-      console.error("Error al agregar respuesta:", error);
-    }
-  };
-
-  const customEmojis = [
-    { id: 1, src: emoji1, name: ":emoji1:" },
-    { id: 2, src: emoji2, name: ":emoji2:" },
-    { id: 3, src: emoji3, name: ":emoji3:" },
-    { id: 4, src: emoji4, name: ":emoji4:" },
-    { id: 5, src: emoji5, name: ":emoji5:" },
-    { id: 6, src: emoji6, name: ":emoji6:" },
-    { id: 7, src: emoji7, name: ":emoji7:" },
-    { id: 8, src: emoji8, name: ":emoji8:" },
-    { id: 9, src: emoji9, name: ":emoji9:" },
-  ];
-
-  // Manejar la selección de emoji personalizado
-  const onCustomEmojiClick = (emoji) => {
-    const emojiTag = document.createTextNode(emoji.name); // Crear texto del emoji
-    inputRef.current.appendChild(emojiTag); // Agregar el identificador del emoji al input editable
-    handleInputChange(); // Llamar a la función para procesar el input
-  };
-
-  // Manejar cambios en el input y reemplazar nombres de emoji por imágenes
-  const handleInputChange = () => {
-    const currentInput = inputRef.current.innerHTML;
-    let updatedInput = currentInput;
-
-    customEmojis.forEach(emoji => {
-      const regex = new RegExp(`(${emoji.name})`, "g"); // Crear regex para el nombre del emoji
-      updatedInput = updatedInput.replace(regex, `<img src="${emoji.src}" alt="${emoji.name}" class="custom-emoji"/>`);
-    });
-
-    if (updatedInput !== currentInput) {
-      inputRef.current.innerHTML = updatedInput; // Actualizar el input solo si ha cambiado
-      placeCaretAtEnd(inputRef.current); // Mantener el cursor al final
-    }
-  };
-
-  // Función para mantener el cursor al final del input
-  const placeCaretAtEnd = (el) => {
-    el.focus();
-    const range = document.createRange();
-    range.selectNodeContents(el);
-    range.collapse(false);
-    const sel = window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(range);
-  };
-
-  // Extraer emojis reemplazando las imágenes con los identificadores
-  const extractEmojis = (htmlText) => {
-    let extractedText = htmlText;
-    customEmojis.forEach(emoji => {
-      const regex = new RegExp(`<img[^>]*alt="${emoji.name}"[^>]*>`, "g");
-      extractedText = extractedText.replace(regex, emoji.name);
-    });
-    return extractedText;
-  };
-
-  const renderWithEmojis = (text) => {
-    let formattedText = text;
-    customEmojis.forEach(emoji => {
-      const regex = new RegExp(emoji.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), "g"); // Escapar caracteres especiales
-      formattedText = formattedText.replace(regex, `<img src="${emoji.src}" alt="${emoji.name}" class="custom-emoji"/>`);
-    });
-    return formattedText;
-  };
-
-  return (
-    <MainContainer>
-      <QuestionContainer>
-        <QuestionBox>
-          <h2>¿Cuáles son las principales ventajas de la punción capilar frente a otros métodos de extracción de sangre?</h2>
-          <p>Escribe tu respuesta y abre debate con tus compañeros.</p>
-        </QuestionBox>
-
-        <CommentsSection>
-          <CommentForm>
-            <TextAreaContainer>
-              <EditableInput
-                ref={inputRef}
-                contentEditable="true"
-                placeholder="Escribe un comentario..."
-                onInput={handleInputChange} // Cambiar a esta función
-              />
-              <EmojiButton onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
-                <FaSmile size={24} />
-              </EmojiButton>
-            </TextAreaContainer>
-            {showEmojiPicker && (
-              <EmojiPickerContainer>
-                {customEmojis.map((emoji) => (
-                  <CustomEmojiButton key={emoji.id} onClick={() => onCustomEmojiClick(emoji)}>
-                    <img src={emoji.src} alt={emoji.name} />
-                  </CustomEmojiButton>
-                ))}
-              </EmojiPickerContainer>
-            )}
-            {errorMessage && <ErrorLabel>{errorMessage}</ErrorLabel>}
-            <SubmitButton onClick={handleAddComment}>Enviar</SubmitButton>
-          </CommentForm>
-
-          {comments.map(comment => (
-            <Comment key={comment.id}>
-              <CommentHeader>
-                <UserName>{comment.author}</UserName>
-                <CommentDate>{comment.date}</CommentDate>
-              </CommentHeader>
-              {/* Renderizar contenido con emojis personalizados */}
-              <CommentBody dangerouslySetInnerHTML={{ __html: renderWithEmojis(comment.content) }} />
-              <ReplyButton onClick={() => setReplyingTo(comment.id)}>Responder</ReplyButton>
-
-              <RepliesContainer>
-                {comment.replies.map((reply, index) => (
-                  <Reply key={index}>
-                    <CommentHeader>
-                      <UserName>{reply.author}</UserName>
-                      <CommentDate>{reply.date}</CommentDate>
-                    </CommentHeader>
-                    <CommentBody dangerouslySetInnerHTML={{ __html: renderWithEmojis(reply.content) }} />
-                  </Reply>
-                ))}
-              </RepliesContainer>
-
-              {replyingTo === comment.id && (
-                <CommentForm>
-                  <textarea
-                    placeholder="Escribe una respuesta..."
-                    onBlur={(e) => handleAddReply(comment.id, e.target.value)}
-                  />
-                  <SubmitButton onClick={() => handleAddReply(comment.id, inputRef.current.innerHTML)}>Responder</SubmitButton>
-                </CommentForm>
+  
+    const handleInputChange = () => {
+      const currentInput = inputRef.current.innerHTML;
+      let updatedInput = currentInput;
+  
+      customEmojis.forEach(emoji => {
+        const regex = new RegExp(`(${emoji.name})`, "g"); 
+        updatedInput = updatedInput.replace(regex, imgTag); 
+      });
+  
+      inputRef.current.innerHTML = updatedInput; 
+      placeCaretAtEnd(inputRef.current); 
+    };
+  
+    const placeCaretAtEnd = (el) => {
+      el.focus();
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      range.collapse(false);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    };
+  
+    const extractEmojis = (htmlText) => {
+      let extractedText = htmlText;
+      customEmojis.forEach(emoji => {
+        const regex = new RegExp(`<img[^>]*alt="${emoji.name}"[^>]*>`, "g");
+        extractedText = extractedText.replace(regex, emoji.name);
+      });
+      return extractedText;
+    };
+  
+    const renderWithEmojis = (text) => {
+      let formattedText = text;
+      customEmojis.forEach(emoji => {
+        const regex = new RegExp(emoji.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), "g");
+        formattedText = formattedText.replace(regex, `<img src="${emoji.src}" alt="${emoji.name}" class="custom-emoji"/>`);
+      });
+      return formattedText;
+    };
+  
+    return (
+      <MainContainer>
+        <QuestionContainer>
+          <QuestionBox>
+            <h2>¿Cuáles son las principales ventajas de la punción capilar frente a otros métodos de extracción de sangre?</h2>
+            <p>Escribe tu respuesta y abre debate con tus compañeros.</p>
+          </QuestionBox>
+  
+          <CommentsSection>
+            <CommentForm>
+              <TextAreaContainer>
+                <EditableInput
+                  ref={inputRef}
+                  contentEditable="true"
+                  placeholder="Escribe un comentario..."
+                  onInput={handleInputChange} 
+                />
+                <EmojiButton onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
+                  <FaSmile size={24} />
+                </EmojiButton>
+              </TextAreaContainer>
+              {showEmojiPicker && (
+                <EmojiPickerContainer>
+                  {filteredEmojis.length > 0 ? (
+                    filteredEmojis.map((emoji) => (
+                      <CustomEmojiButton key={emoji.id} onClick={() => onCustomEmojiClick(emoji)}>
+                        <img src={emoji.src} alt={emoji.name} />
+                      </CustomEmojiButton>
+                    ))
+                  ) : (
+                    <p>Compra emojis en la tienda!</p>
+                  )}
+                </EmojiPickerContainer>
               )}
-            </Comment>
-          ))}
-        </CommentsSection>
-      </QuestionContainer>
-    </MainContainer>
-  );
-};
-
+              {errorMessage && <ErrorLabel>{errorMessage}</ErrorLabel>}
+              <SubmitButton onClick={handleAddComment}>Enviar</SubmitButton>
+            </CommentForm>
+  
+            {comments.map(comment => (
+              <Comment key={comment.id}>
+                <CommentHeader>
+                  <UserName>{comment.author}</UserName>
+                  <CommentDate>{comment.date}</CommentDate>
+                </CommentHeader>
+                <CommentBody dangerouslySetInnerHTML={{ __html: renderWithEmojis(comment.content) }} />
+                <ReplyButton onClick={() => setReplyingTo(comment.id)}>Responder</ReplyButton>
+  
+                <RepliesContainer>
+                  {comment.replies.map((reply, index) => (
+                    <Reply key={index}>
+                      <CommentHeader>
+                        <UserName>{reply.author}</UserName>
+                        <CommentDate>{reply.date}</CommentDate>
+                      </CommentHeader>
+                      <CommentBody dangerouslySetInnerHTML={{ __html: renderWithEmojis(reply.content) }} />
+                    </Reply>
+                  ))}
+                </RepliesContainer>
+  
+                {replyingTo === comment.id && (
+                  <CommentForm>
+                    <textarea
+                      placeholder="Escribe una respuesta..."
+                      onBlur={(e) => handleAddReply(comment.id, e.target.value)}
+                    />
+                    <SubmitButton onClick={() => handleAddReply(comment.id, inputRef.current.innerHTML)}>Responder</SubmitButton>
+                  </CommentForm>
+                )}
+              </Comment>
+            ))}
+          </CommentsSection>
+        </QuestionContainer>
+      </MainContainer>
+    );
+  };
 // Styled Components
 const MainContainer = styled.section`
   width: 100%;
