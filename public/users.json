@@ -1,302 +1,1038 @@
 [
     {
-        "id": 1,
-        "nombre": "Aguilar Castañeda, Miguel Yeison",
-        "dni": 76959289,
-        "codigo_estudiante": "9A260"
+      "id": "1",
+      "nombre": "Miguel Yeison Aguilar Castañeda",
+      "dni": 76959289,
+      "codigo": "9A260",
+      "notas": {
+        "1": null,
+        "2": 15,
+        "3": 18,
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": null,
+        "8": null,
+        "9": null
+      },
+      "monedas": 200,
+      "experiencia": 0,
+      "nivel": 1,
+      "emojisComprados": [],
+      "profileImage": null,
+      "profileImagesCompradas": []
     },
     {
-        "id": 2,
-        "nombre": "Aguirre Callan, Angelina Jade",
-        "dni": 60223352,
-        "codigo_estudiante": "0TFHQ"
+      "id": "2",
+      "nombre": "Danna Graciela Arevalo Tamani",
+      "dni": 77815783,
+      "codigo": "4RXJW",
+      "notas": {
+        "1": null,
+        "2": 15,
+        "3": 18,
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": null,
+        "8": null,
+        "9": null
+      },
+      "monedas": 200,
+      "experiencia": 0,
+      "nivel": 1,
+      "emojisComprados": [],
+      "profileImage": null,
+      "profileImagesCompradas": []
     },
     {
-        "id": 3,
-        "nombre": "Alhuay Sarmiento, Yulisa",
-        "dni": 76438561,
-        "codigo_estudiante": "78HC6"
+      "id": "3",
+      "nombre": "Zeus Banny Arévalo Tamani",
+      "dni": 76991976,
+      "codigo": "PTP9B",
+      "notas": {
+        "1": null,
+        "2": 15,
+        "3": 18,
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": null,
+        "8": null,
+        "9": null
+      },
+      "monedas": 200,
+      "experiencia": 0,
+      "nivel": 1,
+      "emojisComprados": [],
+      "profileImage": null,
+      "profileImagesCompradas": []
     },
     {
-        "id": 4,
-        "nombre": "Alvarado Ferrer, Shandy Susan",
-        "dni": 71591719,
-        "codigo_estudiante": "4XUOR"
+      "id": "4",
+      "nombre": "Shandy Susan Alvarado Ferrer",
+      "dni": 71591719,
+      "codigo": "4XUOR",
+      "notas": {
+        "1": null,
+        "2": 15,
+        "3": 18,
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": null,
+        "8": null,
+        "9": null
+      },
+      "monedas": 200,
+      "experiencia": 0,
+      "nivel": 1,
+      "emojisComprados": [],
+      "profileImage": null,
+      "profileImagesCompradas": []
     },
     {
-        "id": 5,
-        "nombre": "Arevalo Tamani, Danna Graciela",
-        "dni": 77815783,
-        "codigo_estudiante": "4RXJW"
+      "id": "5",
+      "nombre": "Aracely Beteta Fernandez",
+      "dni": 63254814,
+      "codigo": "JUJJR",
+      "notas": {
+        "1": null,
+        "2": 15,
+        "3": 18,
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": null,
+        "8": null,
+        "9": null
+      },
+      "monedas": 200,
+      "experiencia": 0,
+      "nivel": 1,
+      "emojisComprados": [],
+      "profileImage": null,
+      "profileImagesCompradas": []
     },
     {
-        "id": 6,
-        "nombre": "Arévalo Tamani, Zeus Banny",
-        "dni": 76991976,
-        "codigo_estudiante": "PTP9B"
+      "id": "6",
+      "nombre": "Jaquelyn Bezares Omonte",
+      "dni": 77084483,
+      "codigo": "EPUP9",
+      "notas": {
+        "1": null,
+        "2": 15,
+        "3": 18,
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": null,
+        "8": null,
+        "9": null
+      },
+      "monedas": 200,
+      "experiencia": 0,
+      "nivel": 1,
+      "emojisComprados": [],
+      "profileImage": null,
+      "profileImagesCompradas": []
     },
     {
-        "id": 7,
-        "nombre": "Beteta Fernandez, Aracely",
-        "dni": 63254814,
-        "codigo_estudiante": "JUJJR"
+      "id": "7",
+      "nombre": "Pia Andre Cardenas Ramos",
+      "dni": 62384328,
+      "codigo": "7NNSK",
+      "notas": {
+        "1": null,
+        "2": 15,
+        "3": 18,
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": null,
+        "8": null,
+        "9": null
+      },
+      "monedas": 200,
+      "experiencia": 0,
+      "nivel": 1,
+      "emojisComprados": [],
+      "profileImage": null,
+      "profileImagesCompradas": []
     },
     {
-        "id": 8,
-        "nombre": "Bezares Omonte, Jaquelyn",
-        "dni": 77084483,
-        "codigo_estudiante": "EPUP9"
+      "id": "8",
+      "nombre": "Fernando José Carhuayano Soplin",
+      "dni": 75875154,
+      "codigo": "CRFPH",
+      "notas": {
+        "1": null,
+        "2": 15,
+        "3": 18,
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": null,
+        "8": null,
+        "9": null
+      },
+      "monedas": 200,
+      "experiencia": 0,
+      "nivel": 1,
+      "emojisComprados": [],
+      "profileImage": null,
+      "profileImagesCompradas": []
     },
     {
-        "id": 9,
-        "nombre": "Cardenas Ramos, Pia Andre",
-        "dni": 62384328,
-        "codigo_estudiante": "7NNSK"
+      "id": "9",
+      "nombre": "Yomira Mayra Castillo Albornoz",
+      "dni": 61103005,
+      "codigo": "27SOQ",
+      "notas": {
+        "1": null,
+        "2": 15,
+        "3": 18,
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": null,
+        "8": null,
+        "9": null
+      },
+      "monedas": 200,
+      "experiencia": 0,
+      "nivel": 1,
+      "emojisComprados": [],
+      "profileImage": null,
+      "profileImagesCompradas": []
     },
     {
-        "id": 10,
-        "nombre": "Carhuayano Soplin, Fernando José",
-        "dni": 75875154,
-        "codigo_estudiante": "CRFPH"
+      "id": "10",
+      "nombre": "Briana Alexandra Cerna Carrillo",
+      "dni": 61377597,
+      "codigo": "XYMUA",
+      "notas": {
+        "1": null,
+        "2": 15,
+        "3": 18,
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": null,
+        "8": null,
+        "9": null
+      },
+      "monedas": 200,
+      "experiencia": 0,
+      "nivel": 1,
+      "emojisComprados": [],
+      "profileImage": null,
+      "profileImagesCompradas": []
     },
     {
-        "id": 11,
-        "nombre": "Castillo Albornoz, Yomira Mayra",
-        "dni": 61103005,
-        "codigo_estudiante": "27SOQ"
+      "id": "11",
+      "nombre": "Solange Mariana Chamorro Pascual",
+      "dni": 71572735,
+      "codigo": "D7BUM",
+      "notas": {
+        "1": null,
+        "2": 15,
+        "3": 18,
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": null,
+        "8": null,
+        "9": null
+      },
+      "monedas": 200,
+      "experiencia": 0,
+      "nivel": 1,
+      "emojisComprados": [],
+      "profileImage": null,
+      "profileImagesCompradas": []
     },
     {
-        "id": 12,
-        "nombre": "Cerna Carrillo, Briana Alexandra",
-        "dni": 61377597,
-        "codigo_estudiante": "XYMUA"
+      "id": "12",
+      "nombre": "Mirley Clemente Ramirez",
+      "dni": 81173808,
+      "codigo": "2OX85",
+      "notas": {
+        "1": null,
+        "2": 15,
+        "3": 18,
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": null,
+        "8": null,
+        "9": null
+      },
+      "monedas": 200,
+      "experiencia": 0,
+      "nivel": 1,
+      "emojisComprados": [],
+      "profileImage": null,
+      "profileImagesCompradas": []
     },
     {
-        "id": 13,
-        "nombre": "Chamorro Pascual, Solange Mariana",
-        "dni": 71572735,
-        "codigo_estudiante": "D7BUM"
+      "id": "13",
+      "nombre": "Jeraly Maily Cornelio Cantaro",
+      "dni": 76580040,
+      "codigo": "MZHK4",
+      "notas": {
+        "1": null,
+        "2": 15,
+        "3": 18,
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": null,
+        "8": null,
+        "9": null
+      },
+      "monedas": 200,
+      "experiencia": 0,
+      "nivel": 1,
+      "emojisComprados": [],
+      "profileImage": null,
+      "profileImagesCompradas": []
     },
     {
-        "id": 14,
-        "nombre": "Clemente Ramirez, Mirley",
-        "dni": 81173808,
-        "codigo_estudiante": "2OX85"
+      "id": "14",
+      "nombre": "Maria Rosa De La Barra Paredes",
+      "dni": 45388073,
+      "codigo": "8R765",
+      "notas": {
+        "1": null,
+        "2": 15,
+        "3": 18,
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": null,
+        "8": null,
+        "9": null
+      },
+      "monedas": 200,
+      "experiencia": 0,
+      "nivel": 1,
+      "emojisComprados": [],
+      "profileImage": null,
+      "profileImagesCompradas": []
     },
     {
-        "id": 15,
-        "nombre": "Cornelio Cantaro, Jeraly Maily",
-        "dni": 76580040,
-        "codigo_estudiante": "MZHK4"
+      "id": "15",
+      "nombre": "Triana Angelline De La Cruz Esteban",
+      "dni": 73675768,
+      "codigo": "5LBTV",
+      "notas": {
+        "1": null,
+        "2": 15,
+        "3": 18,
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": null,
+        "8": null,
+        "9": null
+      },
+      "monedas": 200,
+      "experiencia": 0,
+      "nivel": 1,
+      "emojisComprados": [],
+      "profileImage": null,
+      "profileImagesCompradas": []
     },
     {
-        "id": 16,
-        "nombre": "De La Barra Paredes, Maria Rosa",
-        "dni": 45388073,
-        "codigo_estudiante": "8R765"
-    },
-    {
-        "id": 17,
-        "nombre": "De La Cruz Esteban, Triana Angelline",
-        "dni": 73675768,
-        "codigo_estudiante": "5LBTV"
-    },
-    {
-        "id": 18,
-        "nombre": "Diego Cardenas, Alexis",
-        "dni": 74069130,
-        "codigo_estudiante": "G4OUR"
-    },
-    {
-        "id": 19,
-        "nombre": "Doroteo Mauri, Luis Jampiere",
-        "dni": 76813679,
-        "codigo_estudiante": "0W6MU"
-    },
-    {
-        "id": 20,
-        "nombre": "Espinoza Tueros, Yoisy Guiliana",
-        "dni": 71959889,
-        "codigo_estudiante": "YPIOJ"
-    },
-    {
-        "id": 21,
-        "nombre": "Eugenio Rosas, Maryori",
-        "dni": 75891546,
-        "codigo_estudiante": "IS19U"
-    },
-    {
-        "id": 22,
-        "nombre": "Flores Pérez, Yomira Jazmin",
-        "dni": 76385760,
-        "codigo_estudiante": "SDK2X"
-    },
-    {
-        "id": 23,
-        "nombre": "García Garcia, May Taison",
-        "dni": 75855487,
-        "codigo_estudiante": "I02MG"
-    },
-    {
-        "id": 24,
-        "nombre": "Grados Melgarejo, Mery Mardeli",
-        "dni": 60889343,
-        "codigo_estudiante": "QMNQI"
-    },
-    {
-        "id": 25,
-        "nombre": "Hurtado Nieto, Sally",
-        "dni": 61544124,
-        "codigo_estudiante": "HMD9V"
-    },
-    {
-        "id": 26,
-        "nombre": "Isla Flores, Marco Antonio",
-        "dni": 60602716,
-        "codigo_estudiante": "2LSNV"
-    },
-    {
-        "id": 27,
-        "nombre": "Julca Huaman, Evelyn Rocio",
-        "dni": 71303503,
-        "codigo_estudiante": "F8X4K"
-    },
-    {
-        "id": 28,
-        "nombre": "Matos Porta, Anghelo Genaro",
-        "dni": 73307180,
-        "codigo_estudiante": "IRN8U"
-    },
-    {
-        "id": 29,
-        "nombre": "Meliton Florido, Leydibi Herlinda",
-        "dni": 60200568,
-        "codigo_estudiante": "6G25F"
-    },
-    {
-        "id": 30,
-        "nombre": "Mena Hilario, Ana Cristina",
-        "dni": 73963422,
-        "codigo_estudiante": "YBBXQ"
-    },
-    {
-        "id": 31,
-        "nombre": "Mercedes Martel, Yusselly Cristina",
-        "dni": 60733746,
-        "codigo_estudiante": "O2SQE"
-    },
-    {
-        "id": 32,
-        "nombre": "Montenegro Coz, Marializ Esther",
-        "dni": 77693430,
-        "codigo_estudiante": "M4KKG"
-    },
-    {
-        "id": 33,
-        "nombre": "Nieto Eugenio, Nun Alecxander",
-        "dni": 71568173,
-        "codigo_estudiante": "BKC07"
-    },
-    {
-        "id": 34,
-        "nombre": "Ortiz Cabanillas, Daniel",
-        "dni": 46681555,
-        "codigo_estudiante": "GWFLY"
-    },
-    {
-        "id": 35,
-        "nombre": "Paucar Pari, Banessa Feliciana",
-        "dni": 76140235,
-        "codigo_estudiante": "HO3Z1"
-    },
-    {
-        "id": 36,
-        "nombre": "Pinasco Juanan, Fabrisio Jose",
-        "dni": 60932447,
-        "codigo_estudiante": "H1STW"
-    },
-    {
-        "id": 37,
-        "nombre": "Ponce Figueroa, Katerin Tatiana",
-        "dni": 76655223,
-        "codigo_estudiante": "98YJH"
-    },
-    {
-        "id": 38,
-        "nombre": "Ramirez Ore, Greisy Andrea",
-        "dni": 60733750,
-        "codigo_estudiante": "DSZMO"
-    },
-    {
-        "id": 39,
-        "nombre": "Rengifo Silvestre, Leydy Sharith",
-        "dni": 60889087,
-        "codigo_estudiante": "RSCYI"
-    },
-    {
-        "id": 40,
-        "nombre": "Rodriguez Saire, Milagros",
-        "dni": 75161576,
-        "codigo_estudiante": "HDKVL"
-    },
-    {
-        "id": 41,
-        "nombre": "Rojas Diego, Maribella Kayra",
-        "dni": 74539825,
-        "codigo_estudiante": "THVO3"
-    },
-    {
-        "id": 42,
-        "nombre": "Sanchez Ponce, Mariana",
-        "dni": 75162314,
-        "codigo_estudiante": "G8DIY"
-    },
-    {
-        "id": 43,
-        "nombre": "Sandoval Guardia, Violeta Tamara",
-        "dni": 60580215,
-        "codigo_estudiante": "EIVE7"
-    },
-    {
-        "id": 44,
-        "nombre": "Silvestre Rueda, Darlin",
-        "dni": 63248043,
-        "codigo_estudiante": "5TUX5"
-    },
-    {
-        "id": 45,
-        "nombre": "Simon Calero, Naydi Antonia",
-        "dni": 71306433,
-        "codigo_estudiante": "CSGJJ"
-    },
-    {
-        "id": 46,
-        "nombre": "Solano Selaya, Francesca",
-        "dni": 72877572,
-        "codigo_estudiante": "8Z912"
-    },
-    {
-        "id": 47,
-        "nombre": "Tarazona Ávalos, Carmela Yanina",
-        "dni": 75335767,
-        "codigo_estudiante": "QHRIO"
-    },
-    {
-        "id": 48,
-        "nombre": "Valeriano Vazques, Yulissa Yasmira",
-        "dni": 71320949,
-        "codigo_estudiante": "6IDBJ"
-    },
-    {
-        "id": 49,
-        "nombre": "Velez De Villa Dominguez, Abraham",
-        "dni": 73181598,
-        "codigo_estudiante": "JQDJR"
-    },
-    {
-        "id": 50,
-        "nombre": "Zevallos Trinidad, Zureyla Mercedes",
-        "dni": 72949537,
-        "codigo_estudiante": "0DLXS"
-    }
-]
+        "id": "16",
+        "nombre": "Juan Pablo De La Cruz Huamani",
+        "dni": 74367732,
+        "codigo": "AXF45",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "17",
+        "nombre": "Andrea Jimena Diaz Lopez",
+        "dni": 73452369,
+        "codigo": "LJM87",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "18",
+        "nombre": "Victor Eduardo Flores Ramos",
+        "dni": 76103924,
+        "codigo": "ZKP92",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "19",
+        "nombre": "María José Gonzales Alva",
+        "dni": 74658123,
+        "codigo": "HTP45",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "20",
+        "nombre": "Daniela Teresa Gutierrez Valle",
+        "dni": 76843924,
+        "codigo": "XMK23",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "21",
+        "nombre": "Diego Alonso Ibarra Ramirez",
+        "dni": 75648293,
+        "codigo": "FPT64",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "22",
+        "nombre": "Carmen Patricia Jimenez Meza",
+        "dni": 74837104,
+        "codigo": "QHT52",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "23",
+        "nombre": "Rafael Mateo Juarez Vargas",
+        "dni": 75108294,
+        "codigo": "GZT39",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "24",
+        "nombre": "Alessia Valentina Loayza Chavez",
+        "dni": 75719083,
+        "codigo": "JLK47",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "25",
+        "nombre": "Luis Fernando Luna Sanchez",
+        "dni": 75928310,
+        "codigo": "FKP12",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "26",
+        "nombre": "Karina Margarita Meza Alva",
+        "dni": 74902837,
+        "codigo": "WPT56",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "27",
+        "nombre": "Lucas Matias Ortega Trujillo",
+        "dni": 74298364,
+        "codigo": "GRJ29",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "28",
+        "nombre": "Mónica Fabiola Ortiz Campos",
+        "dni": 76193285,
+        "codigo": "JYM98",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "29",
+        "nombre": "Rodrigo Alejandro Paz Lopez",
+        "dni": 75834019,
+        "codigo": "MRK64",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "30",
+        "nombre": "Valeria Fernanda Quiroz Ramirez",
+        "dni": 76529382,
+        "codigo": "WTP84",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "31",
+        "nombre": "Natalia Sofia Reyes Salazar",
+        "dni": 76103485,
+        "codigo": "BNY32",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "32",
+        "nombre": "Alejandro José Salinas Vargas",
+        "dni": 74829560,
+        "codigo": "ZTN47",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "33",
+        "nombre": "Diana Fernanda Sánchez Quiroz",
+        "dni": 74502843,
+        "codigo": "JYK52",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "34",
+        "nombre": "Esteban Arturo Santillan Lopez",
+        "dni": 74205834,
+        "codigo": "PTU39",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "35",
+        "nombre": "Liliana Beatriz Silva Vargas",
+        "dni": 74103256,
+        "codigo": "LMK74",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "36",
+        "nombre": "Jorge Luis Suarez Villanueva",
+        "dni": 75291834,
+        "codigo": "BRU65",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "37",
+        "nombre": "Carla Patricia Toledo Reyes",
+        "dni": 75608291,
+        "codigo": "VNY47",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "38",
+        "nombre": "Juliana Alejandra Torres Flores",
+        "dni": 74592038,
+        "codigo": "QRT82",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "39",
+        "nombre": "Jose David Trujillo Romero",
+        "dni": 75210385,
+        "codigo": "DRJ94",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "40",
+        "nombre": "Andrea Luisa Ugarte Tapia",
+        "dni": 75940283,
+        "codigo": "WRK39",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "41",
+        "nombre": "Valentina Villanueva Galvez",
+        "dni": 75102398,
+        "codigo": "JLK58",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "42",
+        "nombre": "Manuel Enrique Zapata Rios",
+        "dni": 74389052,
+        "codigo": "BNT65",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "43",
+        "nombre": "Ariana Patricia Zarate Carhuayo",
+        "dni": 74589013,
+        "codigo": "NYM34",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "44",
+        "nombre": "Gabriela Daniela Aguirre Salas",
+        "dni": 75120847,
+        "codigo": "VPT96",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      },
+      {
+        "id": "45",
+        "nombre": "Luis Alfonso Alvarez Perez",
+        "dni": 75918203,
+        "codigo": "JLT39",
+        "notas": {
+          "1": null,
+          "2": 15,
+          "3": 18,
+          "4": null,
+          "5": null,
+          "6": null,
+          "7": null,
+          "8": null,
+          "9": null
+        },
+        "monedas": 200,
+        "experiencia": 0,
+        "nivel": 1,
+        "emojisComprados": [],
+        "profileImage": null,
+        "profileImagesCompradas": []
+      }
+  ]
+  

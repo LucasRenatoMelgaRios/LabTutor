@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { gsap } from 'gsap';
+import axios from 'axios';
+import { useAuth } from "../context/AuthContext"; // Obtener usuario del contexto
 import emoji1 from "../assets/emojis/emoji1.png";
 import emoji2 from "../assets/emojis/emoji2.png";
 import emoji3 from "../assets/emojis/emoji3.png";
@@ -13,15 +15,15 @@ import emoji9 from "../assets/emojis/emoji9.png";
 import { FaCoins, FaQuestionCircle } from 'react-icons/fa';
 
 const emojiData = [
-  { id: 1, name: 'Cool Emoji', price: '100', image: emoji1 },
-  { id: 2, name: 'Smiling Emoji', price: '150', image: emoji2 },
-  { id: 3, name: 'Sad Emoji', price: '120', image: emoji3 },
-  { id: 4, name: 'Angry Emoji', price: '130', image: emoji4 },
-  { id: 5, name: 'Winking Emoji', price: '170', image: emoji5 },
-  { id: 6, name: 'Winking Emoji', price: '170', image: emoji6 },
-  { id: 7, name: 'Winking Emoji', price: '170', image: emoji7 },
-  { id: 8, name: 'Winking Emoji', price: '170', image: emoji8 },
-  { id: 9, name: 'Winking Emoji', price: '170', image: emoji9 },
+  { id: 1, name: 'Cool guy', price: '100', image: emoji1 },
+  { id: 2, name: 'Lawren', price: '150', image: emoji2 },
+  { id: 3, name: 'Robert', price: '120', image: emoji3 },
+  { id: 4, name: 'Andy', price: '130', image: emoji4 },
+  { id: 5, name: 'Robert', price: '170', image: emoji5 },
+  { id: 6, name: 'Emily', price: '170', image: emoji6 },
+  { id: 7, name: 'Machine', price: '170', image: emoji7 },
+  { id: 8, name: 'Machine', price: '170', image: emoji8 },
+  { id: 9, name: 'Glass', price: '170', image: emoji9 },
 ];
 
 export const EmojiStore = () => {
@@ -30,6 +32,12 @@ export const EmojiStore = () => {
   const [showInfo, setShowInfo] = useState(false);
   const [popUpPosition, setPopUpPosition] = useState({ top: 0, left: 0 });
   const [isDesktop, setIsDesktop] = useState(false);
+  const [selectedEmoji, setSelectedEmoji] = useState(null); // Estado para el emoji seleccionado
+  const [showModal, setShowModal] = useState(false); // Estado para mostrar/ocultar el modal de confirmación de compra
+  const [showInsufficientFundsModal, setShowInsufficientFundsModal] = useState(false); // Estado para mostrar/ocultar el modal de fondos insuficientes
+  const [emojisComprados, setEmojisComprados] = useState([]); // Estado para almacenar los emojis comprados
+
+  const { user } = useAuth(); // Obtenemos el usuario autenticado desde el AuthContext
 
   // Función que detecta si es desktop o móvil según la resolución
   const handleResize = () => {
@@ -50,10 +58,24 @@ export const EmojiStore = () => {
     handleResize(); // Detectar al cargar la página
     window.addEventListener('resize', handleResize); // Detectar al cambiar el tamaño de la ventana
 
+    // Obtener la información del usuario al cargar la página
+    const fetchUserData = async () => {
+      try {
+        if (user) { // Verificar si el usuario está autenticado
+          const response = await axios.get(`https://66ca61e159f4350f064f0e88.mockapi.io/api/labtutor/users/${user.id}`);
+          setEmojisComprados(response.data.emojisComprados || []); // Guardar los emojis comprados en el estado
+        }
+      } catch (error) {
+        console.error('Error al obtener la información del usuario:', error);
+      }
+    };
+
+    fetchUserData();
+
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [user]); // Ejecutar el efecto solo cuando el usuario cambie
 
   const handleInfoClick = () => {
     if (infoIconRef.current) {
@@ -70,6 +92,55 @@ export const EmojiStore = () => {
     }
 
     setShowInfo(!showInfo);
+  };
+
+  const handleEmojiClick = (emoji) => {
+    setSelectedEmoji(emoji); // Guarda el emoji seleccionado en el estado
+    setShowModal(true); // Muestra el modal de confirmación de compra
+  };
+
+  const handleConfirmPurchase = async () => {
+    try {
+      // 1. Verificar que el usuario esté autenticado
+      if (!user) return;
+      
+      // 2. Obtener la información actual del usuario
+      const response = await axios.get(`https://66ca61e159f4350f064f0e88.mockapi.io/api/labtutor/users/${user.id}`);
+      const userData = response.data;
+  
+      // 3. Verificar si el usuario tiene suficientes monedas
+      if (userData.monedas >= selectedEmoji.price) {
+        // 4. Actualizar la lista de emojis comprados y las monedas del usuario
+        const updatedEmojis = [...userData.emojisComprados, selectedEmoji.id];
+        const updatedMonedas = userData.monedas - selectedEmoji.price;
+  
+        // 5. Hacer la solicitud PUT para actualizar el usuario
+        await axios.put(`https://66ca61e159f4350f064f0e88.mockapi.io/api/labtutor/users/${user.id}`, {
+          emojisComprados: updatedEmojis,
+          monedas: updatedMonedas,
+        });
+
+        // Actualizar la lista de emojis comprados en el estado
+        setEmojisComprados(updatedEmojis);
+  
+        console.log('Compra confirmada');
+        setShowModal(false); // Cierra el modal de confirmación de compra
+      } else {
+        // Si no tiene suficientes monedas, muestra el modal de fondos insuficientes
+        setShowModal(false);
+        setShowInsufficientFundsModal(true); // Mostrar el modal de fondos insuficientes
+      }
+    } catch (error) {
+      console.error('Error al confirmar la compra:', error);
+    }
+  };
+  
+  const handleCancelPurchase = () => {
+    setShowModal(false); // Cierra el modal de confirmación de compra
+  };
+
+  const handleCloseInsufficientFundsModal = () => {
+    setShowInsufficientFundsModal(false); // Cierra el modal de fondos insuficientes
   };
 
   return (
@@ -95,25 +166,126 @@ export const EmojiStore = () => {
       </HeaderContainer>
 
       <EmojiGrid ref={storeRef}>
-        {emojiData.map((emoji) => (
-          <EmojiCard
-            key={emoji.id}
-            onMouseEnter={(e) => gsap.to(e.currentTarget, { scale: 1.05, duration: 0.3 })}
-            onMouseLeave={(e) => gsap.to(e.currentTarget, { scale: 1, duration: 0.3 })}
-          >
-            <EmojiImage src={emoji.image} alt={emoji.name} />
-            <EmojiInfo>
-              <EmojiName>{emoji.name}</EmojiName>
-              <EmojiPrice>
-                {emoji.price} <FaCoins />
-              </EmojiPrice>
-            </EmojiInfo>
-          </EmojiCard>
-        ))}
+        {emojiData.map((emoji) => {
+          const isPurchased = emojisComprados.includes(emoji.id);
+          return (
+            <EmojiCard
+              key={emoji.id}
+              onMouseEnter={(e) => !isPurchased && gsap.to(e.currentTarget, { scale: 1.05, duration: 0.3 })}
+              onMouseLeave={(e) => !isPurchased && gsap.to(e.currentTarget, { scale: 1, duration: 0.3 })}
+              onClick={() => !isPurchased && handleEmojiClick(emoji)} // Deshabilitar el click si está comprado
+              style={{
+                opacity: isPurchased ? 0.5 : 1, // Apagar la tarjeta si está comprada
+                cursor: isPurchased ? 'not-allowed' : 'pointer' // Cambiar el cursor si está comprada
+              }}
+            >
+              <EmojiImage src={emoji.image} alt={emoji.name} />
+              <EmojiInfo>
+                <EmojiName>{emoji.name}</EmojiName>
+                <EmojiPrice>
+                  {emoji.price} <FaCoins />
+                </EmojiPrice>
+                {isPurchased && <PurchasedLabel>Comprado!</PurchasedLabel>} {/* Etiqueta de comprado */}
+              </EmojiInfo>
+            </EmojiCard>
+          );
+        })}
       </EmojiGrid>
+
+      {/* Modal de confirmación de compra */}
+      {showModal && (
+        <ModalOverlay>
+          <ModalContainer>
+            <h2>Confirmar compra</h2>
+            <p>¿Deseas comprar el emoji "{selectedEmoji.name}" por {selectedEmoji.price} monedas?</p>
+            <ButtonGroup>
+              <ConfirmButton onClick={handleConfirmPurchase}>Confirmar</ConfirmButton>
+              <CancelButton onClick={handleCancelPurchase}>Cancelar</CancelButton>
+            </ButtonGroup>
+          </ModalContainer>
+        </ModalOverlay>
+      )}
+
+      {/* Modal de fondos insuficientes */}
+      {showInsufficientFundsModal && (
+        <ModalOverlay>
+          <InsufficientFundsModal>
+            <h2>Fondos insuficientes</h2>
+            <p>No tienes suficientes monedas para comprar este emoji.</p>
+            <ButtonGroup>
+              <WarningButton onClick={handleCloseInsufficientFundsModal}>Cerrar</WarningButton>
+            </ButtonGroup>
+          </InsufficientFundsModal>
+        </ModalOverlay>
+      )}
     </StoreContainer>
   );
-};
+}
+
+//COnfirm purchase modal
+
+const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+
+const ModalContainer = styled.div`
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 100%;
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+`;
+
+const ConfirmButton = styled.button`
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: #218838;
+  }
+`;
+
+const CancelButton = styled.button`
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: #c82333;
+  }
+`;
+
+const PurchasedLabel = styled.div`
+  background: #d4edda;
+  color: #155724;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 12px;
+  margin-top: 5px;
+`;
+
 
 // Styled components
 const StoreContainer = styled.div`
@@ -271,4 +443,24 @@ const EmojiPrice = styled.p`
   font-weight: bold;
 `;
 
-export default EmojiStore;
+
+const InsufficientFundsModal = styled(ModalContainer)`
+  background: #fff3cd;
+  color: #856404;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const WarningButton = styled.button`
+  background-color: #ffc107;
+  color: #212529;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: #e0a800;
+  }
+`;

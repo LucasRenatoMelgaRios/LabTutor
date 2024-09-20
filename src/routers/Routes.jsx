@@ -15,7 +15,7 @@ import { LandingPage } from '../pages/LandingPage';
 import { NotasProfesorPage } from '../pages/NotasProfesorPage';
 import { NotasProfesorRoute } from '../components/NotasProfesorRoute';
 import { SyllabusPage } from "../pages/SyllabusPage"
-import EmojiStore from '../pages/EmojiStore';
+import { EmojiStore }  from '../pages/EmojiStore';
 import { UsuarioInfoPage } from '../pages/UsuarioInfoPage';
 import { SecondClassForum } from '../components/forum/SecondClassForum';
 import { ThirdClassForum } from '../components/forum/ThirdClassForum';
