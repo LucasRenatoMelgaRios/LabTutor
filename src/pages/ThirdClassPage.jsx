@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { CierreUno } from "../components/CierreUno";
+import tabla from "../assets/classes/class3/tabla.PNG"
 import imagen1 from "../assets/classes/class2/imagen1.PNG";
 import imagen2 from "../assets/classes/class2/imagen2.PNG";
 import imagen3 from "../assets/classes/class2/imagen3.PNG";
@@ -46,7 +47,7 @@ export const ThirdClassPage = () => {
             image: "https://www.familiaysalud.es/sites/default/files/bolsa_de_orina2.png"
         },
         {
-            title: "Recolección de Orina en Pacientes con Sonda Vesical",
+            title: "Recolección de Orina para pacientes imposibilitados",
             description: "En pacientes ingresados con imposibilidad de recoger la muestra por sí mismos, se procederá a realizar sondaje vesical con las medidas asépticas habituales. En pacientes con sonda vesical permanente, la recogida de orina se realizará de la siguiente manera:",
             steps: [
                 "1) Limpiar una zona del catéter con una gasa humedecida en alcohol; dejar secar completamente.",
@@ -132,7 +133,7 @@ export const ThirdClassPage = () => {
                     <BackButton onClick={() => navigate(-1)}>
                         <FaArrowLeft />
                     </BackButton>
-                    <ClassTitle style={{ color: "green" }}>Recolección de Muestras de Orina</ClassTitle>
+                    <ClassTitle style={{ color: "green" }}>Instrucciones para el paciente</ClassTitle>
                     <BackButton>
                         <FaArrowRight />
                     </BackButton>
@@ -159,7 +160,6 @@ export const ThirdClassPage = () => {
 
             {/* Sección de Instrucciones */}
             <Section>
-                <SectionTitle>Instrucciones Básicas</SectionTitle>
                 {instructions.map((instruction, index) => (
                     <InstructionContainer key={index}>
                         <InstructionTitle>{instruction.title}</InstructionTitle>
@@ -173,7 +173,14 @@ export const ThirdClassPage = () => {
                     </InstructionContainer>
                 ))}
             </Section>
-
+                <h2 style={{textAlign:"center", fontSize:"2vw"}}>Recoleccion de muestra de orina en varones</h2>
+            <VideoWrapper style={{marginBottom: "50px"}}>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/guB2I2XcHho?si=GnzkFDqFU5a-iNrS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>               
+             </VideoWrapper>
+             <Section style={{display: "flex", justifyContent:"center", flexDirection:"column", alignContent:"center"}}>
+             <h2 style={{textAlign:"center", fontSize:"2vw"}}>Examen completo de orina</h2>
+                <img src={tabla} alt="" />
+             </Section>
             <Section>
                 <CierreUno />
                 <IdeasFuerza />

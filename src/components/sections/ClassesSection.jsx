@@ -86,7 +86,7 @@ export const ClassesSection = () => {
         },
         {
             id: 3,
-            title: "Recolección de Muestras De Orina",
+            title: "Instrucciones para el paciente",
             fecha: "Septiembre 19, 2024",
             profesor: "Rogelio Melgar Pérez",
             img: "https://s2.abcstatics.com/abc/www/multimedia/salud/2023/02/20/muestra-orina-RKextZqw3bYT2jLhsQ2GagO-1200x840@abc.jpg"
