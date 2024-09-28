@@ -1510,7 +1510,6 @@ font-size: clamp(0.8rem, 1vw, 0.9rem);
   width: 100%;
   background-color: white;
   border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   padding: clamp(20px, 3vw, 30px);
 `,QuestionBox$2=dt.div`
   margin-bottom: clamp(20px, 3vw, 30px);
@@ -1586,22 +1585,6 @@ font-size: clamp(0.8rem, 1vw, 0.9rem);
   width: 250px;
   max-height: 200px;
   overflow-y: auto;
-`,CustomEmojiButton$2=dt.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin: 5px;
-  padding: 5px;
-  border-radius: 5px;
-
-  &:hover {
-    background-color: #f0f0f0;
-  }
-
-  img {
-    width: 20px;
-    height: 20px;
-  }
 `,SubmitButton$4=dt.button`
   align-self: flex-end;
   padding: clamp(8px, 2vw, 12px) clamp(16px, 3vw, 24px);
@@ -1620,19 +1603,6 @@ font-size: clamp(0.8rem, 1vw, 0.9rem);
   color: red;
   font-size: clamp(12px, 2vw, 14px);
   margin-bottom: 10px;
-`,Comment$2=dt.div`
-  margin-bottom: clamp(10px, 2vw, 20px);
-  padding: clamp(15px, 2vw, 20px);
-  background-color: #ffffff;
-  border-radius: 10px;
-  border: 1px solid #d1eeea;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-
-  img.custom-emoji {
-    width: 40px;
-    height: 40px;
-    vertical-align: middle;
-  }
 `,CommentHeader$2=dt.div`
   display: flex;
   justify-content: space-between;
@@ -1650,8 +1620,8 @@ font-size: clamp(0.8rem, 1vw, 0.9rem);
   margin-bottom: 10px;
 
   img.custom-emoji {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 30px;
     vertical-align: middle;
   }
 `,ReplyButton$2=dt.button`
@@ -1677,9 +1647,38 @@ font-size: clamp(0.8rem, 1vw, 0.9rem);
   border: 1px solid #d1eeea;
 
   img.custom-emoji {
-    width: 30px;
+    width: 20px;
     height: 30px;
     vertical-align: middle;
+  }
+`,Comment$2=dt.div`
+  margin-bottom: clamp(10px, 2vw, 20px);
+  padding: clamp(15px, 2vw, 20px);
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #d1eeea;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+  img.custom-emoji {
+    width: 20px;
+    height: 30px;
+    vertical-align: middle;
+  }
+`,CustomEmojiButton$2=dt.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+
+  img {
+    width: 20px;
+    height: 30px;
   }
 `;function IoBookOutline(i){return GenIcon({tag:"svg",attr:{viewBox:"0 0 512 512"},child:[{tag:"path",attr:{fill:"none",strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:"32",d:"M256 160c16-63.16 76.43-95.41 208-96a15.94 15.94 0 0 1 16 16v288a16 16 0 0 1-16 16c-128 0-177.45 25.81-208 64-30.37-38-80-64-208-64-9.88 0-16-8.05-16-17.93V80a15.94 15.94 0 0 1 16-16c131.57.59 192 32.84 208 96zm0 0v288"},child:[]}]})(i)}const imagen="/LabTutor/assets/image-KVOVCqTg.png",hero1="/LabTutor/assets/hero1-BQ6_M8IR.png",hero2="/LabTutor/assets/hero2-DLEt6tLe.png",hero3="/LabTutor/assets/hero3-CYcAhdMB.png",hero4="/LabTutor/assets/hero4-BHpCVDOC.png";gsapWithCSS.registerPlugin(ScrollTrigger);const LandingPage=()=>{const i=useNavigate(),e=reactExports.useRef(null),s=reactExports.useRef(null),o=reactExports.useRef(null),a=reactExports.useRef(null),c=reactExports.useRef(null),d=()=>{i("/login")},h=reactExports.useRef(null);gsapWithCSS.utils.toArray(".benefit-item");const b=reactExports.useRef(null);return reactExports.useEffect(()=>{gsapWithCSS.fromTo(c.current,{opacity:0,y:-100},{opacity:1,y:0,duration:1,ease:"power3.out"}),gsapWithCSS.fromTo(e.current,{opacity:0,y:-50},{opacity:1,y:0,duration:1,ease:"power3.out"}),gsapWithCSS.fromTo(s.current.children,{opacity:0,y:50},{opacity:1,y:0,duration:.8,stagger:.2,ease:"power3.out"}),gsapWithCSS.fromTo(o.current,{opacity:0,scale:.8},{opacity:1,scale:1,duration:1,ease:"back.out(1.4)"}),gsapWithCSS.fromTo(a.current.children,{opacity:0,scale:0},{opacity:1,scale:1,duration:.5,stagger:.2,ease:"back.out(1.4)"})},[]),reactExports.useEffect(()=>{const tt=gsapWithCSS.utils.toArray(".benefit-item");gsapWithCSS.fromTo(tt,{opacity:0,y:50},{scrollTrigger:{trigger:b.current,start:"top 80%",end:"bottom 20%",toggleActions:"play none none none"},opacity:1,y:0,duration:1.2,stagger:.3,ease:"power2.out"})},[]),reactExports.useEffect(()=>{gsapWithCSS.fromTo(h.current,{opacity:0,scale:.8},{opacity:1,scale:1,duration:1,ease:"power3.out",scrollTrigger:{trigger:h.current,start:"top 80%",end:"bottom 20%",toggleActions:"play none none none"}})},[]),jsxRuntimeExports.jsxs(PageContainer$1,{children:[jsxRuntimeExports.jsxs(Navbar,{ref:c,children:[jsxRuntimeExports.jsxs(LogoContainer,{children:[jsxRuntimeExports.jsx(LogoImage,{src:logo,alt:"LabTutor Logo"}),jsxRuntimeExports.jsx(LogoText,{children:"LabTutor"})]}),jsxRuntimeExports.jsx(NavButtons,{children:jsxRuntimeExports.jsx(ButtonNav,{secondary:!0,onClick:d,children:"Iniciar sesión"})})]}),jsxRuntimeExports.jsxs(HeroSection,{children:[jsxRuntimeExports.jsxs(HeroContent,{ref:e,children:[jsxRuntimeExports.jsxs(Title$3,{children:["Potenciando tu aprendizaje con ",jsxRuntimeExports.jsx("span",{style:{background:"linear-gradient(90deg, #15d1c1 0%, #6487fa 100%)",WebkitBackgroundClip:"text",backgroundClip:"text",color:"transparent"},children:"LabTutor"}),":"]}),jsxRuntimeExports.jsx(Title$3,{children:"el tutor inteligente de laboratorio clínico!"}),jsxRuntimeExports.jsx(Subtitle,{children:"Explora tus clases más a detalle con más recursos hechos para tu aprendizaje: videos, libros, artículos de clase, glosario, foros y más!"}),jsxRuntimeExports.jsxs(ButtonContainer,{ref:s,children:[jsxRuntimeExports.jsx(Button$1,{primary:!0,children:"Inscribirse ahora"}),jsxRuntimeExports.jsx(Button$1,{secondary:!0,onClick:d,children:"Comenzar"})]})]}),jsxRuntimeExports.jsx(HeroImageContainer,{ref:o,children:jsxRuntimeExports.jsx(HeroImage,{src:imagen,alt:"Hero"})})]}),jsxRuntimeExports.jsxs(SponsorSection,{ref:a,children:[jsxRuntimeExports.jsx(LogoText,{children:"Desarrollado con:"}),jsxRuntimeExports.jsxs(SponsorLogo,{children:[jsxRuntimeExports.jsx(FaReact,{size:80,color:"#0a4658"}),jsxRuntimeExports.jsx(IconLabel,{children:"React 18"})]}),jsxRuntimeExports.jsxs(SponsorLogo,{children:[jsxRuntimeExports.jsx(FaHtml5,{size:80,color:"#0a4658"}),jsxRuntimeExports.jsx(IconLabel,{children:"HTML5"})]}),jsxRuntimeExports.jsxs(SponsorLogo,{children:[jsxRuntimeExports.jsx(FaCss3Alt,{size:80,color:"#0a4658"}),jsxRuntimeExports.jsx(IconLabel,{children:"CSS3"})]}),jsxRuntimeExports.jsxs(SponsorLogo,{children:[jsxRuntimeExports.jsx(FaJsSquare,{size:80,color:"#0a4658"}),jsxRuntimeExports.jsx(IconLabel,{children:"JavaScript"})]})]}),jsxRuntimeExports.jsxs(BenefitsSection,{className:"benefits-section",children:[jsxRuntimeExports.jsxs(BenefitsImageContainer,{ref:h,children:[jsxRuntimeExports.jsx(ImageGridElement,{style:{borderTopLeftRadius:"60px",borderBottomRightRadius:"60px",backgroundColor:"#15d1c1"},children:jsxRuntimeExports.jsx(BenefitsImage,{src:hero1,alt:"Beneficios"})}),jsxRuntimeExports.jsx(ImageGridElement,{style:{borderTopRightRadius:"60px",borderBottomLeftRadius:"60px",backgroundColor:"#6487fa"},children:jsxRuntimeExports.jsx(BenefitsImage,{src:hero2,alt:"Beneficios"})}),jsxRuntimeExports.jsx(ImageGridElement,{style:{borderTopRightRadius:"60px",borderBottomLeftRadius:"60px",backgroundColor:"#6487fa"},children:jsxRuntimeExports.jsx(BenefitsImage,{src:hero3,alt:"Beneficios"})}),jsxRuntimeExports.jsx(ImageGridElement,{style:{borderTopLeftRadius:"60px",borderBottomRightRadius:"60px",backgroundColor:"#15d1c1"},children:jsxRuntimeExports.jsx(BenefitsImage,{src:hero4,alt:"Beneficios"})})]}),jsxRuntimeExports.jsxs(BenefitsContent,{ref:b,className:"benefits-section",children:[jsxRuntimeExports.jsxs(BenefitsTitle,{className:"benefit-item",children:[jsxRuntimeExports.jsx("span",{style:{background:"linear-gradient(90deg, #15d1c1 0%, #6487fa 100%)",WebkitBackgroundClip:"text",backgroundClip:"text",color:"transparent"},children:"Beneficios"})," De Nuestro Aprendizaje en Línea"]}),jsxRuntimeExports.jsxs(BenefitItem,{className:"benefit-item",children:[jsxRuntimeExports.jsx(BenefitIcon,{style:{backgroundColor:"#6487fa"},children:jsxRuntimeExports.jsx(FaGraduationCap,{color:"#ffffff"})}),jsxRuntimeExports.jsxs(BenefitText,{children:[jsxRuntimeExports.jsx("h4",{children:"Recursos de clases en línea"}),jsxRuntimeExports.jsx("p",{children:"Obtén los recursos de las clases más extras elegidos especialmente para tu aprendizaje."})]})]}),jsxRuntimeExports.jsxs(BenefitItem,{className:"benefit-item",children:[jsxRuntimeExports.jsx(BenefitIcon,{children:jsxRuntimeExports.jsx(IoBookOutline,{color:"#ffffff"})}),jsxRuntimeExports.jsxs(BenefitText,{children:[jsxRuntimeExports.jsx("h4",{children:"Glosario"}),jsxRuntimeExports.jsx("p",{children:"Mejora tus comprensión y entendimiento de diversas clases con el glosario incluido en los artículos de clase."})]})]}),jsxRuntimeExports.jsxs(BenefitItem,{className:"benefit-item",children:[jsxRuntimeExports.jsx(BenefitIcon,{style:{backgroundColor:"#6487fa"},children:jsxRuntimeExports.jsx(FaChalkboardTeacher,{color:"#ffffff"})}),jsxRuntimeExports.jsxs(BenefitText,{children:[jsxRuntimeExports.jsx("h4",{children:"Foros"}),jsxRuntimeExports.jsx("p",{children:"Debate y comparte tu opinión en los foros de cada clase."})]})]}),jsxRuntimeExports.jsxs(BenefitItem,{className:"benefit-item",children:[jsxRuntimeExports.jsx(BenefitIcon,{children:jsxRuntimeExports.jsx(FaVideo,{color:"#ffffff"})}),jsxRuntimeExports.jsxs(BenefitText,{children:[jsxRuntimeExports.jsx("h4",{children:"Videos"}),jsxRuntimeExports.jsx("p",{children:"Accede a una gran cantidad de videos por clase para profundizar más en los temas."})]})]})]})]})]})},PageContainer$1=dt.div`
   font-family: 'Arial', sans-serif;
@@ -2442,16 +2441,14 @@ font-size: clamp(0.8rem, 1vw, 0.9rem);
     }
 `,SecondClassForum=()=>{const{user:i}=useAuth(),[e,s]=reactExports.useState([]),[o,a]=reactExports.useState(null),[c,d]=reactExports.useState(""),[h,b]=reactExports.useState(!1),[tt,nt]=reactExports.useState([]),gt=reactExports.useRef(),xt="https://66ca61e159f4350f064f0e88.mockapi.io/api/labtutor/comentarios",st="https://66ca61e159f4350f064f0e88.mockapi.io/api/labtutor/users";reactExports.useEffect(()=>{(async()=>{try{const _t=await axios.get(xt);s(_t.data.filter(wt=>wt.preguntaId===2))}catch(_t){console.error("Error al obtener comentarios:",_t)}})()},[]),reactExports.useEffect(()=>{(async()=>{try{const wt=(await axios.get(`${st}/${i.id}`)).data.emojisComprados;nt(wt)}catch(_t){console.error("Error al obtener datos del usuario:",_t)}})()},[i.id]);const ot=async()=>{const bt=gt.current.innerHTML.trim();if(!bt){d("El comentario no puede estar vacío.");return}const _t=St(bt),wt={author:i.nombre,content:_t,date:new Date().toLocaleString(),replies:[],preguntaId:2};try{const $t=await axios.post(xt,wt);s([$t.data,...e]),gt.current.innerHTML="",d(""),b(!1)}catch($t){console.error("Error al agregar comentario:",$t)}},ft=async(bt,_t)=>{if(!_t.trim()){d("La respuesta no puede estar vacía.");return}const wt=e.find(Nt=>Nt.id===bt),$t={...wt,replies:[...wt.replies,{author:i.nombre,content:_t,date:new Date().toLocaleString()}]};try{const Nt=await axios.put(`${xt}/${bt}`,$t);s(e.map(Ht=>Ht.id===bt?Nt.data:Ht)),a(null),d("")}catch(Nt){console.error("Error al agregar respuesta:",Nt)}},yt=[{id:1,src:emoji1,name:":emoji1:"},{id:2,src:emoji2,name:":emoji2:"},{id:3,src:emoji3,name:":emoji3:"},{id:4,src:emoji4,name:":emoji4:"},{id:5,src:emoji5,name:":emoji5:"},{id:6,src:emoji6,name:":emoji6:"},{id:7,src:emoji7,name:":emoji7:"},{id:8,src:emoji8,name:":emoji8:"},{id:9,src:emoji9,name:":emoji9:"}],ht=yt.filter(bt=>tt.includes(bt.id)),vt=bt=>{const _t=`<img src="${bt.src}" alt="${bt.name}" class="custom-emoji"/>`;gt.current.innerHTML+=_t,mt()},mt=()=>{let _t=gt.current.innerHTML;yt.forEach(wt=>{const $t=new RegExp(`(${wt.name})`,"g");_t=_t.replace($t,imgTag)}),gt.current.innerHTML=_t,Et(gt.current)},Et=bt=>{bt.focus();const _t=document.createRange();_t.selectNodeContents(bt),_t.collapse(!1);const wt=window.getSelection();wt.removeAllRanges(),wt.addRange(_t)},St=bt=>{let _t=bt;return yt.forEach(wt=>{const $t=new RegExp(`<img[^>]*alt="${wt.name}"[^>]*>`,"g");_t=_t.replace($t,wt.name)}),_t},At=bt=>{let _t=bt;return yt.forEach(wt=>{const $t=new RegExp(wt.name.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"g");_t=_t.replace($t,`<img src="${wt.src}" alt="${wt.name}" class="custom-emoji"/>`)}),_t};return jsxRuntimeExports.jsx(MainContainer$1,{children:jsxRuntimeExports.jsxs(QuestionContainer$3,{children:[jsxRuntimeExports.jsxs(QuestionBox$1,{children:[jsxRuntimeExports.jsx("h2",{children:"¿Cuáles son las principales ventajas de la punción capilar frente a otros métodos de extracción de sangre?"}),jsxRuntimeExports.jsx("p",{children:"Escribe tu respuesta y abre debate con tus compañeros."})]}),jsxRuntimeExports.jsxs(CommentsSection$1,{children:[jsxRuntimeExports.jsxs(CommentForm$1,{children:[jsxRuntimeExports.jsxs(TextAreaContainer$1,{children:[jsxRuntimeExports.jsx(EditableInput$1,{ref:gt,contentEditable:"true",placeholder:"Escribe un comentario...",onInput:mt}),jsxRuntimeExports.jsx(EmojiButton$1,{onClick:()=>b(!h),children:jsxRuntimeExports.jsx(FaSmile,{size:24})})]}),h&&jsxRuntimeExports.jsx(EmojiPickerContainer$1,{children:ht.length>0?ht.map(bt=>jsxRuntimeExports.jsx(CustomEmojiButton$1,{onClick:()=>vt(bt),children:jsxRuntimeExports.jsx("img",{src:bt.src,alt:bt.name})},bt.id)):jsxRuntimeExports.jsx("p",{children:"Compra emojis en la tienda!"})}),c&&jsxRuntimeExports.jsx(ErrorLabel$1,{children:c}),jsxRuntimeExports.jsx(SubmitButton$3,{onClick:ot,children:"Enviar"})]}),e.map(bt=>jsxRuntimeExports.jsxs(Comment$1,{children:[jsxRuntimeExports.jsxs(CommentHeader$1,{children:[jsxRuntimeExports.jsx(UserName$1,{children:bt.author}),jsxRuntimeExports.jsx(CommentDate$1,{children:bt.date})]}),jsxRuntimeExports.jsx(CommentBody$1,{dangerouslySetInnerHTML:{__html:At(bt.content)}}),jsxRuntimeExports.jsx(ReplyButton$1,{onClick:()=>a(bt.id),children:"Responder"}),jsxRuntimeExports.jsx(RepliesContainer$1,{children:bt.replies.map((_t,wt)=>jsxRuntimeExports.jsxs(Reply$1,{children:[jsxRuntimeExports.jsxs(CommentHeader$1,{children:[jsxRuntimeExports.jsx(UserName$1,{children:_t.author}),jsxRuntimeExports.jsx(CommentDate$1,{children:_t.date})]}),jsxRuntimeExports.jsx(CommentBody$1,{dangerouslySetInnerHTML:{__html:At(_t.content)}})]},wt))}),o===bt.id&&jsxRuntimeExports.jsxs(CommentForm$1,{children:[jsxRuntimeExports.jsx("textarea",{placeholder:"Escribe una respuesta...",onBlur:_t=>ft(bt.id,_t.target.value)}),jsxRuntimeExports.jsx(SubmitButton$3,{onClick:()=>ft(bt.id,gt.current.innerHTML),children:"Responder"})]})]},bt.id))]})]})})},MainContainer$1=dt.section`
   width: 100%;
-  padding: clamp(10px, 5vw, 20px); 
   background-color: #f9fbfc;
   display: flex;
   justify-content: center;
   position: relative; /* Asegura que el contenedor principal sea relativo */
 `,QuestionContainer$3=dt.div`
-  width: clamp(80%, 70vw, 60%);
+  width: 100%;
   background-color: white;
   border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   padding: clamp(20px, 3vw, 30px);
 `,QuestionBox$1=dt.div`
   margin-bottom: clamp(20px, 3vw, 30px);
@@ -2527,22 +2524,6 @@ font-size: clamp(0.8rem, 1vw, 0.9rem);
   width: 250px;
   max-height: 200px;
   overflow-y: auto;
-`,CustomEmojiButton$1=dt.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin: 5px;
-  padding: 5px;
-  border-radius: 5px;
-
-  &:hover {
-    background-color: #f0f0f0;
-  }
-
-  img {
-    width: 20px;
-    height: 20px;
-  }
 `,SubmitButton$3=dt.button`
   align-self: flex-end;
   padding: clamp(8px, 2vw, 12px) clamp(16px, 3vw, 24px);
@@ -2561,19 +2542,6 @@ font-size: clamp(0.8rem, 1vw, 0.9rem);
   color: red;
   font-size: clamp(12px, 2vw, 14px);
   margin-bottom: 10px;
-`,Comment$1=dt.div`
-  margin-bottom: clamp(10px, 2vw, 20px);
-  padding: clamp(15px, 2vw, 20px);
-  background-color: #ffffff;
-  border-radius: 10px;
-  border: 1px solid #d1eeea;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-
-  img.custom-emoji {
-    width: 40px;
-    height: 40px;
-    vertical-align: middle;
-  }
 `,CommentHeader$1=dt.div`
   display: flex;
   justify-content: space-between;
@@ -2591,8 +2559,8 @@ font-size: clamp(0.8rem, 1vw, 0.9rem);
   margin-bottom: 10px;
 
   img.custom-emoji {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 30px;
     vertical-align: middle;
   }
 `,ReplyButton$1=dt.button`
@@ -2618,22 +2586,49 @@ font-size: clamp(0.8rem, 1vw, 0.9rem);
   border: 1px solid #d1eeea;
 
   img.custom-emoji {
-    width: 30px;
+    width: 20px;
     height: 30px;
     vertical-align: middle;
   }
+`,Comment$1=dt.div`
+  margin-bottom: clamp(10px, 2vw, 20px);
+  padding: clamp(15px, 2vw, 20px);
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #d1eeea;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+  img.custom-emoji {
+    width: 20px;
+    height: 30px;
+    vertical-align: middle;
+  }
+`,CustomEmojiButton$1=dt.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+
+  img {
+    width: 20px;
+    height: 30px;
+  }
 `,ThirdClassForum=()=>{const{user:i}=useAuth(),[e,s]=reactExports.useState([]),[o,a]=reactExports.useState(null),[c,d]=reactExports.useState(""),[h,b]=reactExports.useState(!1),[tt,nt]=reactExports.useState([]),gt=reactExports.useRef(),xt="https://66ca61e159f4350f064f0e88.mockapi.io/api/labtutor/comentarios",st="https://66ca61e159f4350f064f0e88.mockapi.io/api/labtutor/users";reactExports.useEffect(()=>{(async()=>{try{const _t=await axios.get(xt);s(_t.data.filter(wt=>wt.preguntaId===3))}catch(_t){console.error("Error al obtener comentarios:",_t)}})()},[]),reactExports.useEffect(()=>{(async()=>{try{const wt=(await axios.get(`${st}/${i.id}`)).data.emojisComprados;nt(wt)}catch(_t){console.error("Error al obtener datos del usuario:",_t)}})()},[i.id]);const ot=async()=>{const bt=gt.current.innerHTML.trim();if(!bt){d("El comentario no puede estar vacío.");return}const _t=St(bt),wt={author:i.nombre,content:_t,date:new Date().toLocaleString(),replies:[],preguntaId:3};try{const $t=await axios.post(xt,wt);s([$t.data,...e]),gt.current.innerHTML="",d(""),b(!1)}catch($t){console.error("Error al agregar comentario:",$t)}},ft=async(bt,_t)=>{if(!_t.trim()){d("La respuesta no puede estar vacía.");return}const wt=e.find(Nt=>Nt.id===bt),$t={...wt,replies:[...wt.replies,{author:i.nombre,content:_t,date:new Date().toLocaleString()}]};try{const Nt=await axios.put(`${xt}/${bt}`,$t);s(e.map(Ht=>Ht.id===bt?Nt.data:Ht)),a(null),d("")}catch(Nt){console.error("Error al agregar respuesta:",Nt)}},yt=[{id:1,src:emoji1,name:":emoji1:"},{id:2,src:emoji2,name:":emoji2:"},{id:3,src:emoji3,name:":emoji3:"},{id:4,src:emoji4,name:":emoji4:"},{id:5,src:emoji5,name:":emoji5:"},{id:6,src:emoji6,name:":emoji6:"},{id:7,src:emoji7,name:":emoji7:"},{id:8,src:emoji8,name:":emoji8:"},{id:9,src:emoji9,name:":emoji9:"}],ht=yt.filter(bt=>tt.includes(bt.id)),vt=bt=>{const _t=`<img src="${bt.src}" alt="${bt.name}" class="custom-emoji"/>`;gt.current.innerHTML+=_t,mt()},mt=()=>{let _t=gt.current.innerHTML;yt.forEach(wt=>{const $t=new RegExp(`(${wt.name})`,"g");_t=_t.replace($t,imgTag)}),gt.current.innerHTML=_t,Et(gt.current)},Et=bt=>{bt.focus();const _t=document.createRange();_t.selectNodeContents(bt),_t.collapse(!1);const wt=window.getSelection();wt.removeAllRanges(),wt.addRange(_t)},St=bt=>{let _t=bt;return yt.forEach(wt=>{const $t=new RegExp(`<img[^>]*alt="${wt.name}"[^>]*>`,"g");_t=_t.replace($t,wt.name)}),_t},At=bt=>{let _t=bt;return yt.forEach(wt=>{const $t=new RegExp(wt.name.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"g");_t=_t.replace($t,`<img src="${wt.src}" alt="${wt.name}" class="custom-emoji"/>`)}),_t};return jsxRuntimeExports.jsx(MainContainer,{children:jsxRuntimeExports.jsxs(QuestionContainer$2,{children:[jsxRuntimeExports.jsxs(QuestionBox,{children:[jsxRuntimeExports.jsx("h2",{children:"¿Cuáles son los errores más comunes que pueden ocurrir durante la recolección de orina y cómo se pueden evitar?"}),jsxRuntimeExports.jsx("p",{children:"Escribe tu respuesta y abre debate con tus compañeros."})]}),jsxRuntimeExports.jsxs(CommentsSection,{children:[jsxRuntimeExports.jsxs(CommentForm,{children:[jsxRuntimeExports.jsxs(TextAreaContainer,{children:[jsxRuntimeExports.jsx(EditableInput,{ref:gt,contentEditable:"true",placeholder:"Escribe un comentario...",onInput:mt}),jsxRuntimeExports.jsx(EmojiButton,{onClick:()=>b(!h),children:jsxRuntimeExports.jsx(FaSmile,{size:24})})]}),h&&jsxRuntimeExports.jsx(EmojiPickerContainer,{children:ht.length>0?ht.map(bt=>jsxRuntimeExports.jsx(CustomEmojiButton,{onClick:()=>vt(bt),children:jsxRuntimeExports.jsx("img",{src:bt.src,alt:bt.name})},bt.id)):jsxRuntimeExports.jsx("p",{children:"Compra emojis en la tienda!"})}),c&&jsxRuntimeExports.jsx(ErrorLabel,{children:c}),jsxRuntimeExports.jsx(SubmitButton$2,{onClick:ot,children:"Enviar"})]}),e.map(bt=>jsxRuntimeExports.jsxs(Comment,{children:[jsxRuntimeExports.jsxs(CommentHeader,{children:[jsxRuntimeExports.jsx(UserName,{children:bt.author}),jsxRuntimeExports.jsx(CommentDate,{children:bt.date})]}),jsxRuntimeExports.jsx(CommentBody,{dangerouslySetInnerHTML:{__html:At(bt.content)}}),jsxRuntimeExports.jsx(ReplyButton,{onClick:()=>a(bt.id),children:"Responder"}),jsxRuntimeExports.jsx(RepliesContainer,{children:bt.replies.map((_t,wt)=>jsxRuntimeExports.jsxs(Reply,{children:[jsxRuntimeExports.jsxs(CommentHeader,{children:[jsxRuntimeExports.jsx(UserName,{children:_t.author}),jsxRuntimeExports.jsx(CommentDate,{children:_t.date})]}),jsxRuntimeExports.jsx(CommentBody,{dangerouslySetInnerHTML:{__html:At(_t.content)}})]},wt))}),o===bt.id&&jsxRuntimeExports.jsxs(CommentForm,{children:[jsxRuntimeExports.jsx("textarea",{placeholder:"Escribe una respuesta...",onBlur:_t=>ft(bt.id,_t.target.value)}),jsxRuntimeExports.jsx(SubmitButton$2,{onClick:()=>ft(bt.id,gt.current.innerHTML),children:"Responder"})]})]},bt.id))]})]})})},MainContainer=dt.section`
   width: 100%;
-  padding: clamp(10px, 5vw, 20px); 
   background-color: #f9fbfc;
   display: flex;
   justify-content: center;
   position: relative; /* Asegura que el contenedor principal sea relativo */
 `,QuestionContainer$2=dt.div`
-  width: clamp(80%, 70vw, 60%);
+  width: 100%;
   background-color: white;
   border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   padding: clamp(20px, 3vw, 30px);
 `,QuestionBox=dt.div`
   margin-bottom: clamp(20px, 3vw, 30px);
@@ -2709,22 +2704,6 @@ font-size: clamp(0.8rem, 1vw, 0.9rem);
   width: 250px;
   max-height: 200px;
   overflow-y: auto;
-`,CustomEmojiButton=dt.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin: 5px;
-  padding: 5px;
-  border-radius: 5px;
-
-  &:hover {
-    background-color: #f0f0f0;
-  }
-
-  img {
-    width: 20px;
-    height: 20px;
-  }
 `,SubmitButton$2=dt.button`
   align-self: flex-end;
   padding: clamp(8px, 2vw, 12px) clamp(16px, 3vw, 24px);
@@ -2743,19 +2722,6 @@ font-size: clamp(0.8rem, 1vw, 0.9rem);
   color: red;
   font-size: clamp(12px, 2vw, 14px);
   margin-bottom: 10px;
-`,Comment=dt.div`
-  margin-bottom: clamp(10px, 2vw, 20px);
-  padding: clamp(15px, 2vw, 20px);
-  background-color: #ffffff;
-  border-radius: 10px;
-  border: 1px solid #d1eeea;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-
-  img.custom-emoji {
-    width: 40px;
-    height: 40px;
-    vertical-align: middle;
-  }
 `,CommentHeader=dt.div`
   display: flex;
   justify-content: space-between;
@@ -2773,8 +2739,8 @@ font-size: clamp(0.8rem, 1vw, 0.9rem);
   margin-bottom: 10px;
 
   img.custom-emoji {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 30px;
     vertical-align: middle;
   }
 `,ReplyButton=dt.button`
@@ -2800,9 +2766,38 @@ font-size: clamp(0.8rem, 1vw, 0.9rem);
   border: 1px solid #d1eeea;
 
   img.custom-emoji {
-    width: 30px;
+    width: 20px;
     height: 30px;
     vertical-align: middle;
+  }
+`,Comment=dt.div`
+  margin-bottom: clamp(10px, 2vw, 20px);
+  padding: clamp(15px, 2vw, 20px);
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #d1eeea;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+  img.custom-emoji {
+    width: 20px;
+    height: 30px;
+    vertical-align: middle;
+  }
+`,CustomEmojiButton=dt.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+
+  img {
+    width: 20px;
+    height: 30px;
   }
 `,RubricaInformeDePracticasPage=({pdfUrl:i})=>jsxRuntimeExports.jsxs(Container$1,{children:[jsxRuntimeExports.jsx("h2",{children:"Visualizador de PDF"}),jsxRuntimeExports.jsx(PDFContainer$1,{children:jsxRuntimeExports.jsx(libExports.Worker,{workerUrl:"/LabTutor/pdf.worker.min.js",children:jsxRuntimeExports.jsx(libExports.Viewer,{fileUrl:"/LabTutor/RUBRICA%20DE%20EVALUACION%20DE%20INFORME%20DE%20PRACTICA.pdf"})})})]}),Container$1=dt.div`
   padding: 20px;
