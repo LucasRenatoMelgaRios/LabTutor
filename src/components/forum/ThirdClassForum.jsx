@@ -247,7 +247,6 @@ export const ThirdClassForum = () => {
 // Styled Components
 const MainContainer = styled.section`
   width: 100%;
-  padding: clamp(10px, 5vw, 20px); 
   background-color: #f9fbfc;
   display: flex;
   justify-content: center;
@@ -255,10 +254,9 @@ const MainContainer = styled.section`
 `;
 
 const QuestionContainer = styled.div`
-  width: clamp(80%, 70vw, 60%);
+  width: 100%;
   background-color: white;
   border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   padding: clamp(20px, 3vw, 30px);
 `;
 
@@ -350,23 +348,7 @@ const EmojiPickerContainer = styled.div`
   overflow-y: auto;
 `;
 
-const CustomEmojiButton = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin: 5px;
-  padding: 5px;
-  border-radius: 5px;
 
-  &:hover {
-    background-color: #f0f0f0;
-  }
-
-  img {
-    width: 20px;
-    height: 20px;
-  }
-`;
 
 const SubmitButton = styled.button`
   align-self: flex-end;
@@ -390,20 +372,7 @@ const ErrorLabel = styled.label`
   margin-bottom: 10px;
 `;
 
-const Comment = styled.div`
-  margin-bottom: clamp(10px, 2vw, 20px);
-  padding: clamp(15px, 2vw, 20px);
-  background-color: #ffffff;
-  border-radius: 10px;
-  border: 1px solid #d1eeea;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 
-  img.custom-emoji {
-    width: 40px;
-    height: 40px;
-    vertical-align: middle;
-  }
-`;
 
 const CommentHeader = styled.div`
   display: flex;
@@ -428,8 +397,8 @@ const CommentBody = styled.div`
   margin-bottom: 10px;
 
   img.custom-emoji {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 30px;
     vertical-align: middle;
   }
 `;
@@ -461,8 +430,41 @@ const Reply = styled.div`
   border: 1px solid #d1eeea;
 
   img.custom-emoji {
-    width: 30px;
+    width: 20px;
     height: 30px;
     vertical-align: middle;
+  }
+`;
+
+const Comment = styled.div`
+  margin-bottom: clamp(10px, 2vw, 20px);
+  padding: clamp(15px, 2vw, 20px);
+  background-color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #d1eeea;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+  img.custom-emoji {
+    width: 20px;
+    height: 30px;
+    vertical-align: middle;
+  }
+`;
+
+const CustomEmojiButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
+
+  img {
+    width: 20px;
+    height: 30px;
   }
 `;
