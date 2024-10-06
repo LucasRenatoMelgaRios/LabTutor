@@ -233,7 +233,7 @@ export const ThirdClassPage = () => {
                     </Link>
                 </QuizButtonWrapper>
                 <QuizButtonWrapper>
-                    <Link to="/foro/urineCollection">
+                    <Link to="/foro/3">
                         <QuizButton>Foro</QuizButton>
                     </Link>
                 </QuizButtonWrapper>

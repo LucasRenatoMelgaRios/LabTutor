@@ -25,6 +25,7 @@ import { RubricaInformeDePracticasPage } from '../pages/Rubricas/RubricaInformeD
 import { FichaDeEvaluacionPage } from '../pages/Rubricas/FichaDeEvaluaciónPage';
 import { BiologicalSamplesQuiz } from '../components/quizzes/BiologicalSamplesQuiz';
 import { ConditionalFactorsQuiz } from '../components/quizzes/ConditionalFactorsQuiz';
+import { FourthClassPage } from '../pages/FourthClassPage';
 
 const RoutesWrapper = () => {
   const { user } = useAuth(); // Asegúrate de que el contexto provee un token o estado de autenticación
@@ -80,6 +81,13 @@ const RoutesWrapper = () => {
         <PrivateRoute>
           <Header updateEmojis={updateEmojis} acquiredEmojis={acquiredEmojis} />
           <ThirdClassPage />
+          <Footer />
+        </PrivateRoute>
+      } />
+            <Route path="/class/4" element={
+        <PrivateRoute>
+          <Header updateEmojis={updateEmojis} acquiredEmojis={acquiredEmojis} />
+          <FourthClassPage />
           <Footer />
         </PrivateRoute>
       } />
