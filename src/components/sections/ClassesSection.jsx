@@ -93,16 +93,16 @@ export const ClassesSection = () => {
         },
         {
             id: 4,
-            title: "Laboratorio de Química",
-            fecha: "Septiembre 5, 2024",
-            profesor: "Ana López Martínez",
-            img: "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/625d6f41-519c-4d72-adf9-382db270fbf5/thumb_man_coding_app_square.png"
+            title: "Normas de calidad en el proceso pre analítico",
+            fecha: "Octubre 9, 2024",
+            profesor: "Rogelio Melgar Pérez",
+            img: "https://www.vegalab.com.mx/cdn/shop/articles/shutterstock_1401235820-1-1706x960.jpg?v=1664899239"
         },
         {
             id: 5,
             title: "Genética Molecular",
             fecha: "Octubre 15, 2024",
-            profesor: "Carlos Díaz Sánchez",
+            profesor: "Rogelio Melgar Pérez",
             img: "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/625d6f41-519c-4d72-adf9-382db270fbf5/thumb_man_coding_app_square.png"
         },
         {
