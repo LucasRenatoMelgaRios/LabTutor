@@ -100,10 +100,10 @@ export const ClassesSection = () => {
         },
         {
             id: 5,
-            title: "Genética Molecular",
-            fecha: "Octubre 15, 2024",
+            title: "Recepción y Control De Muestras",
+            fecha: "Octubre 14, 2024",
             profesor: "Rogelio Melgar Pérez",
-            img: "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/625d6f41-519c-4d72-adf9-382db270fbf5/thumb_man_coding_app_square.png"
+            img: "https://www.ceac.es/sites/default/files/2021/11/ceac-07-11.jpg"
         },
         {
             id: 6,
