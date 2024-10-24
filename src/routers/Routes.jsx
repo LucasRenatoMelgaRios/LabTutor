@@ -27,6 +27,7 @@ import { BiologicalSamplesQuiz } from '../components/quizzes/BiologicalSamplesQu
 import { ConditionalFactorsQuiz } from '../components/quizzes/ConditionalFactorsQuiz';
 import { FourthClassPage } from '../pages/FourthClassPage';
 import { FifthClassPage } from '../pages/FifthClassPage';
+import { SixthClassPage } from '../pages/SixthClassPage';
 
 const RoutesWrapper = () => {
   const { user } = useAuth(); // Asegúrate de que el contexto provee un token o estado de autenticación
@@ -85,17 +86,24 @@ const RoutesWrapper = () => {
           <Footer />
         </PrivateRoute>
       } />
-            <Route path="/class/4" element={
+      <Route path="/class/4" element={
         <PrivateRoute>
           <Header updateEmojis={updateEmojis} acquiredEmojis={acquiredEmojis} />
           <FourthClassPage />
           <Footer />
         </PrivateRoute>
       } />
-                  <Route path="/class/5" element={
+      <Route path="/class/5" element={
         <PrivateRoute>
           <Header updateEmojis={updateEmojis} acquiredEmojis={acquiredEmojis} />
           <FifthClassPage />
+          <Footer />
+        </PrivateRoute>
+      } />
+      <Route path="/class/6" element={
+        <PrivateRoute>
+          <Header updateEmojis={updateEmojis} acquiredEmojis={acquiredEmojis} />
+          <SixthClassPage />
           <Footer />
         </PrivateRoute>
       } />

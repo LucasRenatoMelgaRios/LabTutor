@@ -107,16 +107,16 @@ export const ClassesSection = () => {
         },
         {
             id: 6,
-            title: "Microbiología",
-            fecha: "Noviembre 20, 2024",
+            title: "Biopsias",
+            fecha: "Noviembre 25, 2024",
             profesor: "Lucía García Fernández",
-            img: "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/625d6f41-519c-4d72-adf9-382db270fbf5/thumb_man_coding_app_square.png"
+            img: "https://asocolderma.org.co/sites/default/files/enfermedad/biopsia-de-la-piel_0.jpg"
         },
         {
             id: 7,
             title: "Inmunología Básica",
             fecha: "Diciembre 1, 2024",
-            profesor: "Marta Torres Muñoz",
+            profesor: "Rogelio Melgar Pérez",
             img: "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/625d6f41-519c-4d72-adf9-382db270fbf5/thumb_man_coding_app_square.png"
         },
         {
