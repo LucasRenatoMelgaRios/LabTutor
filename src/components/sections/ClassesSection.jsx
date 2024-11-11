@@ -114,11 +114,11 @@ export const ClassesSection = () => {
         },
         {
             id: 7,
-            title: "Inmunología Básica",
-            fecha: "Diciembre 1, 2024",
+            title: "Orina",
+            fecha: "Noviembre 11, 2024",
             profesor: "Rogelio Melgar Pérez",
-            img: "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/625d6f41-519c-4d72-adf9-382db270fbf5/thumb_man_coding_app_square.png"
-        },
+            img: "https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2023/04/21/16820723915934.jpg"
+             },
         {
             id: 8,
             title: "Bioquímica",
