@@ -29,6 +29,7 @@ import { FourthClassPage } from "../pages/FourthClassPage";
 import { FifthClassPage } from "../pages/FifthClassPage";
 import { SixthClassPage } from "../pages/SixthClassPage";
 import { SeventhClassPage } from "../pages/SeventhClassPage";
+import { EightClassPage } from "../pages/EightClassPage";
 
 const RoutesWrapper = () => {
   const { user } = useAuth(); // Asegúrate de que el contexto provee un token o estado de autenticación
@@ -161,6 +162,19 @@ const RoutesWrapper = () => {
               acquiredEmojis={acquiredEmojis}
             />
             <SeventhClassPage />
+            <Footer />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/class/8"
+        element={
+          <PrivateRoute>
+            <Header
+              updateEmojis={updateEmojis}
+              acquiredEmojis={acquiredEmojis}
+            />
+            <EightClassPage />
             <Footer />
           </PrivateRoute>
         }
