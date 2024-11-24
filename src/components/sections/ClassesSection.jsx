@@ -122,16 +122,16 @@ export const ClassesSection = () => {
         {
             id: 8,
             title: "Esputo",
-            fecha: "Noviembre 21, 2025",
+            fecha: "Noviembre 21, 2024",
             profesor: "Rogelio Melgar Pérez",
             img: "https://st4.depositphotos.com/2977159/21147/i/450/depositphotos_211473840-stock-photo-removing-phlegm-baby-nose-using.jpg"
         },
         {
             id: 9,
-            title: "Biotecnología",
-            fecha: "Febrero 18, 2025",
-            profesor: "Elena Ruiz González",
-            img: "https://media.beehiiv.com/cdn-cgi/image/fit=scale-down,format=auto,onerror=redirect,quality=80/uploads/publication/logo/625d6f41-519c-4d72-adf9-382db270fbf5/thumb_man_coding_app_square.png"
+            title: "Heces",
+            fecha: "Noviembre 25, 2024",
+            profesor: "Rogelio Melgar Pérez",
+            img: "https://laboatlas.com/wp-content/uploads/2017/02/blastocystis-300x202.jpg"
         },
         {
             id: 10,
